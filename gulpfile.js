@@ -42,7 +42,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('deploy', ['build'], function () {
-    return gulp.src(TARGET.public)
+    return gulp.src(TARGET.public + '/**/*')
                .pipe(deploy());
 });
 
