@@ -1,0 +1,27 @@
+{
+  "name": "freelancer",
+  "version": "0.0.0",
+  "description": "Personal portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justuswilhelm/portfolio.git"
+  },
+  "keywords": [
+    "portfolio"
+  ],
+  "author": "Justus Wilhelm Perlwitz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justuswilhelm/portfolio/issues"
+  },
+  "homepage": "https://github.com/justuswilhelm/portfolio",
+  "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-gh-pages": "^0.3.4",
+    "main-bower-files": "^2.0.0"
+  }
+}
