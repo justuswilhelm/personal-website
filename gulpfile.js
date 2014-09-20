@@ -1,4 +1,5 @@
 var concat = require('gulp-concat');
+var deploy = require('gulp-gh-pages');
 var gulp = require('gulp');
 var jade = require('gulp-jade');
 var bower = require('gulp-bower');
@@ -26,6 +27,10 @@ gulp.task('css', function () {
                .pipe(gulp.dest(TARGET.css));
 });
 
+gulp.task('build', [
+    'jade',
+    'css'
+]);
 gulp.task('clean', function () {
     return gulp.src(TARGET.public)
                .pipe(rimraf());
@@ -36,7 +41,9 @@ gulp.task('watch', function () {
     gulp.watch(SRC.css, ['css']);
 });
 
-gulp.task('default', [
-    'jade',
-    'css'
-]);
+gulp.task('deploy', ['build'], function () {
+    return gulp.src(TARGET.public)
+               .pipe(deploy());
+});
+
+gulp.task('default', ['build']);
