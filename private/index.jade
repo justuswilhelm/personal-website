@@ -7,31 +7,33 @@ html(lang='en')
     meta(name='description', content='Portfolio with professional and personal works')
     meta(name='author', content='Justus Wilhelm Perlwitz')
     title Justus Wilhelm Perlwitz
-    link(href='css/bootstrap.min.css', rel='stylesheet')
-    link(href='css/freelancer.css', rel='stylesheet')
+    link(href='css/main.css', rel='stylesheet')
     link(href='http://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
     link(href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic', rel='stylesheet', type='text/css')
   body#page-top.index
     header
       .container
         .row
-          .col-lg-12
+          .span12
             .intro-text
-              span.name Justus Wilhelm Perlwitz
-              hr.star-light
-              span.skills Developer - Musician
+              h1.text-center Justus Wilhelm Perlwitz
+              hr
+              h2.text-center Developer - Musician
     section#portfolio
       .row
-        .col-lg-12
+        .span6.offset6
           ul
-            li GitHub
-            li SoundCloud
+            li
+              a(href='https://github.com/justuswilhelm')
+                | GitHub
+            li
+              a(href='https://soundcloud.com/justuswilhelm')
+                | SoundCloud
     footer.text-center
-      .footer-below
-        .container
-          .row
-            .col-lg-12
-              a.success(href='#')
-                | mail [at) justusperlwitz { dot ( com
-            .col-lg-12
-              | Copyright © Justus Wilhelm Perlwitz 2014
+      .container
+        .row
+          .span12
+            a.success(href='#')
+              | mail [at) justusperlwitz { dot ( com
+          .col-lg-12
+            | Copyright © Justus Wilhelm Perlwitz 2014
