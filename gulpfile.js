@@ -36,7 +36,8 @@ gulp.task('cname', function () {
 
 gulp.task('build', [
     'jade',
-    'css'
+    'css',
+    'cname'
 ]);
 gulp.task('clean', function () {
     return gulp.src(TARGET.public)
