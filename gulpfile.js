@@ -8,7 +8,7 @@ var rimraf = require('gulp-rimraf');
 var SRC = {
     jade: 'private/*.jade',
     css: 'private/css/*.css',
-    cname: 'private/CNAME'
+    cname: 'private/CNAME*'
 };
 
 var TARGET = {
@@ -30,7 +30,6 @@ gulp.task('css', function () {
 
 gulp.task('cname', function () {
     return gulp.src(SRC.cname)
-               .pipe(concat(SRC.cname))
                .pipe(gulp.dest(TARGET.public));
 });
 
