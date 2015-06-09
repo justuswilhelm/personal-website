@@ -3,7 +3,7 @@ var deploy = require('gulp-gh-pages');
 var gulp = require('gulp');
 var jade = require('gulp-jade');
 var bower = require('gulp-bower');
-var rimraf = require('gulp-rimraf');
+var del = require('del');
 
 var SRC = {
     jade: 'private/*.jade',
@@ -40,7 +40,7 @@ gulp.task('build', [
 ]);
 gulp.task('clean', function () {
     return gulp.src(TARGET.public)
-               .pipe(rimraf());
+               .pipe(del());
 });
 
 gulp.task('watch', function () {
