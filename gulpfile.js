@@ -8,12 +8,14 @@ var del = require('del');
 var SRC = {
     jade: 'private/*.jade',
     css: 'private/css/*.css',
+    img: 'private/img/*',
     cname: 'private/CNAME*'
 };
 
 var TARGET = {
     public: 'public/',
-    css: 'public/css'
+    css: 'public/css',
+    img: 'public/img',
 };
 
 gulp.task('jade', function () {
@@ -28,6 +30,11 @@ gulp.task('css', function () {
                .pipe(gulp.dest(TARGET.css));
 });
 
+gulp.task('img', function () {
+  return gulp.src(SRC.img)
+             .pipe(gulp.dest(TARGET.img));
+});
+
 gulp.task('cname', function () {
     return gulp.src(SRC.cname)
                .pipe(gulp.dest(TARGET.public));
@@ -36,8 +43,10 @@ gulp.task('cname', function () {
 gulp.task('build', [
     'jade',
     'css',
-    'cname'
+    'cname',
+    'img'
 ]);
+
 gulp.task('clean', function () {
     return gulp.src(TARGET.public)
                .pipe(del());
@@ -46,6 +55,7 @@ gulp.task('clean', function () {
 gulp.task('watch', function () {
     gulp.watch(SRC.jade, ['jade']);
     gulp.watch(SRC.css, ['css']);
+    gulp.watch(SRC.img, ['img']);
 });
 
 gulp.task('deploy', ['build'], function () {
