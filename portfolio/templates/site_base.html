@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Justus Perlwitz" />
+    <title>Justus Perlwitz Software Development</title>
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+      rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"
+      type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+      rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="two-thirds column">
+        {% block content %}
+        {% endblock content %}
+      </div>
+      <div class="one-third column">
+        {% include "_contact.html" %}
+        {% include "_nav.html" %}
+      </div>
+    </div>
+    <script type="text/javascript">
+      var $uni = document.getElementsByClassName('unicorn')[0];
+      var text = $uni.innerHTML;
+      var color_steps = 360 / text.length;
+      var newCont = "";
+      var time = 0;
+      var timestep = $uni.dataset.score;
+
+      for (var text_index =0; text_index < text.length; text_index++) {
+      newCont += "<span style='color:hsl(" + text_index * color_steps +
+        ", 100%, 50%)'>" + text.charAt(text_index) + "<\/span>";
+      }
+
+      $uni.innerHTML = newCont; // Replace with new content
+      var $ch = $uni.getElementsByTagName('span'); // character
+
+      setInterval(function(){
+      time -= timestep;
+      time = time % 360;
+      for (var ch_index = 0; ch_index < $ch.length; ch_index += 1) {
+        current_ch = $ch[ch_index];
+        var hue = (time + (color_steps * ch_index)) % 360;
+        current_ch.style.color = "hsl(" + hue + ", 100%, 50%)";
+      }
+      }, 50);
+    </script>
+  </body>
+</html>

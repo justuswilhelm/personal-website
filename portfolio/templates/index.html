@@ -1,0 +1,39 @@
+{% extends "site_base.html" %}
+{% block content %}
+  <h1>Justus Perlwitz</h1>
+  <h2>Software Developer</h2>
+  <h3>Services</h3>
+  <p>I possess comprehensive skills and provide services in the following areas:</p>
+  <ul>
+    <li>Backend development</li>
+    <li>Bulk data processing</li>
+    <li>System integration</li>
+  </ul>
+  <h3 id="projects">Projects</h3>
+  <h4>twogifs</h4>
+  <a target="_blank" href="http://www.twogifs.com/">
+    <img src="{{ url_for('static', filename='twogifs.png') }}" alt="twogifs screenshot"/>
+  </a>
+  <p>Addictive site that let's users vote for their favorite GIF:</p>
+  <p>
+    <a target="_blank" href="http://www.twogifs.com/">
+      http://www.twogifs.com
+    </a>
+  </p>
+  <h4>Binview</h4>
+  <a target="_blank" href="https://github.com/justuswilhelm/binview">
+    <img src="{{ url_for('static', filename='binview.png') }}" alt="binview screenshot"/>
+  </a>
+  <p>Binary file analysis toolset.</p>
+  <p>
+    <a target="_blank" href="https://github.com/justuswilhelm/binview">
+      GitHub
+  Repository
+    </a>
+  </p>
+  <p>
+    <a target="_blank" href="https://pypi.python.org/pypi?:action=display&amp;name=binview">
+      PyPI package
+    </a>
+  </p>
+{% endblock content %}
