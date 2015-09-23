@@ -1,0 +1,10 @@
+- hosts: website
+  tasks:
+    - name: get newest version of repository
+      git: repo=https://github.com/justuswilhelm/portfolio.git
+        dest=/root/portfolio
+        clone=no
+    - name: restart server
+      supervisorctl: state=restarted
+        config=/root/portfolio/supervisor.conf
+        name=all
