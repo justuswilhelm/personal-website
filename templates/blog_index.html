@@ -1,0 +1,7 @@
+{% extends "site_base.html" %}
+{% block content %}
+  {% for article in blog_articles %}
+    {{ article.title }} - {{ article.date }}
+    {{ article.content|truncate }}
+  {% endfor %}
+{% endblock content %}
