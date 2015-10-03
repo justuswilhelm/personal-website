@@ -1,7 +1,18 @@
 {% extends "site_base.html" %}
 {% block content %}
-  {% for article in blog_articles %}
-    {{ article.title }} - {{ article.date }}
-    {{ article.content|truncate }}
-  {% endfor %}
+  <h2>
+    Blog Index
+  </h2>
+  <ul>
+    {% for article in blog_articles %}
+      <li>
+        <a href="blog/{{ article.creation_date }}-{{ article.title }}.html">
+          {{ article.title }} - 
+          <small>
+            {{ article.creation_date }}
+          </small>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
 {% endblock content %}
