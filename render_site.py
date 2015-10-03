@@ -1,5 +1,6 @@
 from os import mkdir
 from shutil import (
+    copy,
     copytree,
     rmtree,
 )
@@ -18,7 +19,7 @@ env = Environment(
 
 
 def clean():
-    rmtree('public')
+    rmtree('public', ignore_errors=True)
 
 
 def create_folders():
@@ -27,6 +28,7 @@ def create_folders():
 
 
 def copy_files():
+    copy('CNAME', 'public/CNAME')
     copytree('static/', 'public/static/')
 
 
