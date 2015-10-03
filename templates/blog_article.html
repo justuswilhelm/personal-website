@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+{% block content %}
+  <h2>
+    {{ article.title }}
+  </h2>
+  <small>
+    {{ article.creation_date }}
+  </small>
+  <p>
+  {% markdown %}
+    {{ article.content }}
+  {% endmarkdown %}
+  </p>
+{% endblock content %}
