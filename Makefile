@@ -1,3 +1,5 @@
+PORT=5000
+
 all: public
 
 clean:
@@ -8,3 +10,10 @@ public: clean
 
 deploy: public
 	ghp-import -b master -p $<
+
+test: public
+	python -m doctest *.py
+	killall python3
+	cd public; python3 -m http.server $(PORT) &
+	sleep 0.5
+	open "http://localhost:$(PORT)"

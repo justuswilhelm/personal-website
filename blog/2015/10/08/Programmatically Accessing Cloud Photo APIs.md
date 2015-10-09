@@ -20,40 +20,52 @@ The cloud photo providers in question are:
 
 ### iCloud Photo Library
 [iOS developer documentation](https://developer.apple.com/library/prerelease/ios/documentation/Photos/Reference/Photos_Framework/)
-Listing and Retrieving: Yes
-Delete: Yes
-Edit: Yes
 
-Note: Great, but proprietary API. All the functionality can only be accessed
-directly from a native iOS apps. This rules out any kind of web application. iOS
->=8.0. Seamlessly integrates local and remote photo content, which allows
-treating them without having to bother with the physical storage location.
+- Listing and Retrieving: Yes
+- Delete: Yes
+- Edit: Yes
+
+#### Note
+Great, but proprietary API. All the functionality can only be accessed directly
+from a native iOS apps. This rules out any kind of web application. iOS
+under version 8.0. Seamlessly integrates local and remote photo content, which
+allows treating them without having to bother with the physical storage
+location.
 
 ### Google Photos
 [Google Picasa Webalbums API documentation](https://developers.google.com/picasa-web/?hl=en)
-Listing and Retrieving: Yes
-Delete: Yes
-Edit: Yes
-Note: API is messy and encapsulates data with the [Google
-Data](https://developers.google.com/gdata/?hl=en) standard. Not a pleasure to
+
+- Listing and Retrieving: Yes
+- Delete: Yes
+- Edit: Yes
+
+#### Note
+API is messy and provides data in the [Google
+Data](https://developers.google.com/gdata/?hl=en) format. Not a pleasure to
 use compared to RESTful APIs.
 
 ### Flickr
 [Flickr API documentation](https://www.flickr.com/services/api/)
-Listing and Retrieving: Yes
-Delete: [Yes](https://www.flickr.com/services/api/flickr.photos.delete.html)
-Edit: Yes
-Note: RESTful API documentation. Very easy to read.
+
+- Listing and Retrieving: Yes
+- Delete: [Yes](https://www.flickr.com/services/api/flickr.photos.delete.html)
+- Edit: Yes
+
+#### Note
+RESTful API documentation. Very easy to read.
 
 ### Facebook Moments
 No API as of Oct 9, 2015
 
 ### Amazon Photos
 [Cloud Drive API documentation](https://developer.amazon.com/public/apis/experience/cloud-drive/)
-Listing and Retrieving: Yes
-Deleting: Yes
-Editing: Yes
-Note: Well written RESTful API. Must be used over the cloud drive interface.
+
+- Listing and Retrieving: Yes
+- Deleting: Yes
+- Editing: Yes
+
+#### Note
+Well written RESTful API. Integrated into the Amazon Cloud Drive API.
 
 ### Dropbox Carousel
 [No API](http://stackoverflow.com/questions/29198042/dropbox-carousel-api) as of May 22, 2015
