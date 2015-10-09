@@ -1,35 +1,36 @@
-# It All Began With Skype
+# Who to Sue if Skype Spam Kills You
+## It All Began With Skype
 
 The other day I received this ominous message on Skype from an infected machine:
 
 > `http://octavo.in/v/yx7vj.php?liveID=[myskypeusername]`
 
-# A Trail of 302s
+## A Trail of 302s
 
 The URL redirects to `http://professtanitim.com` (with a revealing WHOIS record), which just serves this mysterious JavaScript:
 
 ```
-<script type="text/javascript"> 
+<script type="text/javascript">
 function generate(len)
 {
 // generates a random string with length len
 }
 
-function rand(min, max) 
-{ 
+function rand(min, max)
+{
 // random int >min and <max
-} 
+}
 
-var urls = 
-[ 
+var urls =
+[
 'com-n7d.net/?a=311397&c=wl_con&', // These two
 'com-3fg.net/?a=311397&c=wl_con&' // are owned by a resident of Shandong
-]; 
+];
 
 redir ='http://'+generate(rand(5,10))+'.'+urls[rand(0, urls.length-1)]+generate(rand(5,10));
 
-parent.location.href = redir; 
-//--> 
+parent.location.href = redir;
+//-->
 ```
 
 Even in Shandong, programmers like the [K&R indent style](https://en.wikipedia.org/wiki/Indent_style#K.26R_style). Let's try one of these random URLs:
@@ -51,13 +52,13 @@ curl -Lv 'http://fuckyou.com-n7d.net/a=311397&c=wl_con&assholes'
 [...]
 ```
 
-# The Fake Magazine
+## The Fake Magazine
 
 ![image](http://i.imgur.com/wqCEb1o.png)Fake _Women'sHealth magazine_ article
 
 The article seems to cater to insecure women that are desperately trying to lose weight and are thus easy bait for weight loss drug scammers. In it, two drugs are being promoted: __Garcinia Cambogia + Pure Life Cleanse__, AKA Pure Wallet Cleanse, amirite??!
 
-# Who is behind it?
+## Who is behind it?
 
 Let's see whether we can find out which company is selling these weight loss drugs.
 

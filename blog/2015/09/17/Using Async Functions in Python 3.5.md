@@ -1,3 +1,5 @@
+# Using Async Functions in Python 3.5
+
 With the new [async syntax](https://www.python.org/dev/peps/pep-0492/) in Python 3.5, defining asynchronous functions has become a lot simpler. In this article, I will demonstrate a simple example for this new feature. It will involve pulling a set of homepages of popular websites and displaying the first 10 characters of every HTTP response. The example will utilise the awesome [Requests](http://www.python-requests.org/) library. Make sure that your machine has Requests and Python 3.5 installed.
 
 ## A Traditional, Synchronous Approach
