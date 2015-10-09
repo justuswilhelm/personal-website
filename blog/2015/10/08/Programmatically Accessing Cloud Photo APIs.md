@@ -1,10 +1,14 @@
 # Programmatically Accessing Cloud Photo APIs
 
-This is a short evaluation on whether one can perform a series of basic tasks using the APIs that cloud photo services provide.
+This is a short evaluation on whether one can perform a series of basic tasks
+using the APIs that cloud photo services provide.
 
-We are imagining a scenario, where a mobile app user might want to retrieve a list of photos that they have previously stored on a cloud platform in order to review the photos, edit and delete them.
+We are imagining a scenario, where a mobile app user might want to retrieve a
+list of photos that they have previously stored on a cloud platform in order to
+review the photos, edit and delete them.
 
 The cloud photo providers in question are:
+
 - iCloud Photo Library
 - Google Photos
 - Flickr
@@ -20,14 +24,19 @@ Listing and Retrieving: Yes
 Delete: Yes
 Edit: Yes
 
-Note: Great, but proprietary API. All the functionality can only be accessed directly from a native iOS apps. This rules out any kind of web application. iOS >=8.0. Seamlessly integrates local and remote photo content, which allows treating them without having to bother with the physical storage location.
+Note: Great, but proprietary API. All the functionality can only be accessed
+directly from a native iOS apps. This rules out any kind of web application. iOS
+>=8.0. Seamlessly integrates local and remote photo content, which allows
+treating them without having to bother with the physical storage location.
 
 ### Google Photos
 [Google Picasa Webalbums API documentation](https://developers.google.com/picasa-web/?hl=en)
 Listing and Retrieving: Yes
 Delete: Yes
 Edit: Yes
-Note: API is messy and encapsulates data with the [Google Data](https://developers.google.com/gdata/?hl=en) standard. Not a pleasure to use compared to RESTful APIs.
+Note: API is messy and encapsulates data with the [Google
+Data](https://developers.google.com/gdata/?hl=en) standard. Not a pleasure to
+use compared to RESTful APIs.
 
 ### Flickr
 [Flickr API documentation](https://www.flickr.com/services/api/)
@@ -50,4 +59,10 @@ Note: Well written RESTful API. Must be used over the cloud drive interface.
 [No API](http://stackoverflow.com/questions/29198042/dropbox-carousel-api) as of May 22, 2015
 
 ## Summary
-The cloud photo providers with the most pizzazz are Amazon Photos and Flickr. Amazon Photos having a well written API is no surprise, as great APIs are one of Amazon's core values when working with developers. Flickr also comes at no surprise since they've been around for a long time. iCloud's walled garden fits into the whole isolated island thing they've got going. Google Photos might be more trouble than pleasure to use. Dropbox Carousel and Facebook Moments are the absolute losers as they have no API.
+The cloud photo providers with the most pizzazz are Amazon Photos and Flickr.
+Amazon Photos having a well written API is no surprise, as great APIs are one of
+Amazon's core values when working with developers. Flickr also comes at no
+surprise since they've been around for a long time. iCloud's walled garden fits
+into the whole isolated island thing they've got going. Google Photos might be
+more trouble than pleasure to use. Dropbox Carousel and Facebook Moments are the
+absolute losers as they have no API.
