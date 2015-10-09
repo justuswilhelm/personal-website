@@ -1,4 +1,4 @@
-# Programmatically accessing Cloud Photo APIs
+# Programmatically Accessing Cloud Photo APIs
 
 This is a short evaluation on whether one can perform a series of basic tasks using the APIs that cloud photo services provide.
 
@@ -12,7 +12,7 @@ The cloud photo providers in question are:
 - Amazon Photos
 - Dropbox Moments
 
-## The providers
+## The Providers
 
 ### iCloud Photo Library
 [iOS developer documentation](https://developer.apple.com/library/prerelease/ios/documentation/Photos/Reference/Photos_Framework/)
