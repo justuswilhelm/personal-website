@@ -25,7 +25,7 @@ following in a REPL
 
 ```python
 def show_weather():
-    print("The weather is great!")
+	print("The weather is great!")
 ```
 
 we not only define a function `show_weather`, but a CPython code object as well.
@@ -69,7 +69,7 @@ Let's try it out. We will see if there is a problem.
 ```python
 from dis import opname
 for byte in code:
-    print('Byte {} -> opcode {}'.format(byte, opname[byte]))
+	print('Byte {} -> opcode {}'.format(byte, opname[byte]))
 ```
 
 ```
@@ -101,7 +101,7 @@ constants and name references. You will see why.
 
 ```python
 def pformat(tpl):
-    return " \n".join("{}: {}".format(n, val) for n, val in enumerate(tpl))
+	return " \n".join("{}: {}".format(n, val) for n, val in enumerate(tpl))
 print("Constant values:")
 print(pformat(code_object.co_consts))
 
