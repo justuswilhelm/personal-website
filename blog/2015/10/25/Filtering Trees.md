@@ -34,13 +34,14 @@ But before we work on trees, we need to randomly generate some. `gen_tree` will
 recursively create a random tree with a maximum depth of 3.
 
 ```
-def gen_tree(depth=0, max_depth=3):
-    return (
-        "Foobar" if randbool() else "Qux",
-        tuple(gen_tree(depth + 1) for _ in range(randint(0, 3)))
-        if depth < max_depth else tuple(),
-    )
+  def gen_tree(depth=0, max_depth=3):
+      return (
+          "Foobar" if randbool() else "Qux",
+          tuple(gen_tree(depth + 1) for _ in range(randint(0, 3)))
+          if depth < max_depth else tuple(),
+      )
 ```
+
 ```
 >>> pprint(gen_tree())
 ('Qux',
@@ -65,19 +66,20 @@ won't try to do a better job at it. Take a look [right
 here](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first).
 
 ```
-def filter_tree(tree, keyword="Foobar"):
-    # Our first goal is the tree's root
-    # Additionally, we are going to store the path to the node
-    # As the second item in the tuple
-    goals = [(tree, [tree[0]])]
-    while goals:
-        node, path = goals.pop()  # pop the first item in the goal queue
-        for child_node in node[1]:
-            # the path is the current path plus the turn taken
-            goals.append((child_node, path + [child_node[0]]))
-        if node[0] == keyword:
-            yield tuple(path)
+  def filter_tree(tree, keyword="Foobar"):
+      # Our first goal is the tree's root
+      # Additionally, we are going to store the path to the node
+      # As the second item in the tuple
+      goals = [(tree, [tree[0]])]
+      while goals:
+          node, path = goals.pop()  # pop the first item in the goal queue
+          for child_node in node[1]:
+              # the path is the current path plus the turn taken
+              goals.append((child_node, path + [child_node[0]]))
+          if node[0] == keyword:
+              yield tuple(path)
 ```
+
 ```
 >>> pprint(tuple(filter_tree(tree)))
 (('Qux', 'Qux', 'Foobar'),
