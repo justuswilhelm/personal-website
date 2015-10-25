@@ -89,7 +89,7 @@ Byte 0 -> opcode <0>
 Byte 83 -> opcode RETURN_VALUE
 ```
 
-That looks interesting. We immediately notice the occurence of `<0>` opnames.
+That looks interesting. We immediately notice the occurrence of `<0>` opnames.
 Since a lot of the CPython opcodes require arguments to be specified, not all
 bytes in our bytecode represent opcodes, but references to values. In this case
 `<0>` is part of a numeric reference to a constant or global value. `POP_TOP` is
