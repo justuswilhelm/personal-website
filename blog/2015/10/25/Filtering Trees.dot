@@ -1,0 +1,5 @@
+digraph G {
+  root -> left_child;
+  root -> middle_child -> a_leaf;
+  root -> right_child -> right_grandchild -> another_leaf;
+}
