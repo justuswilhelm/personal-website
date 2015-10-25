@@ -2,21 +2,21 @@
 As you might know, CPython, the most commonly used implementation of Python,
 uses a stack based virtual machine to run Python scripts. This means that Python
 script ASTs are never directly executed. Instead, CPython compiles `.py` script
-files into byte code files first (`.pyc` files). This allows for some
-optimizations during the byte code compilation step and shipping of byte code
+files into bytecode files first (`.pyc` files). This allows for some
+optimisations during the bytecode compilation step and shipping of bytecode
 files to end customers instead of raw scripts. This is useful to make reverse
 engineering hard. [Ableton Live](https://www.ableton.com/en/live/) includes a
 CPython interpreter for its MIDI hardware integration. It does not let users
 look at the actual hardware integration scripts though. Instead, all hardware
 integration scripts can only be found in their compiled `.pyc` form.
 
-So what exactly can be found in CPython byte code? Byte code contains the stack
-instructions for CPython's virtual machine. Enter the Python disassembly library
+So what exactly can be found in CPython bytecode? Bytecode contains the stack
+instructions for CPythons virtual machine. Enter the Python disassembly library
 [dis](https://docs.python.org/3/library/dis.html). It is included in the CPython
 standard library and allows developers to view and understand the internal
 [bytecode](https://docs.python.org/3/glossary.html#term-bytecode) representation
 of code objects in CPython. Other implementations of Python typically do not use
-an internal byte code representation. Therefore, the following is highly CPython
+an internal bytecode representation. Therefore, the following is highly CPython
 specific.
 
 First, let's get familiar with code objects. Code objects can be created from
@@ -43,7 +43,7 @@ Now that the we know that the weather is great, we should take a look at the
 code object. A CPython code object can be accessed through the `__code__`
 attribute of a function.
 
-Before even using the `dis` library, we can actually peek at the byte code of our
+Before even using the `dis` library, we can actually peek at the bytecode of our
 `show_weather` function.
 
 ```python
@@ -57,12 +57,12 @@ b't\x00\x00d\x01\x00\x83\x01\x00\x01d\x00\x00S'
 ```
 
 That does not look very helpful. Thankfully, the `dis` module has an `opname`
-list, that maps byte code instructions (opcodes) to human readable names, similar
+list, that maps bytecode instructions (opcodes) to human readable names, similar
 to assembler instruction mnemonics such as MOV, ADD, etc. We need to keep in
 mind though, that we cannot just run all bytes through the `opname` list, as
 some instructions can require attributes. Attributes usually are numbers that
-refer to local and global names. Therefore, not all bytes in a byte code object
-represent byte code instructions.
+refer to local and global names. Therefore, not all bytes in a bytecode object
+represent bytecode instructions.
 
 Let's try it out. We will see if there is a problem.
 
@@ -121,9 +121,9 @@ Excellent. We were able to retrieve the reference to `print` and the string
 constant `The weather is great!`. Let's see whether we're able to match the
 bytecode references with our references.
 
-Luckily, the `dis` module has a few lists of byte codes called `hasname`,
+Luckily, the `dis` module has a few lists of bytecodes called `hasname`,
 `hasconst`, `hasnargs` and similar, that contain all the opcodes that require
-name, constant or other arguments. Since our code only has constants, global values,
+name, constant or other arguments. Since our code only has constants, globals,
 and function calls, we can go on without caring about other types of arguments.
 Function calls require a 2 byte argument that specifies the amount of keyword
 parameters (significant byte) and the number of positional parameters (least
@@ -176,6 +176,6 @@ dis(show_weather)
            13 RETURN_VALUE
 ```
 
-Never mind. There already is a disassembly method.
+Nevermind. There already is a disassembly method.
 
 Back to work.

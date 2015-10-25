@@ -1,6 +1,6 @@
 # Using Async Functions in Python 3.5
 
-With the new [async syntax](https://www.python.org/dev/peps/pep-0492/) in Python 3.5, defining asynchronous functions has become a lot simpler. In this article, I will demonstrate a simple example for this new feature. It will involve pulling a set of homepages of popular websites and displaying the first 10 characters of every HTTP response. The example will utilize the awesome [Requests](http://www.python-requests.org/) library. Make sure that your machine has Requests and Python 3.5 installed.
+With the new [async syntax](https://www.python.org/dev/peps/pep-0492/) in Python 3.5, defining asynchronous functions has become a lot simpler. In this article, I will demonstrate a simple example for this new feature. It will involve pulling a set of homepages of popular websites and displaying the first 10 characters of every HTTP response. The example will utilise the awesome [Requests](http://www.python-requests.org/) library. Make sure that your machine has Requests and Python 3.5 installed.
 
 ## A Traditional, Synchronous Approach
 
@@ -46,7 +46,7 @@ https://news.ycombinator.com/ : <html op=" in 0:00:01.464526s
 https://www.tagesschau.de/    : <!DOCTYPE  in 0:00:00.991291s
 ```
 
-So far so good. But knowing how this kind of code works, we quickly realize that a lot of time is being spent waiting for and being blocked by external resources. Usually, HTTP servers take their time to respond, and depending on a multitude of factors, results are almost always not being delivered instantly.
+So far so good. But knowing how this kind of code works, we quickly realise that a lot of time is being spent waiting for and being blocked by external resources. Usually, HTTP servers take their time to respond, and depending on a multitude of factors, results are almost always not being delivered instantly.
 
 Since one HTTP request has to be finished in order to execute the next HTTP request, our program will lose a considerable amount of time being blocked by an external resource. This is also known as an [I/O bound](https://en.wikipedia.org/wiki/I/O_bound) computation.
 
