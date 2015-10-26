@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from functools import lru_cache
 from datetime import date
 from os.path import (
@@ -26,10 +27,11 @@ def format_documents(content):
 
 
 @lru_cache()
-def read_blog_article(blog_article_path):
+def read_blog_article(blog_article_path_raw):
     # blog/2015/09/10/Who To Sue If Skype Spam Kills You.md
+    blog_article_path = blog_article_path_raw.replace("_", "/")
     title, creation_date = extract_blog_article_metadata(blog_article_path)
-    with open(blog_article_path) as fd:
+    with open(blog_article_path_raw) as fd:
         content = format_documents(fd.read())
     return {
         'title': title,
@@ -38,8 +40,8 @@ def read_blog_article(blog_article_path):
 
 
 def get_blog_articles():
-    document_paths = reversed(glob('blog/**/*.md', recursive=True))
-    return map(read_blog_article, document_paths)
+    blog_article_paths = reversed(glob('blog/**/*.md', recursive=True))
+    return map(read_blog_article, blog_article_paths)
 
 
 if __name__ == "__main__":
