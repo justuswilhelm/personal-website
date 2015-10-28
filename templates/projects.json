@@ -1,0 +1,15 @@
+[
+  {
+    "name": "twogifs",
+    "img": "static/twogifs.png",
+    "description": "Addictive site that lets users vote for their favorite GIF.",
+    "urls": [["https://www.twogifs.com/", "https://twogifs.com"]]
+  }, {
+    "name": "Binview",
+    "img": "static/binview.png",
+    "description": "Binary file analysis toolset.",
+    "urls": [
+      ["GitHub Repository", "https://github.com/justuswilhelm/binview"],
+      ["PyPI Package", "https://pypi.python.org/pypi/binview/"]
+    ]
+  }]

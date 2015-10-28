@@ -1,0 +1,33 @@
+{% extends "site_base.html" %}
+{% block content %}
+  <h2>Projects</h2>
+  <ul>
+    {% for project in projects %}
+      <li>
+        <a href="#{{loop.index0}}">
+          {{ project.name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% for project in projects %}
+    <h3 id={{ loop.index0 }}">
+      {{ project.name }}
+    </h3>
+    <a target="_blank" href="{{ project.urls[0][1] }}">
+      <img src="{{ project.img }}" alt="{{ project.name }} screenshot">
+    </a>
+    <p>
+      {{ project.description }}
+    </p>
+    <ul>
+      {% for url in project.urls %}
+        <li>
+          <a target="_blank" href="{{ url[1] }}">
+            {{ url[0] }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+{% endblock content %}
