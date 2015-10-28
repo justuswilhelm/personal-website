@@ -12,4 +12,18 @@
       ["GitHub Repository", "https://github.com/justuswilhelm/binview"],
       ["PyPI Package", "https://pypi.python.org/pypi/binview/"]
     ]
-  }]
+  }, {
+    "name": "html_potion",
+    "description": "Elixir HTML Tokenizer",
+    "urls": [
+      ["GitHub Repository", "https://github.com/justuswilhelm/html_potion"]
+    ]
+  }, {
+    "name": "Beemodoro",
+    "description": "Pomodors and Beeminder can finally coexist in your terminal. Beemind Pomodoros using this neat tool that integrates with the Beeminder API.",
+    "urls": [
+      ["GitHub Repository", "https://github.com/justuswilhelm/beemodoro"],
+      ["PyPI Package", "https://pypi.python.org/pypi/beemodoro/"]
+    ]
+  }
+]
