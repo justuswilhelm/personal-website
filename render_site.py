@@ -1,3 +1,4 @@
+from json import load
 from os import mkdir
 from shutil import (
     copy,
@@ -36,6 +37,7 @@ def render_templates():
     render_blog_articles()
     render_blog()
     render_index()
+    render_projects()
 
 
 def render_blog():
@@ -46,19 +48,25 @@ def render_blog():
 
 
 def render_blog_articles():
-    blog_article_template = env.get_template("blog_article.html")
+    template = env.get_template("blog_article.html")
     for blog_article in get_blog_articles():
         with open('public/blog/{date}-{title}.html'.format(
                 title=blog_article['title'],
                 date=blog_article['creation_date'],), 'w') as fd:
-            fd.write(blog_article_template.render(
-                article=blog_article))
+            fd.write(template.render(article=blog_article))
 
 
 def render_index():
-    index_template = env.get_template('index.html')
+    template = env.get_template('index.html')
     with open('public/index.html', 'w') as fd:
-        fd.write(index_template.render())
+        fd.write(template.render())
+
+
+def render_projects():
+    projects = load(open('templates/projects.json'))
+    template = env.get_template('projects.html')
+    with open('public/projects.html', 'w') as fd:
+        fd.write(template.render(projects=projects))
 
 
 def main():
