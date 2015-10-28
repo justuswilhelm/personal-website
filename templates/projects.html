@@ -4,19 +4,21 @@
   <ul>
     {% for project in projects %}
       <li>
-        <a href="#{{loop.index0}}">
+        <a href="#{{ loop.index0 }}">
           {{ project.name }}
         </a>
       </li>
     {% endfor %}
   </ul>
   {% for project in projects %}
-    <h3 id={{ loop.index0 }}">
+    <h3 id="{{ loop.index0 }}">
       {{ project.name }}
     </h3>
-    <a target="_blank" href="{{ project.urls[0][1] }}">
-      <img src="{{ project.img }}" alt="{{ project.name }} screenshot">
-    </a>
+    {% if project.img %}
+      <a target="_blank" href="{{ project.urls[0][1] }}">
+        <img src="{{ project.img }}" alt="{{ project.name }} screenshot">
+      </a>
+    {% endif %}
     <p>
       {{ project.description }}
     </p>
