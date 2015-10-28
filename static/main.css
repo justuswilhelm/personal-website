@@ -4,4 +4,7 @@ main {
 
 img {
   width: 100%;
-  }
+}
+dl dt {
+  font-weight: bold;
+}
