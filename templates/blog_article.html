@@ -2,13 +2,13 @@
 {% block content %}
   <h2>
     {{ article.title }}
+    <small>
+      {{ article.creation_date }}
+    </small>
   </h2>
-  <small>
-    {{ article.creation_date }}
-  </small>
   <p>
   {% markdown %}
-    {{ article.content }}
+{{ article.content }}
   {% endmarkdown %}
   </p>
 {% endblock content %}

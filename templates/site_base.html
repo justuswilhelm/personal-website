@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Justus Perlwitz" />
-    <title>Justus Perlwitz Software Development</title>
+    <title>Justus Perlwitz {% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="/static/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
       rel="stylesheet" type="text/css" />
@@ -18,12 +18,12 @@
     <div class="container">
       <div class="two-thirds column">
         {% include "_head.html" %}
+        {% include "_nav.html" %}
         {% block content %}
         {% endblock content %}
       </div>
       <div class="one-third column">
         {% include "_contact.html" %}
-        {% include "_nav.html" %}
       </div>
     </div>
     <script type="text/javascript">

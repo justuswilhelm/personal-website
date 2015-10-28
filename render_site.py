@@ -1,10 +1,4 @@
 from json import load
-from os import mkdir
-from shutil import (
-    copy,
-    copytree,
-    rmtree,
-)
 
 from jinja2 import (
     Environment,
@@ -17,20 +11,6 @@ from blog import get_blog_articles
 env = Environment(
     loader=FileSystemLoader('templates/'),
     extensions=['jinja2_markdown.MarkdownExtension'],)
-
-
-def clean():
-    rmtree('public', ignore_errors=True)
-
-
-def create_folders():
-    mkdir('public')
-    mkdir('public/blog')
-
-
-def copy_files():
-    copy('CNAME', 'public/CNAME')
-    copytree('static/', 'public/static/')
 
 
 def render_templates():
@@ -57,9 +37,10 @@ def render_blog_articles():
 
 
 def render_index():
+    expertise = load(open('templates/expertise.json'))
     template = env.get_template('index.html')
     with open('public/index.html', 'w') as fd:
-        fd.write(template.render())
+        fd.write(template.render(expertise=expertise))
 
 
 def render_projects():
@@ -70,9 +51,6 @@ def render_projects():
 
 
 def main():
-    clean()
-    create_folders()
-    copy_files()
     render_templates()
 
 
