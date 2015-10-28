@@ -1,12 +1,23 @@
 PORT=5000
 
 all: public
+	./spell_check
 
 clean:
-	rm -rf public/
-public: clean
+	rm -rf public/*
+
+public/CNAME: CNAME
+	cp $< $@
+public/blog:
+	mkdir -p $@
+
+public/static: static
+	mkdir -p $@
+	cp static/* $@/
+
+public: public/blog public/static public/CNAME templates
+	mkdir -p $@
 	python render_site.py
-	./spell_check
 
 deploy: public
 	ghp-import -b master -p $<

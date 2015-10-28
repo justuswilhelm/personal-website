@@ -9,21 +9,9 @@
   </ul>
   <h3>Expertise</h3>
   <dl>
-    <dt>Domains</dt>
-    <dd>Web Apps, Web Search, Productivity, Online Media, Mobile Apps</dd>
-    <dt>Languages</dt>
-    <dd>Python 2/3, Javascript, Ruby, SQL, C</dd>
-    <dt>Infrastructures</dt>
-    <dd>Heroku, AWS</dd>
-    <dt>Methodologies</dt>
-    <dd>TDD, BDD, Version Control, SCRUM, Kanban</dd>
-    <dt>Databases</dt>
-    <dd>PostgreSQL, MySQL, Redis</dd>
-    <dt>Python</dt>
-    <dd>Django, Flask, aiohttp, numpy, scipy</dd>
-    <dt>Testing</dt>
-    <dd>Unit and Integration Testing, Coverage Testing, Load Testing, Selenium</dd>
-    <dt>Security</dt>
-    <dd>Pentesting, XSS, SQL injections, Reverse engineering</dd>
+    {% for key, value in expertise.items()|sort %}
+    <dt>{{ key }}</dt>
+    <dd>{{ ", ".join(value) }}</dd>
+    {% endfor %}
   </dl>
 {% endblock content %}

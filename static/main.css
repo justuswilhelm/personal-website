@@ -2,6 +2,11 @@ main {
   margin-top: 50px;
 }
 
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
 img {
   width: 100%;
 }
