@@ -1,10 +1,10 @@
 {
   "Databases": ["PostgreSQL", "MySQL", "Redis"],
-  "Domains": ["Data Processing", "Search", "Productivity"],
   "Infrastructures": ["Heroku", "AWS"],
   "Languages": ["Python 2/3", "SQL", "C", "Matlab"],
   "Methodologies": ["Behavior Driven Development", "Software Configuration Management"],
   "Python": ["Django", "Flask", "aiohttp", "Numpy", "Scipy", "Scikit-Learn"],
   "Security": ["Penetration Testing", "Reverse Engineering"],
-  "Testing": ["User Testing", "Unit Testing", "Coverage Testing", "Load Testing"]
+  "Testing": ["User Testing", "Unit Testing", "Coverage Testing", "Load Testing"],
+  "Web": ["HTML", "CSS", "Transactional Emails", "Content Delivery Networks"]
 }
