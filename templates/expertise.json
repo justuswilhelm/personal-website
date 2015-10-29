@@ -11,7 +11,7 @@
     "Ruby on Rails",
     "Sinatra",
     "Grape",
-    "HAML",
+    "HAML"
   ],
   "Python": ["Django", "Flask", "aiohttp", "NumPy", "SciPy", "scikit-learn"],
   "Security": ["Penetration Testing", "Reverse Engineering"],
