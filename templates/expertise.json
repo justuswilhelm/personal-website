@@ -1,11 +1,17 @@
 {
   "Databases": ["PostgreSQL", "MySQL", "Redis"],
   "Infrastructures": ["Heroku", "AWS"],
-  "Languages": ["Python 2/3", "SQL", "C", "MATLAB"],
+  "Languages": ["Python 2/3", "Ruby", "SQL", "C", "MATLAB"],
   "Methodologies": [
     "Behavior Driven Development",
     "Software Configuration Management",
     "Continuous Integration"
+  ],
+  "Ruby": [
+    "Ruby on Rails",
+    "Sinatra",
+    "Grape",
+    "HAML",
   ],
   "Python": ["Django", "Flask", "aiohttp", "NumPy", "SciPy", "scikit-learn"],
   "Security": ["Penetration Testing", "Reverse Engineering"],
