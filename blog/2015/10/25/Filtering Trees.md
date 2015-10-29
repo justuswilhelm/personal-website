@@ -1,6 +1,8 @@
 # Filtering Trees with Python 3
 Today we are going to look at how to filter items in tree data structures using
-Python 3.
+Python 3. We are going to compare a stateful approach and a functional and
+recursive approach. In the end we will discuss the advantages of a functional
+implementation.
 
 ## The Task
 Assume we have a tree data structure in the form of nested lists, like the following
@@ -61,7 +63,6 @@ tremendously helpful.
 Now, let's see how easily we can find 'Foobar'.
 
 ## Stack-based Traversal
-
 If we're going to traverse a tree structure, we need to take note of which nodes
 we've already visited and which we have not seen yet. If we traverse a tree in a
 predetermined order, for example depth-first in {pre,in,post}-order, we only
@@ -88,7 +89,8 @@ def filter_tree(tree, keyword="Foobar"):
 
 I am going to be honest with you there. This code is messy and hard to debug. We
 have to manually keep track of which paths in the tree need to be visited and
-what the path to every node looks like.
+what the path to every node looks like. But it works. Here are all the paths to
+nodes that have the value 'Foobar':
 
 ```
 >>> pprint(tuple(filter_tree(tree)))
@@ -105,7 +107,8 @@ individual results. That means no `result` temporary list. In general, using
 `yield` statements allows for more concise code and better streaming behavior.
 Instead of allocating memory for a full list, you can leverage `yield`s paired
 with other iterators to only need memory for the end result. This can be useful
-if you nest list operations like 
+if you nest list operations like
+
 ```
 map(operator, filter(operator, reduce(operator, ...)))
 ```
@@ -115,17 +118,37 @@ retrieve the results. Otherwise you will see a result like `<generator object
 <genexpr> at 0x...>`
 
 ## Recursion-based Traversal
+Instead of explicitly tracking our current path and position in the tree, we can
+use a trick that functional programmers have figured out before it became cool:
+Recursion.
 
+In functional programming state often is encapsulated in the way functions are
+called. This has the neat advantage that if you call a function the same way
+twice, you will get the same result. Not only does this make your code more
+predictable, it also helps writing saner tests with less dependency injection.
+
+Let's dive into the code
 
 ```
-def filter_tree_recursive(tree, path=None, keyword="Foobar"):
-    path = path or tuple()
+def filter_tree_recursive(tree, path=tuple(), keyword="Foobar"):
+    # Look ma, no assignment statements
     if tree[0] == keyword:
         yield (path + (tree[0], ))
     for child_node in reversed(tree[1]):
         for result in filter_tree_recursive(child_node, path + (tree[0], )):
             yield result
 ```
+
+What our code does is return the path to the current node if it matches the
+search keyword plus call itself on all child nodes. Using the yield statement,
+we can avoid storing results in temporary variables. This makes the
+function itself store the state of execution. This can have side-effects, but
+not in our case.
+
+Our code always fully evaluates the function and does not suspend execution
+since we are constructing a tuple out of all yield results, as can be seen
+below.  That means that once we are done calculating, the Python runtime
+discards the execution state of the current `filter_tree_recursive` call.
 
 ```
 >>> pprint(tuple(filter_tree_recursive(tree)))
@@ -137,5 +160,4 @@ def filter_tree_recursive(tree, path=None, keyword="Foobar"):
  ('Qux', 'Foobar', 'Qux', 'Foobar'))
 ```
 
-
-Aww yiss
+The result is the same, but our code is more predictable and testable.
