@@ -1,9 +1,13 @@
 {
   "Databases": ["PostgreSQL", "MySQL", "Redis"],
   "Infrastructures": ["Heroku", "AWS"],
-  "Languages": ["Python 2/3", "SQL", "C", "Matlab"],
-  "Methodologies": ["Behavior Driven Development", "Software Configuration Management"],
-  "Python": ["Django", "Flask", "aiohttp", "Numpy", "Scipy", "Scikit-Learn"],
+  "Languages": ["Python 2/3", "SQL", "C", "MATLAB"],
+  "Methodologies": [
+    "Behavior Driven Development",
+    "Software Configuration Management",
+    "Continuous Integration"
+  ],
+  "Python": ["Django", "Flask", "aiohttp", "NumPy", "SciPy", "scikit-learn"],
   "Security": ["Penetration Testing", "Reverse Engineering"],
   "Testing": ["User Testing", "Unit Testing", "Coverage Testing", "Load Testing"],
   "Web": ["HTML", "CSS", "Transactional Emails", "Content Delivery Networks"]
