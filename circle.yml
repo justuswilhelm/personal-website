@@ -1,0 +1,9 @@
+test:
+  override:
+    - echo "No tests"
+
+deployment:
+  pages:
+    branch: pages
+    commands:
+      - make deploy
