@@ -1,21 +1,20 @@
-# Filtering Trees
+# Filtering Trees with Python 3
 Today we are going to look at how to filter items in tree data structures using
 Python 3.
 
-Let's define our task first:
-
-Given a tree data structure in the form of nested lists, like the following
+## The Task
+Assume we have a tree data structure in the form of nested lists, like the following
 
 ```
 tree = ['root', [
-  ['left_child', []],
-  ['middle_child', [
-    ['a leaf!', []]],
-  ],
-  ['right_child', [
-    ['right_grandchild', [
-      ['another leaf!']]]],
-  ],
+    ['left_child', []],
+    ['middle_child', [
+        ['a leaf!', []]],
+    ],
+    ['right_child', [
+        ['right_grandchild', [
+            ['another leaf!']]]],
+    ],
 ]
 ```
 
@@ -30,17 +29,23 @@ explore a few. What all methods have in common, that there needs to be some
 mechanism of traversing the tree in order to visit all nodes, and to extract and
 return the nodes that match "Foobar".
 
-But before we work on trees, we need to randomly generate some. `gen_tree` will
+Before we can get started, we need to create some trees. I like creating
+helpers, so a tree generator is going to be very helpful. `gen_tree` will
 recursively create a random tree with a maximum depth of 3.
 
 ```
 def gen_tree(depth=0, max_depth=3):
-  return (
-    "Foobar" if randbool() else "Qux",
-    tuple(gen_tree(depth + 1) for _ in range(randint(0, 3)))
-    if depth < max_depth else tuple(),
-  )
+    return (
+        "Foobar" if randbool() else "Qux",
+        tuple(gen_tree(depth + 1) for _ in range(randint(0, 3)))
+        if depth < max_depth else tuple(),
+    )
 ```
+
+If you want, you can include `from random import seed; seed(1)` in your code to
+ensure that you get the same random tree for every execution. Of course, using a
+fixed is stretching the definition of randomness. But for debugging it can be
+tremendously helpful.
 
 ```
 >>> pprint(gen_tree())
@@ -53,32 +58,37 @@ def gen_tree(depth=0, max_depth=3):
     ('Foobar', (('Qux', ()), ('Qux', ()), ('Qux', ())))))))
 ```
 
-Now, let's see how easily we can find foobar.
+Now, let's see how easily we can find 'Foobar'.
 
 ## Stack-based Traversal
 
 If we're going to traverse a tree structure, we need to take note of which nodes
 we've already visited and which we have not seen yet. If we traverse a tree in a
 predetermined order, for example depth-first in {pre,in,post}-order, we only
-need to be aware of which we need to visit in the future. Wikipedia has some
-really nice illustrations showing the different kinds of tree traversals, so I
-won't try to do a better job at it. Take a look [right
+need to be aware of which we need to visit in the future.
+
+Wikipedia has some really nice illustrations showing the different kinds of tree
+traversals, so I won't try to do a better job at it. Take a look [right
 here](https://en.wikipedia.org/wiki/Tree_traversal#Depth-first).
 
 ```
 def filter_tree(tree, keyword="Foobar"):
-  # Our first goal is the tree's root
-  # Additionally, we are going to store the path to the node
-  # As the second item in the tuple
-  goals = [(tree, [tree[0]])]
-  while goals:
-    node, path = goals.pop()  # pop the first item in the goal queue
-    for child_node in node[1]:
-      # the path is the current path plus the turn taken
-      goals.append((child_node, path + [child_node[0]]))
-    if node[0] == keyword:
-      yield tuple(path)
+    # Our first goal is the tree's root
+    # Additionally, we are going to store the path to the node
+    # As the second item in the tuple
+    goals = [(tree, [tree[0]])]
+    while goals:
+        node, path = goals.pop()  # pop the first item in the goal queue
+        for child_node in node[1]:
+            # the path is the current path plus the turn taken
+            goals.append((child_node, path + [child_node[0]]))
+        if node[0] == keyword:
+            yield tuple(path)
 ```
+
+I am going to be honest with you there. This code is messy and hard to debug. We
+have to manually keep track of which paths in the tree need to be visited and
+what the path to every node looks like.
 
 ```
 >>> pprint(tuple(filter_tree(tree)))
@@ -90,17 +100,31 @@ def filter_tree(tree, keyword="Foobar"):
  ('Qux', 'Foobar', 'Qux', 'Foobar'))
 ```
 
+Luckily, using `yield` allows us to let the caller take of retrieving the
+individual results. That means no `result` temporary list. In general, using
+`yield` statements allows for more concise code and better streaming behavior.
+Instead of allocating memory for a full list, you can leverage `yield`s paired
+with other iterators to only need memory for the end result. This can be useful
+if you nest list operations like 
+```
+map(operator, filter(operator, reduce(operator, ...)))
+```
+
+It is important to not forget to unpack a iterable stream once you want to
+retrieve the results. Otherwise you will see a result like `<generator object
+<genexpr> at 0x...>`
+
 ## Recursion-based Traversal
 
 
 ```
 def filter_tree_recursive(tree, path=None, keyword="Foobar"):
-  path = path or tuple()
-  if tree[0] == keyword:
-    yield (path + (tree[0], ))
-  for child_node in reversed(tree[1]):
-    for result in filter_tree_recursive(child_node, path + (tree[0], )):
-      yield result
+    path = path or tuple()
+    if tree[0] == keyword:
+        yield (path + (tree[0], ))
+    for child_node in reversed(tree[1]):
+        for result in filter_tree_recursive(child_node, path + (tree[0], )):
+            yield result
 ```
 
 ```
