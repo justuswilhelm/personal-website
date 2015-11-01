@@ -6,7 +6,7 @@
   <h2>
     Blog Index
   </h2>
-  <ul>
+  <ul data-article-count="{{ blog_articles.items|count }}">
     {% for article in blog_articles %}
       <li>
         <a href="blog/{{ article.creation_date }}-{{ article.title }}.html">
