@@ -24,7 +24,7 @@ def render_blog():
     blog_index_template = env.get_template('blog_index.html')
     with open('public/blog_index.html', 'w') as fd:
         fd.write(blog_index_template.render(
-            blog_articles=get_blog_articles()))
+            blog_articles=tuple(get_blog_articles())))
 
 
 def render_blog_articles():
