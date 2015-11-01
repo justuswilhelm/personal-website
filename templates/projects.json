@@ -3,7 +3,7 @@
     "name": "twogifs",
     "img": "static/twogifs.png",
     "description": "Addictive site that lets users vote for their favorite GIF.",
-    "urls": [["https://www.twogifs.com/", "https://twogifs.com"]]
+    "urls": [["www.twogifs.com/", "http://twogifs.com"]]
   }, {
     "name": "Binview",
     "img": "static/binview.png",
