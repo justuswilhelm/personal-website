@@ -16,9 +16,10 @@ def tokenize(s):
     return list(map(lambda s: int(s) if s.isnumeric() else s, filter(
         bool, s.replace('(', '( ').replace(')', ' )').split(" "))))
 ```
+
 First, the tokenizer adds padding to left and right parentheses. Then it splits
 the raw token stream by space characters. As a result empty items will appear,
-since `( ` will turn into `(  `, which will be split into `(`, ``. That is why
+since `( ` will turn into `(  `, which will be split into `(`, ` `. That is why
 the surrounding `filter` discards empty items using `bool`. Finally, the
 tokenizer turns all numeric tokens into `int`s. It returns the resulting token
 stream as a list.
