@@ -1,4 +1,3 @@
-
 # Analyzing Consumer Complaints with Pandas and Python 3
 I found a really neat data source online on unwanted robocalls that the FCC (Federal Communications Commission, a United States government agency) is tracking. Consumers complaints are being tracked in an openly available database.
 
@@ -70,7 +69,7 @@ s
 
 
 
-<div>
+<div class="u-full-width">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -839,7 +838,7 @@ s['Time of Issue']
 
 
 
-<div>
+<div class="u-full-width">
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1139,12 +1138,7 @@ actual_times.hist(bins=24)
 
 
 
-![png](output_9_1.png)
+![Matplotlib Chart](customer_complaints.png)
 
 
 Aha! Most robo calls get placed around 10-11 AM!
-
-
-```python
-
-```
