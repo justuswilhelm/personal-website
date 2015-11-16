@@ -26,32 +26,6 @@
         {% include "_contact.html" %}
       </div>
     </div>
-    <script type="text/javascript">
-      var $uni = document.getElementsByClassName('unicorn')[0];
-      var text = $uni.innerHTML;
-      var color_steps = 360 / text.length;
-      var newCont = "";
-      var time = 0;
-      var timestep = $uni.dataset.score;
-
-      for (var text_index =0; text_index < text.length; text_index++) {
-      newCont += "<span style='color:hsl(" + text_index * color_steps +
-        ", 100%, 50%)'>" + text.charAt(text_index) + "<\/span>";
-      }
-
-      $uni.innerHTML = newCont; // Replace with new content
-      var $ch = $uni.getElementsByTagName('span'); // character
-
-      setInterval(function(){
-      time -= timestep;
-      time = time % 360;
-      for (var ch_index = 0; ch_index < $ch.length; ch_index += 1) {
-        current_ch = $ch[ch_index];
-        var hue = (time + (color_steps * ch_index)) % 360;
-        current_ch.style.color = "hsl(" + hue + ", 100%, 50%)";
-      }
-      }, 50);
-    </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -60,7 +34,6 @@
 
       ga('create', 'UA-67453028-1', 'auto');
       ga('send', 'pageview');
-
     </script>
   </body>
 </html>
