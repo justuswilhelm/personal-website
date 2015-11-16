@@ -5,13 +5,13 @@
 {% block content %}
   <h2>
     {{ article.title }}
-    <small>
-      {{ article.creation_date }}
-    </small>
   </h2>
+  <small>
+    {{ article.creation_date }}
+  </small>
   <p>
-  {% markdown %}
+{% markdown %}
 {{ article.content }}
-  {% endmarkdown %}
+{% endmarkdown %}
   </p>
 {% endblock content %}
