@@ -1,6 +1,6 @@
 # Using Async Functions in Python 3.5
 
-With the new [async syntax](https://www.python.org/dev/peps/pep-0492/) in Python 3.5, defining asynchronous functions has become a lot simpler. In this article, I will demonstrate a simple example for this new feature. It will involve pulling a set of homepages of popular websites and displaying the first 10 characters of every HTTP response. The example will utilize the awesome [Requests](http://www.python-requests.org/) library. Make sure that your machine has Requests and Python 3.5 installed.
+With the new [async syntax](https://www.python.org/dev/peps/pep-0492/) in Python 3.5, defining asynchronous functions has become a lot simpler. In this article, I will demonstrate a simple example for this new feature. It will involve pulling a set of homepages of popular websites and displaying the first 10 characters of every HTTP response. The example will utilize the awesome [aiohttp](http://aiohttp.readthedocs.org/en/stable/) library. Make sure that your machine has aiohttp and Python 3.5 installed.
 
 ## A Traditional, Synchronous Approach
 
@@ -57,13 +57,15 @@ By interleaving the execution of several function calls at once, we will be able
 We are going to execute the same task, but with a twist. Instead of synchronously executing the `get_site_snippet` function, we are going to asynchronously get all website results and join the results in the end. Let's take a look at how to achieve that.
 
 ```python
-from requests import get
+from asyncio.client import get
 
 async def async_get_site_snippet(site):
-    return FORMAT_STRING.format(site=get(site))
+    response = await get(site)
+    content = await response.read()
+    return FORMAT_STRING.format(site=content)
 ```
 
-Already, we can see that not much has changed for the site snippet retriever. Only the keyword `async` has been added to the function definition. In Python terms, this means that the function will not return the desired result immediately. Instead it will return a promise to deliver the result at some point. To be more precise, calling `async_get_site_snippet('http://www.google.com')` will return a coroutine object.
+A keen observer will immediately notice the usage of `async` and `await`. I won't try to get too much into the details of how these are being handled in CPython internally. Let's just say that this means that the functions we're calling will not return the desired result immediately. Instead, calling an `async` function, will return a promise to eventually calculate a result. To be more precise, calling `async_get_site_snippet('http://www.google.com')` will return a coroutine object. The same applies for the two `await` calls, as `get(site)` returns a promise, as well as `response.read()`.
 
 Now, by itself the coroutine object will not do anything. Getting to the result of every coroutine call involves some extra functionality that we are going to add now.
 
