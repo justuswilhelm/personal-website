@@ -1,10 +1,15 @@
-# Analyzing Consumer Complaints with Pandas and Python 3
+# Analyzing Consumer Complaints with Pandas, IPython Python 3
 I found a really neat data source online on unwanted robocalls that the FCC
-(Federal Communications Commission, a United States government agency) is
-tracking. Consumers complaints are being tracked in an openly available
-database.
+(Federal Communications Commission, a United States government agency) has
+created and published openly. The data source provides times and dates of
+unwanted robocalls that consumers have reported to the FCC. We can use this data
+source to find out all kinds of things, but today we will be content with just
+finding out the time of the day households are most likely to receive robocalls.
 
-Let's download it and see what it contains!
+First, we need to fire up our trusty IPython notebook and download the data. The
+data is freely available on the fcc.gov website and is encoded as a `.csv`
+(comma separated values) file. Fortunately for us, we don't even need to leave
+IPython. We can execute bash commands right here!
 
 ```python
 %%bash
@@ -26,10 +31,8 @@ There is the number of a caller, the type of call, the reason for reporting it,
 in which state of the US it happened and finally time and date.
 
 ## Extracting Information
-What interests me the most, is in which hour of the day most robocalls are being
-placed at consumer's homes. First, let's create a Series from the 'Time of
-Issue' column.
-
+Now, in order to retrieve the time of day when the unwanted robocall was
+received, we need to take a closer look at the `Time of Issue` column.
 
 ```python
 s['Time of Issue']
@@ -292,8 +295,9 @@ s['Time of Issue']
 <p>16314 rows × 1 columns</p>
 
 The column is not well formatted, as 'AM' and 'PM' appear in different
-spellings. In order to extract useful information, we need to parse the time
-information first.
+spellings. Sometimes irregular characters such as "?" and "" appear. Perhaps
+this is OCR gone awry. In order to extract useful information, we need to parse
+the time information first and ignore a lot of the spelling/encoding errors.
 
 ```python
 from datetime import datetime, time
