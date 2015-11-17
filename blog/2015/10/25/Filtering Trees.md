@@ -135,9 +135,13 @@ def filter_tree_recursive(tree, path=tuple(), keyword="Foobar"):
     if tree[0] == keyword:
         yield (path + (tree[0], ))
     for child_node in reversed(tree[1]):
-        for result in filter_tree_recursive(child_node, path + (tree[0], )):
-            yield result
+        yield from filter_tree_recursive(child_node, path + (tree[0], ))
 ```
+
+Note the use of `yield from`, which is only available in Python 3. It lets us
+delegate `yield` to another method. Otherwise we would have to unpack the result
+of `filter_tree_recursive` into individual yields. This way, we can shave off
+one line of code.
 
 What our code does is return the path to the current node if it matches the
 search keyword plus call itself on all child nodes. Using the yield statement,
