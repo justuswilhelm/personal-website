@@ -1,6 +1,6 @@
 from pprint import pprint
 from random import randint, seed
-seed(1)
+seed(100)
 
 
 def randbool():
@@ -40,8 +40,7 @@ def filter_tree_recursive(tree, path=None, keyword="Foobar"):
     if tree[0] == keyword:
         yield (path + (tree[0], ))
     for child_node in reversed(tree[1]):
-        for result in filter_tree_recursive(child_node, path + (tree[0], )):
-            yield result
+        yield from filter_tree_recursive(child_node, path + (tree[0], ))
 
 
 pprint(tuple(filter_tree_recursive(tree)))
