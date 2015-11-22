@@ -59,5 +59,5 @@ dict_items([('flipblip', 'foobar'), ('frob', 'lob'), ('floxblum', 'qux'),
 ```
 
 This is considerably cleaner. For more awesome unpacking madness, do check out
-The PEP 0448 document [examples](https://www.python.org/dev/peps/pep-0448/#id6).
+the PEP 0448 document [examples](https://www.python.org/dev/peps/pep-0448/#id6).
 Happy unpacking!
