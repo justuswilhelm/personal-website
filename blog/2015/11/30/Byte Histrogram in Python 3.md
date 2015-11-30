@@ -52,7 +52,7 @@ what I like about the language. It is well designed for these purposes.
 Now, we are going to make use of the
 [`Counter`](https://docs.python.org/3.5/library/collections.html#collections.Counter)
 class in the `collections` module. The `Counter` class allows us to easily count
-the occurence of individual elements in a iterable object, such as the byte
+the occurrence of individual elements in a iterable object, such as the byte
 contents of a file. Let's get going.
 
 ```python
@@ -220,7 +220,7 @@ for value, frequency in c.most_common():
 ```
 
 That looks really interesting! Note that in both cases we scaled the maximum
-probabilty, so that the value with the maximum probability will be shown with 80
+probability, so that the value with the maximum probability will be shown with 80
 bar characters.
 
 If you liked this article and would like to know more about statistics with
