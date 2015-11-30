@@ -14,4 +14,4 @@ fi
 
 mkdir -p "$path"
 touch "$path/$title.md"
-$EDITOR "$path/$title.md"
+nvim "$path/$title.md"
