@@ -1,11 +1,10 @@
 # Byte Histogram in Python 3
-I had this curious thought the other day: how are bytes distributed in binary
-files, such as executable files in my operating system? Take for example
-`/bin/echo` on OS X 10.11.1.
+I had this curious thought the other day: what is the byte value distribution
+in binary files, such as an executable? Take for example `/bin/echo` on OS X
+10.11.1.
 
-What we want to find out more precisely is: what is the probability distribution
-of all bytes from 0-255 in a binary file. And how does it look like when
-visualized?
+What we want to find out more precisely is: how likely will a certain byte value
+appear in a file. And how does it look like when we visualize that distribution?
 
 This is going to be a field day thanks to a few handy classes and methods in the
 Python 3 standard library. Let's get started!
@@ -27,9 +26,8 @@ Bytestrings, which are either of type `bytes` or `bytearray` in Python 3,  have
 a different intent than UTF-8 strings, which are of type `str`. While
 bytestrings are, as their name says, for handling binary data, such as
 executables, serialized files and more, UTF-8 strings are for handling natural
-languages. For example, this could be an HTML template using German with lots of
-umlauts to a user, or a regular expression looking through texts written in
-Japanese.
+languages. This could be an HTML template using German with lots of umlauts, or
+a regular expression looking through texts written in Japanese.
 
 We also make use of the `open()` context manager, which is a good habit for
 several reasons. It allows open files and their file descriptors to be garbage
