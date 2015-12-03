@@ -13,7 +13,7 @@ public/blog:
 
 public/static: static
 	mkdir -p $@
-	cp static/* $@/
+	cp -r static/* $@/
 
 public: public/blog public/static public/CNAME templates
 	mkdir -p $@
@@ -24,7 +24,7 @@ deploy: public
 
 test: public
 	python -m doctest *.py
-	killall python3
+	killall python3 || true
 	cd public; python3 -m http.server $(PORT) &
 	sleep 0.5
 	open "http://localhost:$(PORT)"
