@@ -1,4 +1,4 @@
-from json import load
+from yaml import load
 
 from jinja2 import (
     Environment,
@@ -37,9 +37,9 @@ def render_blog_articles():
 
 
 def render_index():
-    expertise = load(open('templates/expertise.json'))
+    expertise = load(open('templates/expertise.yaml'))
     template = env.get_template('index.html')
-    talks = load(open('templates/talks.json'))
+    talks = load(open('templates/talks.yaml'))
     with open('public/index.html', 'w') as fd:
         fd.write(template.render(
             expertise=expertise,
@@ -48,7 +48,7 @@ def render_index():
 
 
 def render_projects():
-    projects = load(open('templates/projects.json'))
+    projects = load(open('templates/projects.yaml'))
     template = env.get_template('projects.html')
     with open('public/projects.html', 'w') as fd:
         fd.write(template.render(projects=projects))
