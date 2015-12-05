@@ -39,8 +39,12 @@ def render_blog_articles():
 def render_index():
     expertise = load(open('templates/expertise.json'))
     template = env.get_template('index.html')
+    talks = load(open('templates/talks.json'))
     with open('public/index.html', 'w') as fd:
-        fd.write(template.render(expertise=expertise))
+        fd.write(template.render(
+            expertise=expertise,
+            talks=talks,
+        ))
 
 
 def render_projects():

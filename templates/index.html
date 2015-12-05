@@ -24,4 +24,37 @@
       <dd>{{ ", ".join(value) }}</dd>
     {% endfor %}
   </dl>
+
+  <h2>Talks</h2>
+  {% for talk in talks %}
+    <h3>
+      {{ talk.title }}
+    </h3>
+    <dl>
+      <dt>
+        Location
+      </dt>
+      <dd>
+        {{ talk.location }}
+      </dd>
+      <dt>
+        Date
+      </dt>
+      <dd>
+        {{ talk.date }}
+      </dd>
+      <dt>
+        Slides
+      </dt>
+      <dd>
+        <a href="{{ talk.slides }}">Download</a>
+      </dd>
+      <dt>
+        Type
+      </dt>
+      <dd>
+        Lightning talk
+      </dd>
+    </dl>
+  {% endfor %}
 {% endblock content %}
