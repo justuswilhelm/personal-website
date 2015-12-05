@@ -3,10 +3,10 @@
   type: Lightning Talk
   date: 2015-11-12
   title: Asyncio
-  slides: static/slides/lightning_asyncio.pdf
+  slides: lightning_asyncio.pdf
 -
   location: Python Users Berlin
   type: Talk
   date: 2015-12-10
   title: Asyncio and you
-  slides: static/slides/asyncio_and_you.pdf
+  slides: asyncio_and_you.pdf
