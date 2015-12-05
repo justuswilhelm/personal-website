@@ -1,4 +1,9 @@
 {
+  "Problem Domains": [
+    "Search",
+    "Marketing",
+    "Advertising"
+  ],
   "Databases": [
     "PostgreSQL", "MySQL", "Redis"
   ], "Infrastructures": [
@@ -6,9 +11,7 @@
   ], "JavaScript": [
     "Mocha",
     "Browserify",
-    "Safari Extension Development",
-    "Firefox Extension Development",
-    "Chrome Extension Development",
+    "Cross Browser Extension Development",
     "Node.js",
     "three.js",
     "D3.js"
