@@ -1,0 +1,41 @@
+---
+  -
+    name: twogifs
+    img: static/twogifs.png
+    description: Addictive site that lets users vote for their favorite GIF.
+    urls:
+      -
+        - http://twogifs.com
+        - www.twogifs.com/
+  -
+    name: Binview
+    img: static/binview.png
+    description: Binary file analysis toolset.
+    urls:
+      -
+        - GitHub Repository
+        -  https://github.com/justuswilhelm/binview
+      -
+        - PyPI Package
+        - https://pypi.python.org/pypi/binview/
+  -
+    name: Beemodoro
+    description: Pomodoro and Beeminder can finally coexist in your terminal. Beemind Pomodoros using this neat tool that integrates with the Beeminder API.
+    urls:
+      -
+        - GitHub Repository
+        - https://github.com/justuswilhelm/beemodoro
+      -
+        - PyPI Package
+        - https://pypi.python.org/pypi/beemodoro/
+  -
+    name: Webcheck
+    description: Check whether common files, such as favicon.ico are present in your new project.
+    img: static/webcheck.png
+    urls:
+      -
+        - GitHub Repository
+        - https://github.com/justuswilhelm/webcheck
+      -
+        - Rubygems
+        - https://rubygems.org/gems/webcheck
