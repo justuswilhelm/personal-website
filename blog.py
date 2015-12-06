@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from functools import lru_cache
+from markdown import markdown
 from yaml import load
 from os.path import join
 
@@ -7,7 +8,18 @@ from os.path import join
 @lru_cache()
 def read_article(id):
     with open(join('blog', id) + '.md') as fd:
-        return fd.read()
+        return markdown(
+            fd.read(),
+            extensions=[
+                'markdown.extensions.fenced_code',
+                'markdown.extensions.codehilite',
+            ], extension_configs={
+                'markdown.extensions.codehilite': {
+                    'linenums': True,
+                    'noclasses': True,
+                    'guess_lang': True,
+                }
+            })
 
 
 @lru_cache()
@@ -22,5 +34,5 @@ def load_blog():
 
 
 if __name__ == "__main__":
-    for article in load_blog().items():
+    for article in load_blog():
         print(article)
