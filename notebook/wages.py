@@ -91,12 +91,19 @@ female_distribution = probability_distribution(
 male_distribution = probability_distribution(
     male_position_titles)
 
-pprint(female_distribution.most_common(10))
-pprint(male_distribution.most_common(10))
+
+def pprint_distribution(distribution, most_common=10):
+    for key, value in distribution.most_common(most_common):
+        print("{}: {:.2f} %".format(key, value))
+
+print("Female Employees:")
+pprint_distribution(female_distribution)
+print("Male Employees:")
+pprint_distribution(male_distribution)
 
 print("""The 10 most common position titles for female employees cover {:.2f}\
- of all employees""".format(
+ % of all employees""".format(
     sum(map(itemgetter(1), female_distribution.most_common(10)))))
 print("""The 10 most common position titles for male employees cover {:.2f}\
- of all employees""".format(
+ % of all employees""".format(
     sum(map(itemgetter(1), male_distribution.most_common(10)))))
