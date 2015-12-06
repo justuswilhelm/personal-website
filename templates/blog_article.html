@@ -5,27 +5,25 @@
 {% block header %}
 {% endblock header %}
 {% block nav %}
-  <nav class="ten columns offset-by-one">
+  <nav class="eight columns offset-by-two">
     <a href="/blog_index.html">
       &lt; Return to blog index
     </a>
   </nav>
 {% endblock nav %}
 {% block content %}
-  <article class="ten columns offset-by-one">
+  <article class="eight columns offset-by-two">
     <h1>
       {{ article.title }}
     </h1>
     <p>
-{% markdown %}
-{{ article.content }}
-{% endmarkdown %}
+      {{ article.content }}
     </p>
     <small>
       Date: {{ article.created }}
     </small>
   </article>
-  <nav class="ten columns offset-by-one">
+  <nav class="eight columns offset-by-two">
     <a href="/blog_index.html">
       &lt; Return to blog index
     </a>

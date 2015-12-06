@@ -9,9 +9,7 @@ from jinja2 import (
 from blog import load_blog
 
 
-env = Environment(
-    loader=FileSystemLoader('templates/'),
-    extensions=['jinja2_markdown.MarkdownExtension'],)
+env = Environment(loader=FileSystemLoader('templates/'))
 
 
 def render_templates():
