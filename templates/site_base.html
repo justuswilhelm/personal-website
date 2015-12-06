@@ -16,8 +16,12 @@
   </head>
   <body>
     <div class="container">
-      {% include "_head.html" %}
-      {% include "_nav.html" %}
+      {% block header %}
+        {% include "_header.html" %}
+      {% endblock header %}
+      {% block nav %}
+        {% include "_nav.html" %}
+      {% endblock nav %}
       {% block content %}
       {% endblock content %}
     </div>
