@@ -17,3 +17,8 @@ img {
 dl dt {
   font-weight: bold;
 }
+
+article {
+  text-align: justify;
+  font-size: 1.6em;
+}
