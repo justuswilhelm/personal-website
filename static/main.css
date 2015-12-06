@@ -19,6 +19,6 @@ dl dt {
 }
 
 article {
-  text-align: justify;
-  font-size: 1.6em;
+  font-size: 1.1em;
+  line-height: 1.5;
 }
