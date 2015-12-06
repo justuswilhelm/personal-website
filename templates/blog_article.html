@@ -2,16 +2,32 @@
 {% block title %}
   | {{ article.title }}
 {% endblock title %}
+{% block header %}
+{% endblock header %}
+{% block nav %}
+  <nav class="ten columns offset-by-one">
+    <a href="/blog_index.html">
+      &lt; Return to blog index
+    </a>
+  </nav>
+{% endblock nav %}
 {% block content %}
-  <h2>
-    {{ article.title }}
-  </h2>
-  <small>
-    {{ article.creation_date }}
-  </small>
-  <p>
+  <article class="ten columns offset-by-one">
+    <h1>
+      {{ article.title }}
+    </h1>
+    <p>
 {% markdown %}
 {{ article.content }}
 {% endmarkdown %}
-  </p>
+    </p>
+    <small>
+      Date: {{ article.created }}
+    </small>
+  </article>
+  <nav class="ten columns offset-by-one">
+    <a href="/blog_index.html">
+      &lt; Return to blog index
+    </a>
+  </nav>
 {% endblock content %}
