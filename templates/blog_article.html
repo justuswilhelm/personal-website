@@ -19,9 +19,26 @@
     <p>
       {{ article.content }}
     </p>
-    <small>
-      Date: {{ article.created }}
-    </small>
+    <dl>
+      <dt>
+        Date created:
+      </dt>
+      <dd>
+        {{ article.created }}
+      </dd>
+      <dt>
+        Tags:
+      </dt>
+      <dd>
+        <ul>
+          {% for  tag in article.tags %}
+            <li>
+              {{ tag }}
+            </li>
+          {% endfor %}
+        </ul>
+      </dd>
+    </dl>
   </article>
   <nav class="eight columns offset-by-two">
     <a href="/blog_index.html">
