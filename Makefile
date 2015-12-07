@@ -1,28 +1,32 @@
 PORT=5000
 
-all: public
-	./spell_check
+all: public/blog public/index.html public/projects.html public/blog public/static public/CNAME
+
+public/%.html: pages/%.yaml render_page.py templates/%.html
+	./render_page.py $<
 
 clean:
 	rm -rf public/*
 
 public/CNAME: CNAME
 	cp $< $@
-public/blog:
+
+public/blog: blog/ render_blog.py templates/*blog*
+	./spell_check
 	mkdir -p $@
+	./render_blog.py
 
 public/static: static
 	mkdir -p $@
-	cp -r static/* $@/
+	cp -r $</* "$@"
 
-public: public/blog public/static public/CNAME templates
+public:
 	mkdir -p $@
-	python render_site.py
 
-deploy: public
+deploy: all
 	ghp-import -b master -p $<
 
-test: public
+test: all
 	python -m doctest *.py
 	killall python3 || true
 	cd public; python3 -m http.server $(PORT) &

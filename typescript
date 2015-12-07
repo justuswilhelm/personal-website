@@ -1,0 +1,29 @@
+Script started on Tue Dec  8 09:37:57 2015
+fish: Unknown command '__fish_print_help --tty-width 159 functions'
+env/bin/activate.fish (line 1): __fish_print_help --tty-width 159 functions
+                                ^
+in command substitution
+	called on line 3 of file env/bin/activate.fish
+
+in function 'deactivate'
+	called on line 33 of file env/bin/activate.fish
+	with parameter list 'nondestructive'
+
+from sourcing file env/bin/activate.fish
+	called on line 1 of file -
+
+in function 's_env'
+	called on line 6 of file ~/.config/fish/functions/cd.fish
+
+in function 'cd'
+	called on line 19 of file ~/.config/fish/config.fish
+	with parameter list '.'
+
+from sourcing file ~/.config/fish/config.fish
+	called during startup
+
+]0;fish  /Users/justusperlwitz/portfolio[30m(B[mWelcome back
+]0;fish  /Users/justusperlwitz/portfolio[30m(B[m[38;5;245m⏎[0m                                                                                                                                                               [37m[44m(env)[30m(B[m[33m/Users/justusperlwitz/portfolio [30m(B[m[31m✘ [30m(B[m[34mpages [30m(B[m$ [K[100C[32m[0][34m0937[35mDec08[30m(B[m[147C[47C
+[30m(B[m
+[30m(B[m
+Script done on Tue Dec  8 09:38:07 2015
