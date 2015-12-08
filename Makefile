@@ -23,7 +23,7 @@ public/static: static
 public:
 	mkdir -p $@
 
-deploy: all
+deploy: public all
 	ghp-import -b master -p $<
 
 test: all
