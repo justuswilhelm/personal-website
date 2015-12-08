@@ -20,6 +20,12 @@ logging.basicConfig(level='INFO')
 env = Environment(loader=FileSystemLoader('templates/'))
 
 
+def datetimeformat(value, format='%b %d, %Y'):
+    return value.strftime(format)
+
+env.filters['datetimeformat'] = datetimeformat
+
+
 def load_data(path):
     """Given a path, read a yaml file."""
     return load(open(join('data', '{}.yaml'.format(path))).read()) or {}
