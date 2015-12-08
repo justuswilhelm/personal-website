@@ -1,0 +1,74 @@
+2015-11-12:
+  description: Broad overview of the new async/await syntax in Python.
+  location: Python Users Berlin
+  name: Asyncio Lightning Talk
+  type: Talk
+  url: /static/slides/lightning_asyncio.pdf
+2015-12-10:
+  description: Exploring asyncio in Python by example
+  location: Python Users Berlin
+  name: Asyncio and you
+  type: Talk
+  url: /static/slides/asyncio_and_you.pdf
+2012-10-01:
+  end: 2016-02-01
+  location: Berlin
+  name: Freelancer
+  type: Work
+  url: http://www.justus.pw
+  description: <
+    Consulting startups on key technological choices and implementing
+    applications.
+2013-10-01:
+  end: 2015-06-30
+  location: Ecosia GmbH Berlin
+  name: Web Developer
+  type: Work
+  url: https://www.ecosia.org
+  description: <
+    I was tasked with porting parts of the legacy codebase to more modern
+    languages and frameworks (mostly Go and Python with Flask/Django).
+2016-02-01:
+  end: null
+  location: Ayuda Systems GmbH
+  name: Software Developer
+  type: Work
+  url: http://www.ayudasystems.com
+2012-11-01:
+  end: null
+  location: Allversity gGmbH Berlin
+  name: Core Maintainer
+  type: Experience
+  url: http://www.allversity.org
+  description: <
+    I am the core maintainer for the online multimedia education platform
+    Allversity. Originally, I've started working as an intern and was taken on
+    as an employee for a short time. I've become the maintainer of the platform
+    after that.
+2012-10-01:
+  end: null
+  location: Humboldt-University of Berlin
+  name: Computer Science
+  type: Education
+  description: <
+    Broad education in Computer Science topics, both in theoretical topics, such
+    as complexity, algorithms, and data structures, as well as applied topics,
+    such as signal processing, and machine learning.
+2015-09-25:
+  end: 2015-09-27
+  location: Smart Transportation & Energy Hackathon 2015
+  type: Award
+  url: "/static/slides/bubble.pdf"
+  description: <
+    My team and I created a offline wireless network that streams media and
+    delivers location aware services such as maps and train routes. We used the
+    Intel Edison hardware development kit to create the solution.
+  name: Intel Prize
+2015-11-26:
+  location: First Berlin Code Fight 2015
+  name: First Prize
+  type: Award
+  url: http://berlincodefight.com
+  description: <
+    After solving algorithmic challenges and winning all tournament rounds I was
+    awarded a trip to NY city. Who knew bashing a keyboard could create value?

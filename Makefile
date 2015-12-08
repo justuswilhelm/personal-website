@@ -1,27 +1,31 @@
+pages=public/index.html public/projects.html public/blog_index.html
 PORT=5000
 
-all: public/blog public/index.html public/projects.html public/blog public/static public/CNAME
+all: public/blog $(pages) public/static public/CNAME
 
 public/%.html: pages/%.yaml render_page.py templates/%.html
 	./render_page.py $<
 
 clean:
-	rm -rf public/*
+	rm -rf public
 
 public/CNAME: CNAME
 	cp $< $@
 
-public/blog: blog/ render_blog.py templates/*blog*
+public/blog_index.html: templates/blog_index.html
+	./render_blog_index.py
+
+public/blog/: blog/ templates/blog_article.html public
 	./spell_check
-	mkdir -p $@
 	./render_blog.py
 
-public/static: static
-	mkdir -p $@
-	cp -r $</* "$@"
+public/static: static/ public
+	mkdir -p public
+	cp -r $< "$@"
 
 public:
 	mkdir -p $@
+	mkdir -p $@/blog
 
 deploy: public all
 	ghp-import -b master -p $<
