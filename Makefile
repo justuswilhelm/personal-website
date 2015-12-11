@@ -15,7 +15,7 @@ public/CNAME: CNAME
 public/blog_index.html: templates/blog_index.html
 	./render_blog_index.py
 
-public/blog/: blog/ templates/blog_article.html public
+public/blog: blog/ templates/blog_article.html public
 	./spell_check
 	./render_blog.py
 
