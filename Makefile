@@ -3,17 +3,14 @@ PORT=5000
 
 all: public/blog $(pages) public/static public/CNAME
 
-public/%.html: pages/%.yaml render_page.py templates/%.html
+public/%.html: pages/%.yaml render_page.py templates/%.html public
 	./render_page.py $<
 
 clean:
 	rm -rf public
 
-public/CNAME: CNAME
+public/CNAME: CNAME public
 	cp $< $@
-
-public/blog_index.html: templates/blog_index.html
-	./render_blog_index.py
 
 public/blog: blog/ templates/blog_article.html public
 	./spell_check
@@ -27,7 +24,7 @@ public:
 	mkdir -p $@
 	mkdir -p $@/blog
 
-deploy: public all
+deploy: all
 	ghp-import -b master -p $<
 
 test: all

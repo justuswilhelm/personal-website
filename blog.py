@@ -24,7 +24,7 @@ def read_article(id):
 
 @lru_cache()
 def load_blog():
-    blog = load(open(join('blog', 'blog.yaml')))
+    blog = load(open(join('data', 'blog.yaml')))
 
     blog_with_articles = map(
         lambda b: {**b, 'content': read_article(str(b['created']))},
