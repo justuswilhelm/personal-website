@@ -9,4 +9,5 @@ deployment:
   pages:
     branch: pages
     commands:
+      - make
       - make deploy
