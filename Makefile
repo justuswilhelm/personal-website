@@ -1,35 +1,37 @@
-pages=public/index.html public/projects.html public/blog_index.html
+PUBLIC=public
+
+pages=$(PUBLIC)/index.html $(PUBLIC)/projects.html $(PUBLIC)/blog_index.html
 PORT=5000
 
-all: public/blog $(pages) public/static public/CNAME
+all: $(PUBLIC)/blog $(pages) $(PUBLIC)/static $(PUBLIC)/CNAME
 
-public/%.html: pages/%.yaml render_page.py templates/%.html public
+$(PUBLIC)/%.html: pages/%.yaml render_page.py templates/%.html $(PUBLIC)
 	./render_page.py $<
 
 clean:
-	rm -rf public
+	rm -rf $(PUBLIC)
 
-public/CNAME: CNAME public
+$(PUBLIC)/CNAME: CNAME $(PUBLIC)
 	cp $< $@
 
-public/blog: blog/ templates/blog_article.html public
+$(PUBLIC)/blog: blog/ templates/blog_article.html $(PUBLIC)
 	./spell_check
 	./render_blog.py
 
-public/static: static/ public
-	mkdir -p public
+$(PUBLIC)/static: static/ $(PUBLIC)
+	mkdir -p $(PUBLIC)
 	cp -r $< "$@"
 
-public:
+$(PUBLIC):
 	mkdir -p $@
 	mkdir -p $@/blog
 
 deploy: all
-	ghp-import -b master -p $<
+	ghp-import -b master -p $(PUBLIC)
 
 test: all
 	python -m doctest *.py
 	killall python3 || true
-	cd public; python3 -m http.server $(PORT) &
+	cd $(PUBLIC); python3 -m http.server $(PORT) &
 	sleep 0.5
 	open "http://localhost:$(PORT)"
