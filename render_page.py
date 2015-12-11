@@ -28,21 +28,35 @@ env.filters['datetimeformat'] = datetimeformat
 
 def load_data(path):
     """Given a path, read a yaml file."""
-    return load(open(join('data', '{}.yaml'.format(path))).read()) or {}
+    with open(path) as fd:
+        return load(fd.read()) or {}
+
+
+def load_metadata(path):
+    logging.info("Loading metadata files")
+    metadata_paths = load_data(path).get('data_names')
+    assert metadata_paths is not [], "No metadata paths"
+    metadata = {name: load_data(
+        join('data', name + '.yaml')) for name in metadata_paths}
+    return metadata
 
 
 def main():
     page = argv[1]
-    logging.info("Processing %s", page)
     page_name, _ = splitext(basename(page))
-    metadata = load(open(page).read())
-    assert metadata, "Empty metadata"
-    data = {name: load_data(name) for name in metadata.get('data_names', [])}
-    logging.info("Loaded metadata files %s", data.keys())
-    template = env.get_template('{}.html'.format(page_name))
+    logging.info("Processing %s", page)
+
+    metadata = load_metadata(page)
+
+    template_file = '{}.html'.format(page_name)
+    logging.info("Rendering template %s.", template_file)
+    template = env.get_template(template_file)
+    output = template.render(**metadata)
+
     out_path = join('public', '{}.html'.format(page_name))
+    logging.info("Writing output to %s.", out_path)
     with open(out_path, 'w') as fd:
-        fd.write(template.render(**data))
+        fd.write(output)
 
 
 if __name__ == "__main__":
