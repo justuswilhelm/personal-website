@@ -39,6 +39,26 @@
         </ul>
       </dd>
     </dl>
+    <p>
+      You are more than welcome to share your thoughts and comments below or via
+      <a href="mailto:hello@justus.pw">
+        email
+      </a>.
+      Thanks!
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_config = function () {
+      this.page.url = "http://justus.pw/blog/{{ article.created }}" +
+        "-{{ article.title }}.html";
+      this.page.identifier = "{{ article.created }}";
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://justusperlwitz.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+    </script>
   </article>
   <nav class="eight columns offset-by-two">
     <a href="/blog_index.html">
