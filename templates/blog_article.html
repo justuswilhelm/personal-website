@@ -26,6 +26,14 @@
       <dd>
         {{ article.created }}
       </dd>
+      {% if article.modified %}
+        <dt>
+          Date modified:
+        </dt>
+        <dd>
+          {{ article.modified }}
+        </dd>
+      {% endif %}
       <dt>
         Tags:
       </dt>
