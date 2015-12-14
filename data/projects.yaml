@@ -1,15 +1,17 @@
 -
   name: twogifs
   img: static/twogifs.png
-  description: Addictive site that lets users vote for their favorite GIF.
+  description:
+    Addictive site that lets users vote for their favorite GIF.
   urls:
     -
       - http://twogifs.com
       - www.twogifs.com/
 -
--
   name: Beemodoro
-  description: Pomodoro and Beeminder can finally coexist in your terminal. Beemind Pomodoros using this neat tool that integrates with the Beeminder API.
+  description:
+    Pomodoro and Beeminder can finally coexist in your terminal. Beemind
+    Pomodoros using this neat tool that integrates with the Beeminder API.
   urls:
     -
       - GitHub Repository
@@ -19,7 +21,9 @@
       - https://pypi.python.org/pypi/beemodoro/
 -
   name: Webcheck
-  description: Check whether common files, such as favicon.ico are present in your new project.
+  description:
+    Check whether common files, such as favicon.ico are present in your new
+    project.
   img: static/webcheck.png
   urls:
     -
