@@ -7,16 +7,6 @@
       - http://twogifs.com
       - www.twogifs.com/
 -
-  name: Binview
-  img: static/binview.png
-  description: Binary file analysis toolset.
-  urls:
-    -
-      - GitHub Repository
-      -  https://github.com/justuswilhelm/binview
-    -
-      - PyPI Package
-      - https://pypi.python.org/pypi/binview/
 -
   name: Beemodoro
   description: Pomodoro and Beeminder can finally coexist in your terminal. Beemind Pomodoros using this neat tool that integrates with the Beeminder API.
