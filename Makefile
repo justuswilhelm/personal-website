@@ -6,7 +6,7 @@ PORT=5000
 all: $(PUBLIC)/blog $(pages) $(PUBLIC)/static $(PUBLIC)/CNAME
 
 $(PUBLIC)/%.html: pages/%.yaml render_page.py templates/%.html $(PUBLIC)
-	./render_page.py $<
+	script/render_page.py $< $@
 
 clean:
 	rm -rf $(PUBLIC)
@@ -14,9 +14,10 @@ clean:
 $(PUBLIC)/CNAME: CNAME $(PUBLIC)
 	cp $< $@
 
-$(PUBLIC)/blog: blog/ templates/blog_article.html $(PUBLIC)
-	./spell_check
-	./render_blog.py
+$(PUBLIC)/blog: data/blog.yaml templates/blog_article.html $(PUBLIC)
+	mkdir -p $@
+	script/spell_check
+	script/render_blog.py $< $@
 
 $(PUBLIC)/static: static/ $(PUBLIC)
 	mkdir -p $(PUBLIC)
@@ -24,7 +25,6 @@ $(PUBLIC)/static: static/ $(PUBLIC)
 
 $(PUBLIC):
 	mkdir -p $@
-	mkdir -p $@/blog
 
 deploy: all
 	ghp-import -b master -p $(PUBLIC)

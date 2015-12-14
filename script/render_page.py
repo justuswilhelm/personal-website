@@ -43,6 +43,8 @@ def load_metadata(path):
 
 def main():
     page = argv[1]
+    out_path = argv[2]
+
     page_name, _ = splitext(basename(page))
     logging.info("Processing %s", page)
 
@@ -53,7 +55,6 @@ def main():
     template = env.get_template(template_file)
     output = template.render(**metadata)
 
-    out_path = join('public', '{}.html'.format(page_name))
     logging.info("Writing output to %s.", out_path)
     with open(out_path, 'w') as fd:
         fd.write(output)
