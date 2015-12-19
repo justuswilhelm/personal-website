@@ -1,12 +1,15 @@
 PUBLIC=public
+RENDER_PAGE=script/render_page.py
+RENDER_BLOG=script/render_blog.py
+SPELL_CHECK=script/spell_check
 
 pages=$(PUBLIC)/index.html $(PUBLIC)/projects.html $(PUBLIC)/blog_index.html
 PORT=5000
 
 all: $(PUBLIC)/blog $(pages) $(PUBLIC)/static $(PUBLIC)/CNAME
 
-$(PUBLIC)/%.html: pages/%.yaml render_page.py templates/%.html $(PUBLIC)
-	script/render_page.py $< $@
+$(PUBLIC)/%.html: pages/%.yaml templates/%.html $(PUBLIC)
+	$(RENDER_PAGE) $< $@
 
 clean:
 	rm -rf $(PUBLIC)
@@ -16,8 +19,8 @@ $(PUBLIC)/CNAME: CNAME $(PUBLIC)
 
 $(PUBLIC)/blog: data/blog.yaml templates/blog_article.html $(PUBLIC)
 	mkdir -p $@
-	script/spell_check
-	script/render_blog.py $< $@
+	$(SPELL_CHECK)
+	$(RENDER_BLOG) $< $@
 
 $(PUBLIC)/static: static/ $(PUBLIC)
 	mkdir -p $(PUBLIC)
