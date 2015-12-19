@@ -1,4 +1,16 @@
-2015-11-12:
+2015-12-06:
+  description: Wired.de featured the event and mentioned me winning :3
+  location: Wired.de magazine
+  name: Article
+  type: Press
+  url: https://www.wired.de/collection/life/sponsored-ayuda-stand-ganz-klein-auf-der-berlin-code-fight-webseite
+2015-12-18:
+  description: RBB Info wrote an article about the code fight that I've won and did an interview with me.
+  location: RBB Info
+  name: Article and interview
+  type: Press
+  url: https://www.inforadio.de/programm/schema/sendungen/nahaufnahme/201512/229232.html
+2015-12-10:
   description: Broad overview of the new async/await syntax in Python.
   location: Python Users Berlin
   name: Asyncio Lightning Talk
