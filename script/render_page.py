@@ -10,20 +10,9 @@ from sys import argv
 
 from yaml import load
 
-from jinja2 import (
-    Environment,
-    FileSystemLoader,
-)
+from utilities import env
 
 logging.basicConfig(level='INFO')
-
-env = Environment(loader=FileSystemLoader('templates/'))
-
-
-def datetimeformat(value, format='%b %d, %Y'):
-    return value.strftime(format)
-
-env.filters['datetimeformat'] = datetimeformat
 
 
 def load_data(path):
@@ -41,23 +30,25 @@ def load_metadata(path):
     return metadata
 
 
+def render_template(page):
+    page_name, _ = splitext(basename(page))
+    template_file = '{}.html'.format(page_name)
+
+    logging.info("Rendering template %s.", template_file)
+    return env.get_template(template_file).render(**load_metadata(page))
+
+
+def write_output(output, out_path):
+    logging.info("Writing output to %s.", out_path)
+    with open(out_path, 'w') as fd:
+        fd.write(output)
+
+
 def main():
     page = argv[1]
     out_path = argv[2]
 
-    page_name, _ = splitext(basename(page))
-    logging.info("Processing %s", page)
-
-    metadata = load_metadata(page)
-
-    template_file = '{}.html'.format(page_name)
-    logging.info("Rendering template %s.", template_file)
-    template = env.get_template(template_file)
-    output = template.render(**metadata)
-
-    logging.info("Writing output to %s.", out_path)
-    with open(out_path, 'w') as fd:
-        fd.write(output)
+    write_output(render_template(page), out_path)
 
 
 if __name__ == "__main__":
