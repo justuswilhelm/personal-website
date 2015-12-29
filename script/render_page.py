@@ -8,17 +8,12 @@ from os.path import (
 )
 from sys import argv
 
-from yaml import load
-
-from utilities import env
+from utilities import (
+    env,
+    load_data,
+)
 
 logging.basicConfig(level='INFO')
-
-
-def load_data(path):
-    """Given a path, read a yaml file."""
-    with open(path) as fd:
-        return load(fd.read()) or {}
 
 
 def load_metadata(path):
