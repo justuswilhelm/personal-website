@@ -3,14 +3,13 @@ import logging
 from os.path import join
 from sys import argv
 
-from jinja2 import (
-    Environment,
-    FileSystemLoader,
-)
 from markdown import markdown
-from yaml import load
 
-env = Environment(loader=FileSystemLoader('templates/'))
+from utilities import (
+    env,
+    load_data,
+)
+
 logging.basicConfig(level='INFO')
 
 
@@ -31,14 +30,12 @@ def read_article(id):
 
 
 def load_blog(path):
-    with open(path) as fd:
-        blog = load(fd.read())
+    blog = load_data(path)
 
-    blog_with_articles = map(
+    return map(
         lambda b: {**b, 'content': read_article(str(b['created']))},
         blog,
     )
-    return list(blog_with_articles)
 
 
 def main():
