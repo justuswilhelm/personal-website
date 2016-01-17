@@ -1,5 +1,12 @@
 {% extends "site_base.html" %}
 {% block content %}
+  <h2>Expertise</h2>
+  <dl>
+    {% for key, value in expertise.items()|sort %}
+      <dt>{{ key }}</dt>
+      <dd>{{ ", ".join(value) }}</dd>
+    {% endfor %}
+  </dl>
   <h2>Timeline</h2>
   <dl>
     {% for event_date, event in timeline.items()|sort|reverse %}
@@ -22,13 +29,6 @@
         {% endif %}
         at {{ event.location }}
       </dd>
-    {% endfor %}
-  </dl>
-  <h2>Expertise</h2>
-  <dl>
-    {% for key, value in expertise.items()|sort %}
-      <dt>{{ key }}</dt>
-      <dd>{{ ", ".join(value) }}</dd>
     {% endfor %}
   </dl>
 {% endblock content %}
