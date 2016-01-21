@@ -1,5 +1,5 @@
 #!/bin/bash
 for f in blog/*.md
 do echo "$f"
-aspell list < "$f" | sort | uniq -c
+  aspell list < "$f" | sort | uniq -c
 done
