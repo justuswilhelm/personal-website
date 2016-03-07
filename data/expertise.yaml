@@ -1,55 +1,58 @@
 Problem Domains:
-  - Search
-  - Marketing
   - Advertising
+  - Marketing
+  - Search
 Databases:
-  - PostgreSQL
   - MySQL
+  - PostgreSQL
   - Redis
 Infrastructures:
   - Heroku
   - AWS
 JavaScript:
-  - Mocha
+  - Babel
   - Browserify
   - Cross Browser Extension Development
-  - Node.js
-  - three.js
   - D3.js
+  - Mocha
+  - Node.js
+  - React
+  - Webpack
+  - three.js
 Languages:
-  - Python 2/3
-  - Ruby
-  - SQL
   - C
-  - MATLAB
+  - ES2015
+  - Gherkin
   - Java
   - JavaScript
+  - MATLAB
+  - Python 2/3
+  - Ruby
+  - "{c,Z,fi,ba}sh"
+  - SQL
 Methodologies:
-  - Behavior Driven Development
-  - Software Configuration Management
+  - Organic, Grass-fed Agile
+  - "BDD + DDD = 🚀"
   - Continuous Integration
 Ruby:
-  - Ruby on Rails
-  - Sinatra
   - Grape
   - HAML
+  - Ruby on Rails
+  - Sinatra
 Python:
   - Django
   - Flask
-  - aiohttp
   - NumPy
   - SciPy
+  - aiohttp
+  - lettuce
+  - pandas
   - scikit-learn
-Security:
-  - Penetration Testing
-  - Reverse Engineering
 Testing:
   - User Testing
-  - Unit Testing
-  - Coverage Testing
-  - Load Testing
+  - Load and Coverage Testing
 Web:
-  - HTML
-  - CSS
+  - HTML{4,5}
+  - CSS{1,2,3}
   - Transactional Emails
   - Content Delivery Networks
