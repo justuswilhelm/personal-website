@@ -1,4 +1,4 @@
-from yaml import load
+from yaml import safe_load
 from jinja2 import (
     Environment,
     FileSystemLoader,
@@ -18,7 +18,7 @@ def datetimeformat(value, format='%b %d, %Y'):
 def load_data(path):
     """Given a path, read a yaml file."""
     with open(path) as fd:
-        return load(fd.read()) or {}
+        return safe_load(fd.read()) or {}
 
 
 env = Environment(loader=FileSystemLoader('templates/'))
