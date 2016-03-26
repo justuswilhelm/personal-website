@@ -111,16 +111,28 @@
   brand: Multipick
   name: Elite Pick Set
   category: Tools
+  last_used: 2016-03-18
 - id: 4FA3627E-1AA9-4469-B7A1-119B4C0B0A2A
   brand: BKS
   name: Practice Lock
   category: Tools
+  last_used: 2016-03-18
 - id: FB91FF6F-CC61-4E1D-ABA8-D81584998880
   brand: AKAI
   name: APC-40
   category: Instrument
+  last_used: 2015-08-01
 - id: F5998723-83C5-4FA8-A456-C97508E978D5
   brand: Logitech
   name: M705 Marathon Mouse
   category: Electronics
   comment: After the MX518 possibly the best mouse I've ever purchased.
+- id: D21FD2B6-2C59-461D-A1DD-6F3AF86E3DF1
+  name: "A168WG-9EF"
+  brand: Casio
+  purchased: "2015-11-01"
+  comment: >
+    Very handy to have when you're travelling and need to meet deadlines.
+    Quicker lookup than a mobile phone.
+  last_used: 2016-02-01
+  category: Electronics
