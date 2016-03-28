@@ -7,7 +7,7 @@
     Blog Index
   </h2>
   <ul data-article-count="{{ blog_articles|length }}">
-    {% for article in blog|reverse %}
+    {% for article in blog %}
       <li>
         <a href="blog/{{ article.created }}-{{ article.title }}.html">
           {{ article.title }} -
