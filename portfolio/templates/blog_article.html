@@ -1,12 +1,12 @@
 {% extends "site_base.html" %}
 {% block title %}
-  | {{ article.title }}
+  | {{ meta.title }}
 {% endblock title %}
 {% block header %}
 {% endblock header %}
 {% block nav %}
   <nav class="eight columns offset-by-two">
-    <a href="/blog_index.html">
+    <a href="{{ url_for('blog_index') }}">
       &lt; Return to blog index
     </a>
   </nav>
@@ -14,24 +14,24 @@
 {% block content %}
   <article class="eight columns offset-by-two">
     <h1>
-      {{ article.title }}
+      {{ meta.title }}
     </h1>
     <p>
-      {{ article.content }}
+      {{ content|safe }}
     </p>
     <dl>
       <dt>
         Date created:
       </dt>
       <dd>
-        {{ article.created }}
+        {{ meta.created }}
       </dd>
-      {% if article.modified %}
+      {% if meta.modified %}
         <dt>
           Date modified:
         </dt>
         <dd>
-          {{ article.modified }}
+          {{ meta.modified }}
         </dd>
       {% endif %}
       <dt>
@@ -39,7 +39,7 @@
       </dt>
       <dd>
         <ul>
-          {% for  tag in article.tags %}
+          {% for  tag in meta.tags %}
             <li>
               {{ tag }}
             </li>
@@ -55,9 +55,9 @@
     <div id="disqus_thread"></div>
     <script>
     var disqus_config = function () {
-      this.page.url = "http://justus.pw/blog/{{ article.created }}" +
-        "-{{ article.title }}.html";
-      this.page.identifier = "{{ article.created }}";
+      this.page.url = "http://justus.pw/blog/{{ meta.created }}" +
+        "-{{ meta.title }}.html";
+      this.page.identifier = "{{ meta.created }}";
     };
     (function() {
       var d = document, s = d.createElement('script');
@@ -68,7 +68,7 @@
     </script>
   </article>
   <nav class="eight columns offset-by-two">
-    <a href="/blog_index.html">
+    <a href="{{ url_for('blog_index') }}">
       &lt; Return to blog index
     </a>
   </nav>

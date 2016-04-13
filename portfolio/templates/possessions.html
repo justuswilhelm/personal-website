@@ -1,0 +1,14 @@
+{% extends "site_base.html" %}
+{% block title %}
+  | Possessions
+{%  endblock title %}
+{% block content %}
+  <h2>My possessions</h2>
+  So far {{ possessions|count }} items and counting.
+  <div class="row">
+    {% for possession in possessions %}
+      {% include "_possession.html" %}
+      {{ loop.cycle('', '', '', '</div><div class="row">') }}
+    {% endfor %}
+  </div>
+{% endblock content %}

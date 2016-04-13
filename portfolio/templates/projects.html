@@ -19,7 +19,7 @@
     </h3>
     {% if project.img %}
       <a target="_blank" href="{{ project.urls[0][1] }}">
-        <img src="{{ project.img }}" alt="{{ project.name }} screenshot">
+        <img src="{{ url_for('static', filename=project.img) }}" alt="{{ project.name }} screenshot">
       </a>
     {% endif %}
     <p>
