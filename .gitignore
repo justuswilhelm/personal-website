@@ -1,5 +1,5 @@
 *.pyc
 .ipynb_checkpoints
 .env
-public/
+build/
 __pycache__
