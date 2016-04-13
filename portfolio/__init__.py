@@ -84,13 +84,13 @@ def index():
                            timeline=load_data('timeline'))
 
 
-@application.route('/projects/')
+@application.route('/projects.html')
 def projects():
     """Show projects page."""
     return render_template('projects.html', projects=load_data('projects'))
 
 
-@application.route('/blog_index/')
+@application.route('/blog_index.html')
 def blog_index():
     """Show blog index."""
     return render_template('blog_index.html', blog=tuple(read_blog_metadata()))
@@ -98,7 +98,7 @@ def blog_index():
 
 @application.route('/blog/<int(fixed_digits=4):year>-'
                    '<int(fixed_digits=2):month>-'
-                   '<int(fixed_digits=2):day>-<title>/')
+                   '<int(fixed_digits=2):day>-<title>.html')
 def blog_article(year, month, day, **kwargs):
     """Render an individual blog article."""
     meta, content = load_article(year, month, day)
