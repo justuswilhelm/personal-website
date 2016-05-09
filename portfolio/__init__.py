@@ -1,10 +1,9 @@
 """Flask application."""
-from flask import (
-    Flask,
-    render_template,
-    Response,
-)
 from glob import glob
+from datetime import date
+from os.path import split, splitext
+
+from flask import Flask, Response, render_template
 from markdown import markdown
 from yaml import safe_load
 
@@ -32,6 +31,8 @@ def parse_blog_article(path):
         except ValueError:
             raise SyntaxError("Missing meta data in {}".format(path))
         meta = safe_load(meta_raw)
+        fname = splitext(split(path)[-1])[0]
+        meta['created'] = date(*map(int, fname.split("-")))
         return meta, content
 
 
