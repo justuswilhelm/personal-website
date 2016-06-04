@@ -9,7 +9,7 @@
   location: RBB Info
   name: Article and interview
   type: Press
-  url: https://www.inforadio.de/programm/schema/sendungen/nahaufnahme/201512/229232.html
+  url: http://www.rbb-online.de/wirtschaft/beitrag/2015/12/code-fight-programmierer-kampf-boxring.html
 2015-12-10:
   description: Broad overview of the new async/await syntax in Python.
   location: Python Users Berlin
