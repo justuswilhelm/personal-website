@@ -81,7 +81,10 @@ def datetimeformat(value, format='%b %d, %Y'):
 @application.route('/')
 def index():
     """Show index page."""
-    return render_template('index.html', expertise=load_data('expertise'),
+    with open("data/statement.md") as fd:
+        statement = fd.read()
+    return render_template('index.html',
+                           statement=render_article(statement),
                            timeline=load_data('timeline'))
 
 
