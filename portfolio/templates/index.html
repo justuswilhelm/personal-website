@@ -1,12 +1,41 @@
 {% extends "site_base.html" %}
 {% block content %}
-  <h2>Expertise</h2>
-  <dl>
-    {% for key, value in expertise.items()|sort %}
-      <dt>{{ key }}</dt>
-      <dd>{{ ", ".join(value) }}</dd>
-    {% endfor %}
-  </dl>
+  <h2>Statement</h2>
+  Instead of talking about skills that will be irrelevant in 5 years, like
+  knowing how to become angry at mongodb or drinking lattes while hand-crafting
+  artisanal small-batch SCRUM microservices, let me show you how I can help
+  your business become more profitable.
+
+  The hard-to-swallow truth is that any technology you invest in will become
+  outdated and inefficient in the next X years. Your initial promise to the
+  investors that you will truly disrupt the world by using the latest
+  quinoa-capuccino tech stacks will grow meaningless when time passes.
+
+  I will help you get up to speed with real-world demands, such as providing
+  shareholder value and getting from revenue to profit. In the end, if you are
+  not in it to find a sustainable, repeatable business model, why bother?
+
+  The real-world challenges you will inevitably face are going to involve
+  massive heaps of data that will make no sense. There will be unwieldy
+  monoliths and microservices that keep breaking and cause you to churn
+  users like a leaky bucket. Your marketing strategy sounds good in theory,
+  but you don't know how to translate it into automated actions.
+
+  Using Docker or $NEW_TECHNOLOGY will not solve this. You are not Google. You
+  are not Facebook.
+
+  On the other hand, using time-tested tools that helped me lower
+  infrastructure costs by 50% or using 30 year old UNIX tools to increase a
+  data pipeline speed by a factor of 8 will help you further your business
+  goals. Your customer does not care how you get the job done. On the internet,
+  no one knows you are agile.
+
+  Never have tools mattered less than now. This is the time where individuals
+  with the skill to adapt to any business challenge life throws at you thrive.
+
+  There are two knobs in your business. Revenue and Cost. Those that know how
+  to turn both are going to make you rich.
+
   <h2>Timeline</h2>
   <dl>
     {% for event_date, event in timeline.items()|sort|reverse %}
