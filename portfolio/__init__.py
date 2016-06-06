@@ -43,6 +43,7 @@ def render_article(raw):
         extensions=[
             'markdown.extensions.fenced_code',
             'markdown.extensions.codehilite',
+            'markdown.extensions.headerid',
         ], extension_configs={
             'markdown.extensions.codehilite': {
                 'linenums': True,
