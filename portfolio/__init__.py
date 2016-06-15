@@ -46,8 +46,6 @@ def render_article(raw):
             'markdown.extensions.headerid',
         ], extension_configs={
             'markdown.extensions.codehilite': {
-                'linenums': True,
-                'noclasses': True,
                 'guess_lang': True,
             }
         })
