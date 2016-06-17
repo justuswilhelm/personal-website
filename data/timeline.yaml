@@ -22,20 +22,11 @@
   name: Asyncio and you
   type: Talk
   url: /static/slides/Asyncio and You.pdf
-2012-10-01:
-  end: 2016-02-01
-  location: Berlin
-  name: Freelancer
-  type: Work
-  url: http://www.justus.pw
-  description: <
-    Consulting startups on key technological choices and implementing
-    applications.
 2013-10-01:
   end: 2015-06-30
   location: Ecosia GmbH Berlin
   name: Web Developer
-  type: Work
+  type: Freelance
   url: https://www.ecosia.org
   description: <
     I was tasked with porting parts of the legacy codebase to more modern
@@ -84,3 +75,10 @@
   description: <
     After solving algorithmic challenges and winning all tournament rounds I was
     awarded a trip to NY city. Who knew bashing a keyboard could create value?
+2012-10-01:
+  description: Consulting startups on key technological choices and implementing applications.
+  end: null
+  location: Berlin
+  name: Freelancer
+  type: Work
+  url: http://www.justus.pw

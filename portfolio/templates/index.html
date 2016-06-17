@@ -16,11 +16,11 @@
       <dd>
         {% if event.url %}
           <a href="{{ event.url }}">
-            {{ event.name }}</a>
+            {{ event.name }}</a>,
         {% else %}
-          {{ event.name }}
+          {{ event.name }},
         {% endif %}
-        at {{ event.location }}
+        {{ event.location }}
       </dd>
     {% endfor %}
   </dl>
