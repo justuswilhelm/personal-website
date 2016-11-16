@@ -19,8 +19,22 @@
 2016-06-01:
     end: 2016-06-03
     url: http://www.fepe.com/page.php?id=19
+    name: FEPE 2016
     location: Barcelona, Spain
     type: Conference
+2016-04-22:
+    end: 2016-08-23
+    url: /static/gsoc.pdf
+    name: Google Summer of Code 2016
+    type: Mentor
+    description: I mentored for the Python Software Foundation
+    location: https://summerofcode.withgoogle.com/
+2016-03-22:
+    end: null
+    url: https://www.advolytics.de
+    name: advolytics UG (haftungsbeschränkt)
+    type: CEO & Co-Founder
+    location: Berlin
 2015-12-06:
   description: Wired.de featured the event and mentioned me winning :3
   location: Wired.de magazine
