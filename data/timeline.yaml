@@ -1,3 +1,26 @@
+2012-04-06:
+    name: CS101
+    type: Course
+    description: I had the privilige of finishing one of the first MOOCs
+    location: https://udacity.com
+    url: /static/cs101.pdf
+2016-09-21:
+    name: PyCon JP 2016
+    url: https://pycon.jp/2016/en/
+    location: Tokyo, Japan
+    type: Conference
+    end: 2016-09-22
+2016-07-17:
+    name: EuroPython 2016
+    url: https://ep2016.europython.eu/
+    location: Bilbao, Spain
+    type: Conference
+    end: 2016-07-21
+2016-06-01:
+    end: 2016-06-03
+    url: http://www.fepe.com/page.php?id=19
+    location: Barcelona, Spain
+    type: Conference
 2015-12-06:
   description: Wired.de featured the event and mentioned me winning :3
   location: Wired.de magazine
@@ -32,7 +55,7 @@
     I was tasked with porting parts of the legacy codebase to more modern
     languages and frameworks (mostly Go and Python with Flask/Django).
 2016-02-01:
-  end: null
+  end: 2016-08-31
   location: Ayuda Systems GmbH
   name: Software Developer
   type: Work
