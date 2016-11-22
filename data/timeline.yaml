@@ -1,8 +1,20 @@
+2016-11-22:
+    type: Press
+    name: Article about advolytics
+    location: Frankfurter Allgemeine Zeitung
+    url: http://plus.faz.net/evr-editions/2016-11-22/QSVyva240QPuzGHzJm8X1Ak8?GEPC=s3
+2016-09-01:
+    end: null
+    name: QA automation
+    type: Consulting
+    location: Siemens MT
+    description: I've done QA automation and design for a massive development
+        in wireless communication for mass transit.
 2012-04-06:
     name: CS101
     type: Course
-    description: I had the privilige of finishing one of the first MOOCs
-    location: https://udacity.com
+    description: I had the privilege of finishing one of the first MOOCs
+    location: Udacity
     url: /static/cs101.pdf
 2016-09-21:
     name: PyCon JP 2016
@@ -35,6 +47,11 @@
     name: advolytics UG (haftungsbeschränkt)
     type: CEO & Co-Founder
     location: Berlin
+2015-12-20:
+    end: 2015-12-23
+    type: Consulting
+    name: Big Data Pipeline optimization
+    location: Major property classifieds page in Berlin
 2015-12-06:
   description: Wired.de featured the event and mentioned me winning :3
   location: Wired.de magazine
