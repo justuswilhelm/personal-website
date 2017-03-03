@@ -87,12 +87,6 @@ def index():
                            timeline=load_data('timeline'))
 
 
-@application.route('/projects.html')
-def projects():
-    """Show projects page."""
-    return render_template('projects.html', projects=load_data('projects'))
-
-
 @application.route('/blog_index.html')
 def blog_index():
     """Show blog index."""
