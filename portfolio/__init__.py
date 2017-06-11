@@ -9,7 +9,7 @@ from yaml import safe_load
 
 
 application = Flask(__name__)
-application.config.update(FREEZER_DESTINATION='../build')
+application.config.update(FREEZER_DESTINATION='../justus.pw')
 
 
 def discover_blog_articles():

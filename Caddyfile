@@ -1,0 +1,16 @@
+https://www.justus.pw, https://justusperlwitz.com, https://www.justusperlwitz.com {
+    log /var/log/caddy-redirect.log
+    redir https://justus.pw{uri}
+    tls {
+        max_certs 10
+    }
+}
+
+https://justus.pw {
+    root /www/justus.pw
+    gzip
+    log /var/log/caddy.log
+    tls {
+        max_certs 10
+    }
+}
