@@ -14,7 +14,7 @@ make test
 # Download caddy
 curl https://caddyserver.com/download/linux/amd64?plugins=dns > caddy.tar.xz
 # Untar caddy
-tar xvfz -C caddy caddy.tar.xz
+tar xvfz caddy.tar.xz -C caddy
 # Execute on dev machine
 scp Caddyfile root@67.207.75.149:~/Caddyfile
 scp -r justus.pw root@67.207.75.149:/www/
