@@ -87,10 +87,10 @@ def index():
                            timeline=load_data('timeline'))
 
 
-@application.route('/blog_index.html')
-def blog_index():
+@application.route('/blog.html')
+def blog():
     """Show blog index."""
-    return render_template('blog_index.html', blog=tuple(read_blog_metadata()))
+    return render_template('blog.html', blog=tuple(read_blog_metadata()))
 
 
 @application.route('/blog/<int(fixed_digits=4):year>-'
