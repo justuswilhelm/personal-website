@@ -1,10 +1,12 @@
 {% extends "site_base.html" %}
+
 {% block title %}
   | Blog
 {% endblock title %}
+
 {% block content %}
   <h2>
-    Blog Index
+      Articles
   </h2>
   <ul data-article-count="{{ blog_articles|length }}">
     {% for article in blog %}
