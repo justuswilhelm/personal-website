@@ -5,14 +5,14 @@
 {% block header %}
 {% endblock header %}
 {% block nav %}
-  <nav class="eight columns offset-by-two">
+  <nav class="twelve columns">
     <a href="{{ url_for('blog') }}">
       &lt; Return to blog index
     </a>
   </nav>
 {% endblock nav %}
 {% block content %}
-  <article class="eight columns offset-by-two">
+  <article class="twelve columns">
     <h1>
       {{ meta.title }}
     </h1>
@@ -36,26 +36,13 @@
       {% endif %}
     </dl>
     <p>
-      You are more than welcome to share your thoughts and comments below or via
+      You are more than welcome to share your thoughts via
       <a href="mailto:hello@justus.pw">
         email</a>.
       Thanks!
-    <div id="disqus_thread"></div>
-    <script>
-    var disqus_config = function () {
-      this.page.url = "http://justus.pw/blog/{{ meta.created }}" +
-        "-{{ meta.title }}.html";
-      this.page.identifier = "{{ meta.created }}";
-    };
-    (function() {
-      var d = document, s = d.createElement('script');
-      s.src = 'https://justusperlwitz.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-    </script>
+    </p>
   </article>
-  <nav class="eight columns offset-by-two">
+  <nav class="eight columns">
     <a href="{{ url_for('blog') }}">
       &lt; Return to blog index
     </a>
