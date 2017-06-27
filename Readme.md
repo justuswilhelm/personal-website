@@ -17,7 +17,7 @@ curl https://caddyserver.com/download/linux/amd64?plugins=dns > caddy.tar.xz
 tar xvfz caddy.tar.xz -C caddy
 # Execute on dev machine
 scp Caddyfile root@justus.pw:~/Caddyfile
-rsync -rv justus.pw root@justus.pw:/www/
+make
 ```
 
 ## Requirements
