@@ -1,7 +1,6 @@
 Flask==0.10.1
 Frozen-Flask==0.12
 jinja2==2.8
-ghp-import
 markdown==2.6.5
 pygments==2.0.2
 pyyaml==3.11
