@@ -1,7 +1,10 @@
+domain := justus.pw
+
 all: copy
 
 copy: freeze
-	rsync -rv justus.pw root@justus.pw:/www/
+	rsync -rv "$(domain)" "root@$(domain):/www/"
+	rsync -rv caddy/Caddyfile "root@$(domain):~/Caddyfile"
 
 freeze:
 	./manage.py freeze
