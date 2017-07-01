@@ -1,0 +1,7 @@
+#!/bin/sh
+file="$(date '+blog/%Y-%m-%d.md')"
+touch "$file"
+
+echo "Created $file, copying name to clipboard"
+
+printf "$PWD/$file" | pbcopy

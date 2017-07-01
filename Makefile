@@ -5,3 +5,6 @@ copy: freeze
 
 freeze:
 	./manage.py freeze
+
+post:
+	script/create_post

@@ -1,4 +1,0 @@
-#!/bin/sh
-file="$(date '+blog/%Y-%m-%d.md')"
-touch "$file"
-nvim $file
