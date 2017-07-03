@@ -10,6 +10,7 @@ from yaml import safe_load
 
 application = Flask(__name__)
 application.config.update(FREEZER_DESTINATION='../justus.pw')
+application.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 
 
 def discover_blog_articles():
@@ -80,17 +81,19 @@ def datetimeformat(value, format='%b %d, %Y'):
 @application.route('/')
 def index():
     """Show index page."""
-    with open("data/statement.md") as fd:
-        statement = fd.read()
-    return render_template('index.html',
-                           statement=render_article(statement),
-                           timeline=load_data('timeline'))
+    return render_template('index.pug')
+
+
+@application.route('/method.html')
+def method():
+    """Show method page."""
+    return render_template('method.pug')
 
 
 @application.route('/blog.html')
 def blog():
     """Show blog index."""
-    return render_template('blog.html', blog=tuple(read_blog_metadata()))
+    return render_template('blog.pug', blog=tuple(read_blog_metadata()))
 
 
 @application.route('/blog/<int(fixed_digits=4):year>-'
@@ -99,7 +102,7 @@ def blog():
 def blog_article(year, month, day, **kwargs):
     """Render an individual blog article."""
     meta, content = load_article(year, month, day)
-    return render_template('blog_article.html', meta=meta, content=content)
+    return render_template('blog_article.pug', meta=meta, content=content)
 
 
 @application.route('/CNAME')

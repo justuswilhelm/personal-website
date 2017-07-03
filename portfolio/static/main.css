@@ -1,3 +1,7 @@
+.has-text-justified {
+  text-align: justify;
+}
+
 main {
   margin-top: 50px;
 }
