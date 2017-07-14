@@ -7,6 +7,8 @@ from flask import Flask, Response, render_template
 from markdown import markdown
 from yaml import safe_load
 
+from . import content
+
 
 application = Flask(__name__)
 application.config.update(FREEZER_DESTINATION='../justus.pw')
@@ -28,13 +30,13 @@ def parse_blog_article(path):
     """Parse a single blog article."""
     with open(path) as fd:
         try:
-            meta_raw, content = fd.read().split('---')
+            meta_raw, c = fd.read().split('---')
         except ValueError:
             raise SyntaxError("Missing meta data in {}".format(path))
         meta = safe_load(meta_raw)
         fname = splitext(split(path)[-1])[0]
         meta['created'] = date(*map(int, fname.split("-")))
-        return meta, content
+        return meta, c
 
 
 def render_article(raw):
@@ -55,8 +57,8 @@ def render_article(raw):
 def load_article(year, month, day):
     """Load an article, given year, month and day."""
     path = 'blog/{}-{:02d}-{:02d}.md'.format(year, month, day)
-    meta, content = parse_blog_article(path)
-    return meta, render_article(content)
+    meta, c = parse_blog_article(path)
+    return meta, render_article(c)
 
 
 def load_data(path):
@@ -90,10 +92,22 @@ def method():
     return render_template('method.pug')
 
 
+@application.route('/landing/<entry>')
+def landing(entry):
+    """Show landing page."""
+    entry = content.client.entries({
+        'content_type': 'landingPage',
+        'fields.name': entry,
+    })[0]
+    return render_template(
+        'landing.pug', entry=entry
+    )
+
+
 @application.route('/blog.html')
 def blog():
     """Show blog index."""
-    return render_template('blog.pug', blog=tuple(read_blog_metadata()))
+    return render_template('blog.pug', blog=read_blog_metadata())
 
 
 @application.route('/blog/<int(fixed_digits=4):year>-'
@@ -101,8 +115,8 @@ def blog():
                    '<int(fixed_digits=2):day>-<title>.html')
 def blog_article(year, month, day, **kwargs):
     """Render an individual blog article."""
-    meta, content = load_article(year, month, day)
-    return render_template('blog_article.pug', meta=meta, content=content)
+    meta, c = load_article(year, month, day)
+    return render_template('blog_article.pug', meta=meta, content=c)
 
 
 @application.route('/CNAME')
