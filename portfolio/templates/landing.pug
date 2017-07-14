@@ -6,20 +6,15 @@ block content
       .container.has-text-centered
         h1.title
           strong= entry.slogan
-        img(src="{{ entry.picture.url() }}")
+        img.is-4(src="{{ entry.picture.url() }}")
   section.section
     .container
       .columns
         .column.is-6.is-offset-3
           .content
-            p.has-text-justified.
-              Have bugs cost your company time, money and productivity? Do you
-              need to write secure and reliable software, but don't know where
-              to start?
-              My proven approach allows you to refocus your software
-              development. After all, software should serve to enable your
-              business.
-              #[a(href="{{ url_for('method') }}") Learn How]
+            p.has-text-justified= entry.description
+            p.has-text-justified= entry.explanation
+            #[a(href="{{ url_for('method') }}") Learn How]
       .columns
         .column.is-8.is-offset-2
           include _cta.pug
