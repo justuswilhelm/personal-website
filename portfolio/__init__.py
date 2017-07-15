@@ -3,7 +3,7 @@ from glob import glob
 from datetime import date
 from os.path import split, splitext
 
-from flask import Flask, Response, render_template
+from flask import Flask, render_template
 from yaml import safe_load
 
 from . import content
@@ -47,25 +47,6 @@ def load_article(year, month, day):
     return meta, c
 
 
-def load_data(path):
-    """Given a path, read a yaml file."""
-    with open('data/{}.yaml'.format(path)) as fd:
-        return safe_load(fd.read()) or {}
-
-
-@application.template_filter()
-def datetimeformat(value, format='%b %d, %Y'):
-    """
-    Format a datetime object.
-
-    >>> from datetime import datetime
-    >>> a = datetime(2015, 12, 24)
-    >>> datetimeformat(a)
-    'Dec 24, 2015'
-    """
-    return value.strftime(format)
-
-
 @application.route('/')
 def index():
     """Show index page."""
@@ -75,7 +56,7 @@ def index():
     return render_template('index.pug', entries=entries)
 
 
-@application.route('/method/<slug>')
+@application.route('/method/<slug>/')
 def method(slug):
     """Show method page."""
     entry = content.client.entries({
@@ -85,7 +66,7 @@ def method(slug):
     return render_template('method.pug', entry=entry)
 
 
-@application.route('/landing/<slug>')
+@application.route('/landing/<slug>/')
 def landing(slug):
     """Show landing page."""
     entry = content.client.entries({
@@ -97,15 +78,16 @@ def landing(slug):
     )
 
 
-@application.route('/blog.html')
+@application.route('/blog/')
 def blog():
     """Show blog index."""
     return render_template('blog.pug', blog=read_blog_metadata())
 
 
-@application.route('/blog/<int(fixed_digits=4):year>-'
-                   '<int(fixed_digits=2):month>-'
-                   '<int(fixed_digits=2):day>-<title>.html')
+@application.route(
+    '/blog/<int(fixed_digits=4):year>-<int(fixed_digits=2):month>-'
+    '<int(fixed_digits=2):day>-<title>'
+)
 def blog_article(year, month, day, **kwargs):
     """Render an individual blog article."""
     meta, c = load_article(year, month, day)

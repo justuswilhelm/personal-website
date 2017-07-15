@@ -1,3 +1,5 @@
+.PHONY: all copy freeze post
+
 domain := justus.pw
 
 all: copy
@@ -7,6 +9,7 @@ copy: freeze
 	rsync -rv caddy/Caddyfile "root@$(domain):~/Caddyfile"
 
 freeze:
+	rm -rf $(domain)
 	./manage.py freeze
 
 post:
