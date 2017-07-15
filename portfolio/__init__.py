@@ -110,10 +110,3 @@ def blog_article(year, month, day, **kwargs):
     """Render an individual blog article."""
     meta, c = load_article(year, month, day)
     return render_template('blog_article.pug', meta=meta, content=c)
-
-
-@application.route('/CNAME')
-def CNAME():
-    """Return the CNAME for github."""
-    return Response("www.justus.pw",
-                    headers={'Content-Type': 'application/octet-stream'})
