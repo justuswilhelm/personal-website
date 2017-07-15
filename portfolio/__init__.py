@@ -83,21 +83,28 @@ def datetimeformat(value, format='%b %d, %Y'):
 @application.route('/')
 def index():
     """Show index page."""
-    return render_template('index.pug')
+    entries = content.client.entries({
+        'content_type': 'landingPage',
+    })
+    return render_template('index.pug', entries=entries)
 
 
-@application.route('/method.html')
-def method():
+@application.route('/method/<slug>')
+def method(slug):
     """Show method page."""
-    return render_template('method.pug')
+    entry = content.client.entries({
+        'content_type': 'method',
+        'fields.slug': slug,
+    })[0]
+    return render_template('method.pug', entry=entry)
 
 
-@application.route('/landing/<entry>')
-def landing(entry):
+@application.route('/landing/<slug>')
+def landing(slug):
     """Show landing page."""
     entry = content.client.entries({
         'content_type': 'landingPage',
-        'fields.name': entry,
+        'fields.slug': slug,
     })[0]
     return render_template(
         'landing.pug', entry=entry

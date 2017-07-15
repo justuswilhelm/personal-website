@@ -5,44 +5,33 @@ block content
     .hero-body
       .content.has-text-centered
         h1
-          strong Software Quality Consulting
+          strong= entry.title
         h2 3 Steps to Reliable Software
   section.section
     .container
       .columns
         .column.is-third
           .content
-            h3 Strategy
-            p.
-              Together, we can devise a long-term strategy to focus your
-              software development efforts that will allow you to create the
-              most reliable and secure software.
-            h4 Solutions
-            ol
-              li Identifying correct tools and methodologies
-              li Risk Analysis
-              li Developer Training
+            h3= entry.step1_title
+            p= entry.step1
+            h4=entry.step1_subheading
+            ul
+              for step in entry.step1_steps
+                li= step
         .column.is-third
           .content
-            h3 Development
-            p.
-              Using the latest state of the art tools and techniques, I will
-              implement safe and secure software.
-            h4 Areas of Expertise
+            h3= entry.step2_title
+            p= entry.step2
+            h4=entry.step2_subheading
             ul
-              li Protocol Implementation
-              li Transaction Processing
-              li Message Queueing
+              for step in entry.step2_steps
+                li= step
         .column.is-third
           .content
-            h3 Testing and Validation
-            p.
-              Cutting edge methods such as theorem proving or property based
-              testing allow me to test, verify and validate the functionality
-              of your software to an unprecedented degree of certainty.
-            h4 Methods
+            h3= entry.step3_title
+            p= entry.step3
+            h4=entry.step3_subheading
             ul
-              li White/Black-Box Testing
-              li Property Based Testing
-              li Theorem Proving
+              for step in entry.step3_steps
+                li= step
       include _cta.pug

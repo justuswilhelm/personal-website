@@ -6,7 +6,8 @@ block content
       .container.has-text-centered
         h1.title
           strong= entry.slogan
-        img.is-4(src="{{ entry.picture.url() }}")
+        .columns
+          img.column.is-2(src="{{ entry.picture.url() }}")
   section.section
     .container
       .columns
@@ -14,7 +15,7 @@ block content
           .content
             p.has-text-justified= entry.description
             p.has-text-justified= entry.explanation
-            #[a(href="{{ url_for('method') }}") Learn How]
+            #[a(href="{{ url_for('method', slug=entry.slug) }}") Learn How]
       .columns
         .column.is-8.is-offset-2
           include _cta.pug

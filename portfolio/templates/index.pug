@@ -6,7 +6,8 @@ block content
       .columns
         .column.is-6.is-offset-3
           .content
-            ul
-              li
-                a(href="#{url_for('landing', entry='sqc')}")
-                  Software Quality Consulting
+            for entry in entries
+              ul
+                li
+                  a(href="#{url_for('landing', slug=entry.slug)}")
+                    =entry.name
