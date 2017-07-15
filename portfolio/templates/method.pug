@@ -13,7 +13,7 @@ block content
         .column.is-third
           .content
             h3= entry.step1_title
-            p= entry.step1
+            = entry.step1|pandoc
             h4=entry.step1_subheading
             ul
               for step in entry.step1_steps
@@ -21,7 +21,7 @@ block content
         .column.is-third
           .content
             h3= entry.step2_title
-            p= entry.step2
+            = entry.step2|pandoc
             h4=entry.step2_subheading
             ul
               for step in entry.step2_steps
@@ -29,7 +29,7 @@ block content
         .column.is-third
           .content
             h3= entry.step3_title
-            p= entry.step3
+            = entry.step3|pandoc
             h4=entry.step3_subheading
             ul
               for step in entry.step3_steps

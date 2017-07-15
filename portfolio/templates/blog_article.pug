@@ -14,7 +14,7 @@ block content
       .columns
         .column.is-8.is-offset-2
           .content
-            p= content|safe
+            = content|pandoc
             dl
               dt Date created:
               dd= meta.created

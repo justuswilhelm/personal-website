@@ -4,15 +4,16 @@ from datetime import date
 from os.path import split, splitext
 
 from flask import Flask, Response, render_template
-from markdown import markdown
 from yaml import safe_load
 
 from . import content
+from . import filters
 
 
 application = Flask(__name__)
 application.config.update(FREEZER_DESTINATION='../justus.pw')
 application.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
+application.jinja_env.filters['pandoc'] = filters.pandoc
 
 
 def discover_blog_articles():
@@ -39,26 +40,11 @@ def parse_blog_article(path):
         return meta, c
 
 
-def render_article(raw):
-    """Turn raw to markdown."""
-    return markdown(
-        raw,
-        extensions=[
-            'markdown.extensions.fenced_code',
-            'markdown.extensions.codehilite',
-            'markdown.extensions.headerid',
-        ], extension_configs={
-            'markdown.extensions.codehilite': {
-                'guess_lang': True,
-            }
-        })
-
-
 def load_article(year, month, day):
     """Load an article, given year, month and day."""
     path = 'blog/{}-{:02d}-{:02d}.md'.format(year, month, day)
     meta, c = parse_blog_article(path)
-    return meta, render_article(c)
+    return meta, c
 
 
 def load_data(path):
