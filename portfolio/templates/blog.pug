@@ -7,14 +7,22 @@ block content
   section.hero
     .hero-body
       .container.has-text-centered
-        h1.title.is-2 Blog Articles
-  section.section
-    .container
-      .columns
-        .column.is-8.is-offset-2
-          .content
-            ul(data-article-count="{{ blog_articles|length }}")
-              for article in blog
-                li
-                  a(href="#{url_for("blog_article", year=article.created.year, month=article.created.month, day=article.created.day, title=article.title)}")
-                    = article.title
+        h1.title.is-2 The Tool Shed
+  for article in blog
+    - var link = url_for('blog_article', year=article.created.year, month=article.created.month, day=article.created.day, title=article.title)
+    section.section
+      .container
+        .columns
+          .column.is-4
+            p.subtitle= article.created
+            h2.title
+              a(href="#{link}")= article.title
+          .column.is-8
+            .content
+              if article.teaser
+                = article.teaser|pandoc
+              else
+                = article.content|truncate|pandoc
+              p
+                a(href="#{link}") Read More
+

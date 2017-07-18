@@ -2,25 +2,25 @@ extends site_base.pug
 
 block title
   = ' | '
-  = meta.title
+  = article.title
 
 block content
   section.hero
     .hero-body
       .content.has-text-centered
-        h1.title.is-2= meta.title
+        h1.title.is-2= article.title
   section.section
     .container
       .columns
         .column.is-8.is-offset-2
           .content
-            = content|pandoc
+            = article.content|pandoc
             dl
               dt Date created:
-              dd= meta.created
-              if meta.modified
+              dd= article.created
+              if article.modified
                 dt Date modified:
-                dd= meta.modified
+                dd= article.modified
             p
               | You are more than welcome to share your thoughts via
               a(href="mailto:hello@justus.pw")= ' email'

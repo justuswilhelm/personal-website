@@ -12,8 +12,8 @@ from . import filters
 
 application = Flask(__name__)
 application.config.update(FREEZER_DESTINATION='../justus.pw')
-application.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 application.jinja_env.filters['pandoc'] = filters.pandoc
+application.jinja_env.add_extension('pypugjs.ext.jinja.PyPugJSExtension')
 
 
 def discover_blog_articles():
@@ -24,7 +24,7 @@ def discover_blog_articles():
 def read_blog_metadata():
     """Read all blog articles, yield their meta data."""
     for path in discover_blog_articles():
-        yield parse_blog_article(path)[0]
+        yield parse_blog_article(path)
 
 
 def parse_blog_article(path):
@@ -36,18 +36,20 @@ def parse_blog_article(path):
             raise SyntaxError("Missing meta data in {}".format(path))
         meta = safe_load(meta_raw)
         fname = splitext(split(path)[-1])[0]
-        meta['created'] = date(*map(int, fname.split("-")))
-        return meta, c
+        return {
+            **meta,
+            "content": c,
+            "created": date(*map(int, fname.split("-"))),
+        }
 
 
 def load_article(year, month, day):
     """Load an article, given year, month and day."""
     path = 'blog/{}-{:02d}-{:02d}.md'.format(year, month, day)
-    meta, c = parse_blog_article(path)
-    return meta, c
+    return parse_blog_article(path)
 
 
-@application.route('/')
+@application.route('/index.html')
 def index():
     """Show index page."""
     entries = content.client.entries({
@@ -56,7 +58,7 @@ def index():
     return render_template('index.pug', entries=entries)
 
 
-@application.route('/method/<slug>/')
+@application.route('/method/<slug>.html')
 def method(slug):
     """Show method page."""
     entry = content.client.entries({
@@ -66,7 +68,7 @@ def method(slug):
     return render_template('method.pug', entry=entry)
 
 
-@application.route('/landing/<slug>/')
+@application.route('/landing/<slug>.html')
 def landing(slug):
     """Show landing page."""
     entry = content.client.entries({
@@ -78,7 +80,7 @@ def landing(slug):
     )
 
 
-@application.route('/blog/')
+@application.route('/blog.html')
 def blog():
     """Show blog index."""
     return render_template('blog.pug', blog=read_blog_metadata())
@@ -86,9 +88,9 @@ def blog():
 
 @application.route(
     '/blog/<int(fixed_digits=4):year>-<int(fixed_digits=2):month>-'
-    '<int(fixed_digits=2):day>-<title>'
+    '<int(fixed_digits=2):day>-<title>.html'
 )
 def blog_article(year, month, day, **kwargs):
     """Render an individual blog article."""
-    meta, c = load_article(year, month, day)
-    return render_template('blog_article.pug', meta=meta, content=c)
+    article = load_article(year, month, day)
+    return render_template('blog_article.pug', article=article)
