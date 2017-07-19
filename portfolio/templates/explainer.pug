@@ -1,0 +1,26 @@
+extends site_base.pug
+
+block content
+  section.hero
+    .hero-body
+      .content.has-text-centered
+        h1= entry.concept_name
+        h2= entry.tagline
+  section.section
+    .container
+      .columns
+        .column.is-6.is-offset-3
+          .content
+            div.has-text-justified= entry.short_description|pandoc
+      .columns
+        .column.is-4.is-offset-4
+          img(src="#{entry.illustration.url()}")
+      .columns
+        .column.is-6.is-offset-3
+          .content
+            div.has-text-justified= entry.long_description|pandoc
+      include _cta
+      .columns
+        .column.is-6.is-offset-3
+          .content.has-text-centered
+            h2 Related Concepts

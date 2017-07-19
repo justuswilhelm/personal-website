@@ -6,8 +6,8 @@ from os.path import split, splitext
 from flask import Flask, render_template
 from yaml import safe_load
 
-from . import content
-from . import filters
+from . import content, filters
+from .content import contentful
 
 
 application = Flask(__name__)
@@ -35,7 +35,7 @@ def parse_blog_article(path):
         except ValueError:
             raise SyntaxError("Missing meta data in {}".format(path))
         meta = safe_load(meta_raw)
-        fname = splitext(split(path)[-1])[0]
+        fname, = splitext(split(path)[-1])
         return {
             **meta,
             "content": c,
@@ -52,29 +52,28 @@ def load_article(year, month, day):
 @application.route('/index.html')
 def index():
     """Show index page."""
-    entries = content.client.entries({
-        'content_type': 'landingPage',
-    })
+    entries = contentful.entries({'content_type': 'landingPage'})
     return render_template('index.pug', entries=entries)
+
+
+@application.route('/explainer/<slug>.html')
+def explainer(slug):
+    """Show explainer page."""
+    entry = content.get_explainer(slug)
+    return render_template('explainer.pug', entry=entry)
 
 
 @application.route('/method/<slug>.html')
 def method(slug):
     """Show method page."""
-    entry = content.client.entries({
-        'content_type': 'method',
-        'fields.slug': slug,
-    })[0]
+    entry = content.get_method(slug)
     return render_template('method.pug', entry=entry)
 
 
 @application.route('/landing/<slug>.html')
 def landing(slug):
     """Show landing page."""
-    entry = content.client.entries({
-        'content_type': 'landingPage',
-        'fields.slug': slug,
-    })[0]
+    entry = content.get_landing(slug)
     return render_template(
         'landing.pug', entry=entry
     )
