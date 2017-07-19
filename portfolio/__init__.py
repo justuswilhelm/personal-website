@@ -35,7 +35,13 @@ def parse_blog_article(path):
         except ValueError:
             raise SyntaxError("Missing meta data in {}".format(path))
         meta = safe_load(meta_raw)
+<<<<<<< HEAD
         fname, = splitext(split(path)[-1])
+||||||| merged common ancestors
+        fname = splitext(split(path)[-1])[0]
+=======
+        fname, _ = splitext(split(path)[-1])
+>>>>>>> Add explainer pages
         return {
             **meta,
             "content": c,
@@ -52,8 +58,33 @@ def load_article(year, month, day):
 @application.route('/index.html')
 def index():
     """Show index page."""
+<<<<<<< HEAD
     entries = contentful.entries({'content_type': 'landingPage'})
+||||||| merged common ancestors
+    entries = content.client.entries({
+        'content_type': 'landingPage',
+    })
+=======
+    entries = content.get_landings()
+>>>>>>> Add explainer pages
     return render_template('index.pug', entries=entries)
+
+
+<<<<<<< HEAD
+@application.route('/explainer/<slug>.html')
+def explainer(slug):
+    """Show explainer page."""
+    entry = content.get_explainer(slug)
+    return render_template('explainer.pug', entry=entry)
+
+
+||||||| merged common ancestors
+=======
+@application.route('/explainer/index.html')
+def explainers():
+    """Show explainer page."""
+    entries = content.get_explainers()
+    return render_template('explainers.pug', entries=entries)
 
 
 @application.route('/explainer/<slug>.html')
@@ -63,6 +94,7 @@ def explainer(slug):
     return render_template('explainer.pug', entry=entry)
 
 
+>>>>>>> Add explainer pages
 @application.route('/method/<slug>.html')
 def method(slug):
     """Show method page."""
@@ -79,7 +111,7 @@ def landing(slug):
     )
 
 
-@application.route('/blog.html')
+@application.route('/blog/index.html')
 def blog():
     """Show blog index."""
     return render_template('blog.pug', blog=read_blog_metadata())
