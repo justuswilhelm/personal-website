@@ -28,6 +28,7 @@ def main():
 def runserver():
     """Run a local test server."""
     from portfolio import application
+    application.jinja_env.auto_reload = True
     application.run(debug=True)
 
 
