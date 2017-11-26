@@ -1,0 +1,16 @@
+baseurl: ""
+email: hello@justus.pw
+github_username:  justuswilhelm
+markdown: kramdown
+plugins:
+  - jekyll-feed
+title: Justus Perlwitz
+twitter_username: justuswilhelm
+url: "https://www.justus.pw"
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"

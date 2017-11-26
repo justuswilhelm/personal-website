@@ -16,7 +16,7 @@ curl https://caddyserver.com/download/linux/amd64?plugins=dns > caddy.tar.xz
 # Untar caddy
 tar xvfz caddy.tar.xz -C caddy
 # Execute on dev machine
-scp Caddyfile root@justus.pw:~/Caddyfile
+scp caddy/Caddyfile root@justus.pw:~/Caddyfile
 make
 ```
 

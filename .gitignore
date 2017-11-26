@@ -1,5 +1,3 @@
-*.pyc
-.ipynb_checkpoints
-.env
-justus.pw/
-__pycache__
+.jekyll-metadata
+.sass-cache
+_site
