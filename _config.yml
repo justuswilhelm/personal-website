@@ -4,6 +4,7 @@ github_username:  justuswilhelm
 markdown: kramdown
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 title: Justus Perlwitz
 twitter_username: justuswilhelm
 url: "https://www.justus.pw"
