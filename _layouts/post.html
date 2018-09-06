@@ -1,37 +1,22 @@
 ---
 layout: default
 ---
-<section class="hero">
-  <div class="hero-body">
-    <div class="content has-text-centered">
-      <h1 class="title is-2">
-        {{ page.title }}
-      </h1>
-    </div>
-  </div>
-</section>
-<section class="section">
-  <div class="container">
-    <div class="columns">
-      <div class="column is-8 is-offset-2">
-        <div class="content">
-          {{ content | markdownify }}
-          <dl>
-            <dt>
-              Date created:
-            </dt>
-            <dd>
-              {{ page.date | date_to_string }}
-            </dd>
-          </dl>
-          <p>
-            You are more than welcome to share your thoughts via
-            <a href="mailto:hello@justus.pw">
-              email
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<h1>
+  {{ page.title }}
+</h1>
+<section>
+{{ content | markdownify }}
+<dl>
+  <dt>
+    Date created:
+  </dt>
+  <dd>
+    {{ page.date | date_to_string }}
+  </dd>
+</dl>
+<p>
+  You are more than welcome to share your thoughts via
+  <a href="mailto:hello@justus.pw">
+    email
+  </a>
+</p>
