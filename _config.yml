@@ -1,14 +1,21 @@
+# Title of site
+title: Justus Perlwitz
+
+# This blog is located in / at https://www.justus.pw
 baseurl: ""
+url: "https://www.justus.pw"
+
+# Email, Username etc
 email: hello@justus.pw
 github_username:  justuswilhelm
+twitter_username: justuswilhelm
+
+# Rendering
 markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-toc
-title: Justus Perlwitz
-twitter_username: justuswilhelm
-url: "https://www.justus.pw"
 defaults:
   - scope:
       path: ""
@@ -16,6 +23,20 @@ defaults:
     values:
       layout: "post"
 
+# Graphviz stuff
 graphviz:
   options: "-Tsvg"
   executable: "dot"
+
+# What not to include
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - bin/
+  - .editorconfig
+  - Readme.md
