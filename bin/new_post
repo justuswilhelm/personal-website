@@ -1,0 +1,2 @@
+#!/bin/sh
+$EDITOR _posts/$(date +'%F')-$1.md
