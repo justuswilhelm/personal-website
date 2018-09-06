@@ -2,32 +2,22 @@
 layout: default
 ---
 {% for post in site.posts %}
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column is-4">
-          <p class="subtitle">
-            {{ post.date | date_to_string }}
-          </p>
-          <h2 class="title">
-            <a href="{{ post.url }}">
-              {{ post.title }}
-            </a>
-          </h2>
-        </div>
-        <div class="column is-8">
-          <div class="content">
-            {% if post.excerpt %}
-              {{ post.excerpt | markdownify }}
-            {% endif %}
-            <p>
-              <a href="#{link}">
-                Read More
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section>
+  <p>
+    {{ post.date | date_to_string }}
+  </p>
+  <h2>
+    <a href="{{ post.url }}">
+      {{ post.title }}
+    </a>
+  </h2>
+  {% if post.excerpt %}
+    {{ post.excerpt | markdownify }}
+  {% endif %}
+  <p>
+    <a href="#{link}">
+      Read More
+    </a>
+  </p>
+</section>
 {% endfor %}
