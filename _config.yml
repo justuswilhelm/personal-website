@@ -5,13 +5,17 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-toc
 title: Justus Perlwitz
 twitter_username: justuswilhelm
 url: "https://www.justus.pw"
 defaults:
-  -
-    scope:
+  - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
+
+graphviz:
+  options: "-Tsvg"
+  executable: "dot"
