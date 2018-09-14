@@ -20,6 +20,9 @@ GEM
     jekyll-feed (0.10.0)
       jekyll (~> 3.3)
     jekyll-graphviz (0.1.0)
+    jekyll-pandoc (2.0.1)
+      jekyll (>= 3.0)
+      pandoc-ruby (~> 2.0, >= 2.0.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
     jekyll-sitemap (1.2.0)
@@ -38,6 +41,7 @@ GEM
     mini_portile2 (2.3.0)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
+    pandoc-ruby (2.0.2)
     pathutil (0.16.1)
       forwardable-extended (~> 2.6)
     public_suffix (3.0.3)
@@ -60,6 +64,7 @@ DEPENDENCIES
   jekyll (~> 3.6.2)
   jekyll-feed (~> 0.6)
   jekyll-graphviz
+  jekyll-pandoc
   jekyll-sitemap
   jekyll-toc
 

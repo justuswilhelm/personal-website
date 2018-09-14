@@ -10,12 +10,15 @@ email: hello@justus.pw
 github_username:  justuswilhelm
 twitter_username: justuswilhelm
 
-# Rendering
-markdown: kramdown
+# Plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-toc
+  - jekyll-pandoc
+
+# Rendering
+incremental: true
+markdown: Pandoc
 defaults:
   - scope:
       path: ""
@@ -23,10 +26,11 @@ defaults:
     values:
       layout: "post"
 
-# Graphviz stuff
-graphviz:
-  options: "-Tsvg"
-  executable: "dot"
+pandoc:
+  extensions:
+    - toc
+    - filter bin/graphviz.sh
+
 
 # What not to include
 exclude:
