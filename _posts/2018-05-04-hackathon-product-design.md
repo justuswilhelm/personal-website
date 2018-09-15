@@ -4,7 +4,7 @@ title: What Hackathons Teach About Making Products
 
 I like hackathons. Hackathons are competitions that run over multiple days —
 typically a whole weekend — and in which the participants — programmers and
-designers — solve a challenges in order to win a prize. Typically, there are a
+designers — solve a challenge in order to win a prize. Typically, there are a
 few challenges that are all based around some theme — blockchains,
 sustainability, democracy, and so on.
 
