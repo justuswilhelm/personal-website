@@ -1,3 +1,7 @@
+body, p {
+  font-family: "Courier New", "Courier", monospace;
+}
+
 pre {
   background: #fefefe;
 }
