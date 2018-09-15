@@ -44,3 +44,4 @@ exclude:
   - bin/
   - .editorconfig
   - Readme.md
+  - netlify.toml
