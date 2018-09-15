@@ -54,7 +54,7 @@ digraph {
 
 The contract code looks roughly like this:
 
-```
+```c
 contract Crowdsale {
     ERC20 public token;
 
@@ -103,7 +103,7 @@ If you're basing your contract on OpenZeppelin's
 implementation becomes an easy task. Simply define your smart contract like
 so:
 
-```
+```c
 contract Crowdsale is Ownable {
     ERC20 public token;
 
