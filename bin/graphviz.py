@@ -44,7 +44,7 @@ def graphviz(key, value, format, _):
                     fd.write(result.stdout)
                 sys.stderr.write('Created image ' + dest + '\n')
 
-            return Para([Image([ident, [], keyvals], caption, [dest, typef])])
+            return Para([Image([ident, [], keyvals], caption, ["/" + dest, typef])])
 
 if __name__ == "__main__":
     toJSONFilter(graphviz)

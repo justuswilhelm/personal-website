@@ -46,9 +46,11 @@ possible to go back and revise options. This also means that once the crowdsale
 is set up, token buyers will never have the feeling of investing in a bait and
 switch.
 
-{% digraph Ownerless Token Sale %}
+```graphviz
+digraph {
   "Crowdsale Contract" -> "Token Contract" [ label="owns" ]
-{% enddigraph %}
+  }
+```
 
 The contract code looks roughly like this:
 
@@ -84,10 +86,12 @@ There are two risks:
 
 The next option is to add a single owner to the contract.
 
-{% digraph Single Owner Smart Contract %}
+```graphviz
+digraph {
   "Crowdsale Owner" -> "Crowdsale Contract" [ label="owns" ]
   "Crowdsale Contract" -> "Token Contract" [ label="owns" ]
-{% enddigraph %}
+}
+```
 
 The single owner can then change crowdsale parameters, such as bonus payouts or
 soft and hard caps. We can then limit the ability to change crowdsale
@@ -139,14 +143,16 @@ several shareholders who each own a stake in the governance contract and can
 change it based on consensus. The governance contract in turn manages the
 crowdsale contract. The stakeholders can be advisors, investors, or founders.
 
-{% digraph Governance Smart Contract %}
+```graphviz
+digraph {
   "Stakeholder A" -> "Ballot" [ label="votes" ]
   "Stakeholder B" -> "Ballot" [ label="votes" ]
   "Stakeholder C" -> "Ballot" [ label="votes" ]
   "Ballot" -> "Governance Contract" [ label="interacts", dir="both" ]
   "Governance Contract" -> "Crowdsale Contract" [ label="owns" ]
   "Crowdsale Contract" -> "Token Contract" [ label="owns" ]
-{% enddigraph %}
+}
+```
 
 Changes to the crowdsale contract parameters are handled in a very democratic
 way. The following steps are required.
