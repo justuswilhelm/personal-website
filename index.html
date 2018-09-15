@@ -4,7 +4,9 @@ layout: default
 {% for post in site.posts %}
 <section>
   <p>
-    {{ post.date | date_to_string }}
+    <strong>
+      {{ post.date | date_to_string }}
+    </strong>
   </p>
   <h2>
     <a href="{{ post.url }}">
