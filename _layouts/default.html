@@ -8,7 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Justus Perlwitz">
     <title>
-      {{ site.title }} | {{ page.title }}
+      {{ site.title }}
+      {% if page.title %}
+        | {{ page.title }}
+      {% endif %}
     </title>
     <link
       rel="alternate"
