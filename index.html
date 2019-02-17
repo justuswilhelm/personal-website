@@ -1,23 +1,3 @@
----
-layout: default
----
-{% for post in site.posts %}
-<section>
-  <p>
-    {{ post.date | date_to_string }}
-  </p>
-  <h2>
-    <a href="{{ post.url }}">
-      {{ post.title }}
-    </a>
-  </h2>
-  {% if post.excerpt %}
-    {{ post.excerpt | markdownify }}
-  {% endif %}
-  <p>
-    <a href="#{link}">
-      Read More
-    </a>
-  </p>
-</section>
-{% endfor %}
+$for(posts)$
+  $partial("templates/post-item.html")$
+$endfor$
