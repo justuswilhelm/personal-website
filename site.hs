@@ -64,7 +64,7 @@ main =
       compile $ do
         posts <- recentFirst =<< loadAll "posts/*"
         pages <- loadAll "pages/*"
-        let allPosts = (return (pages ++ posts))
+        let allPosts = return (pages ++ posts)
         let sitemapCtx =
               mconcat [listField "entries" postCtx allPosts, defaultContext]
         makeItem "" >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx

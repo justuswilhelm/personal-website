@@ -79,10 +79,18 @@ getCaption m =
     Just cap -> (cap, "fig:")
     Nothing  -> ("", "")
 
+ensureFile fp =
+  let dir = takeDirectory fp
+   in createDirectoryIfMissing True dir >> doesFileExist fp >>= \exist ->
+        unless exist $ writeFile fp ""
+
+toTextPairs = Prelude.map (\(f, s) -> (T.pack f, T.pack s))
+
+-- graphviz
 renderDot1 :: FilePath -> IO FilePath
 renderDot1 src = renderDot src dst >> return dst
   where
-    dst = (dropExtension src) <.> "svg"
+    dst = dropExtension src <.> "svg"
 
 renderDot :: FilePath -> FilePath -> IO ExitCode
 renderDot src dst =
@@ -105,12 +113,7 @@ graphviz cblock@(CodeBlock (id, classes, attrs) content) =
     else return cblock
   where
     dest = fileName4Code "graphviz" (T.pack content) (Just "dot")
-    ensureFile fp =
-      let dir = takeDirectory fp
-       in createDirectoryIfMissing True dir >> doesFileExist fp >>= \exist ->
-            unless exist $ writeFile fp ""
-    toTextPairs = Prelude.map (\(f, s) -> (T.pack f, T.pack s))
-    m = M.fromList $ toTextPairs $ attrs
+    m = M.fromList toTextPairs attrs
     (caption, typedef) = getCaption m
 graphviz x = return x
 
@@ -118,7 +121,7 @@ graphviz x = return x
 renderMsc1 :: FilePath -> IO FilePath
 renderMsc1 src = renderMsc src dst >> return dst
   where
-    dst = (dropExtension src) <.> "svg"
+    dst = dropExtension src <.> "svg"
 
 renderMsc :: FilePath -> FilePath -> IO ExitCode
 renderMsc src dst =
@@ -141,11 +144,6 @@ msc cblock@(CodeBlock (id, classes, attrs) content) =
     else return cblock
   where
     dest = fileName4Code "mscgen" (T.pack content) (Just "msc")
-    ensureFile fp =
-      let dir = takeDirectory fp
-       in createDirectoryIfMissing True dir >> doesFileExist fp >>= \exist ->
-            unless exist $ writeFile fp ""
-    toTextPairs = Prelude.map (\(f, s) -> (T.pack f, T.pack s))
-    m = M.fromList $ toTextPairs $ attrs
+    m = M.fromList toTextPairs attrs
     (caption, typedef) = getCaption m
 msc x = return x
