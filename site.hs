@@ -4,7 +4,7 @@
 import           Data.Monoid          (mappend)
 import           Hakyll
 
-import           PandocFilterGraphviz (graphviz, msc)
+import           PandocFilterGraphviz (renderAll)
 import           Text.Pandoc          (Format (..), Pandoc, WriterOptions (..))
 import           Text.Pandoc.Walk     (walkM)
 
@@ -20,7 +20,7 @@ main =
     match "images/*" $ do
       route idRoute
       compile copyFileCompiler
-    match "mscgen-images/*.png" $ do
+    match "mscgen-images/*.svg" $ do
       route idRoute
       compile copyFileCompiler
     match "graphviz-images/*.svg" $ do
@@ -101,7 +101,7 @@ customPandocCompiler =
   pandocCompilerWithTransformM
     defaultHakyllReaderOptions
     woptions
-    (unsafeCompiler . (walkM graphviz >> walkM msc))
+    (unsafeCompiler . walkM renderAll)
 
 replaceTocExtension :: Item String -> Compiler (Item String)
 replaceTocExtension = return . fmap (withUrls replacer)

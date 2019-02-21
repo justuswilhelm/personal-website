@@ -47,7 +47,7 @@ import           Data.Text.Encoding     as E
 import           System.Directory
 import           System.Exit
 import           System.FilePath
-import           System.Process         (system)
+import           System.Process         (readProcessWithExitCode, system)
 
 import           Text.Pandoc
 import           Text.Pandoc.JSON
@@ -69,6 +69,8 @@ fileName4Code name source ext = filename
     barename =
       shaN ¤
       (case ext of
+         Just "msc" -> ".svg"
+         Just "dot" -> ".svg"
          Just e  -> "." ¤ e
          Nothing -> "")
     filename = T.unpack dirname </> T.unpack barename
@@ -84,66 +86,42 @@ ensureFile fp =
    in createDirectoryIfMissing True dir >> doesFileExist fp >>= \exist ->
         unless exist $ writeFile fp ""
 
-toTextPairs = Prelude.map (\(f, s) -> (T.pack f, T.pack s))
-
--- graphviz
-renderDot1 :: FilePath -> IO FilePath
-renderDot1 src = renderDot src dst >> return dst
-  where
-    dst = dropExtension src <.> "svg"
-
-renderDot :: FilePath -> FilePath -> IO ExitCode
+renderDot :: String -> FilePath -> IO FilePath
 renderDot src dst =
-  system $ Prelude.unwords ["dot", "-Tsvg", "-o" ++ show dst, show src]
-
-graphviz :: Block -> IO Block
-graphviz cblock@(CodeBlock (id, classes, attrs) content) =
-  if "graphviz" `elem` classes
-    then do
-      ensureFile dest >> writeFile dest content
-      img <- renderDot1 dest
-      ensureFile img
-      return $
-        Para
-          [ Image
-              (id, classes, attrs)
-              [Str $ T.unpack caption]
-              ("/" </> img, T.unpack caption)
-          ]
-    else return cblock
-  where
-    dest = fileName4Code "graphviz" (T.pack content) (Just "dot")
-    m = M.fromList toTextPairs attrs
-    (caption, typedef) = getCaption m
-graphviz x = return x
+  readProcessWithExitCode "dot" ["-Tsvg", "-o" ++ show dst, "-"] src >>
+  return dst
 
 -- Here is some msc rendering stuff
-renderMsc1 :: FilePath -> IO FilePath
-renderMsc1 src = renderMsc src dst >> return dst
-  where
-    dst = dropExtension src <.> "svg"
-
-renderMsc :: FilePath -> FilePath -> IO ExitCode
+renderMsc :: String -> FilePath -> IO FilePath
 renderMsc src dst =
-  system $ Prelude.unwords ["mscgen", "-Tsvg", "-o" ++ show dst, show src]
+  readProcessWithExitCode "mscgen" ["-Tsvg", "-o" ++ show dst, "-"] src >>
+  return dst
 
-msc :: Block -> IO Block
-msc cblock@(CodeBlock (id, classes, attrs) content) =
-  if "msc" `elem` classes
-    then do
-      ensureFile dest >> writeFile dest content
-      img <- renderMsc1 dest
-      ensureFile img
-      return $
-        Para
-          [ Image
-              (id, classes, attrs)
-              [Str $ T.unpack caption]
-              ("/" </> img, T.unpack caption)
-          ]
-    else return cblock
+-- and we combine everything into one function
+renderAll :: Block -> IO Block
+renderAll cblock@(CodeBlock (id, classes, attrs) content)
+  | "msc" `elem` classes =
+    let dest = fileName4Code "mscgen" (T.pack content) (Just "msc")
+     in do ensureFile dest >> writeFile dest content
+           img <- renderMsc content dest
+           ensureFile img
+           return $ image img
+  | "graphviz" `elem` classes =
+    let dest = fileName4Code "graphviz" (T.pack content) (Just "dot")
+     in do ensureFile dest >> writeFile dest content
+           img <- renderDot content dest
+           ensureFile img
+           return $ image img
+  | otherwise = return cblock
   where
-    dest = fileName4Code "mscgen" (T.pack content) (Just "msc")
-    m = M.fromList toTextPairs attrs
+    toTextPairs = Prelude.map (\(f, s) -> (T.pack f, T.pack s))
+    m = M.fromList $ toTextPairs attrs
     (caption, typedef) = getCaption m
-msc x = return x
+    image img =
+      Para
+        [ Image
+            (id, classes, attrs)
+            [Str $ T.unpack caption]
+            ("/" </> img, T.unpack caption)
+        ]
+renderAll x = return x
