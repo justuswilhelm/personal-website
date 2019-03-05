@@ -349,78 +349,80 @@ df.head(5)
 
 __Output:__
 
-<table>
- <thead>
-  <tr>
-   <th>
-    id
-   </th>
-   <th>
-    timestamp
-   </th>
-   <th>
-    url
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <th>
-    1
-   </th>
-   <td>
-    2018-03-09 20:16:17.045070
-   </td>
-   <td>
-    http://localhost:8000/
-   </td>
-  </tr>
-  <tr>
-   <th>
-    2
-   </th>
-   <td>
-    2018-03-09 20:16:17.089820
-   </td>
-   <td>
-    http://localhost:8000/page_a
-   </td>
-  </tr>
-  <tr>
-   <th>
-    3
-   </th>
-   <td>
-    2018-03-09 20:16:17.091435
-   </td>
-   <td>
-    http://localhost:8000/page_b
-   </td>
-  </tr>
-  <tr>
-   <th>
-    4
-   </th>
-   <td>
-    2018-03-09 20:16:17.092620
-   </td>
-   <td>
-    http://localhost:8000/page_a
-   </td>
-  </tr>
-  <tr>
-   <th>
-    5
-   </th>
-   <td>
-    2018-03-09 20:16:17.093510
-   </td>
-   <td>
-    http://localhost:8000/page_b
-   </td>
-  </tr>
- </tbody>
-</table>
+<section class="table-wrapper">
+ <table>
+  <thead>
+   <tr>
+    <th>
+     id
+    </th>
+    <th>
+     timestamp
+    </th>
+    <th>
+     url
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <th>
+     1
+    </th>
+    <td>
+     2018-03-09 20:16:17.045070
+    </td>
+    <td>
+     http://localhost:8000/
+    </td>
+   </tr>
+   <tr>
+    <th>
+     2
+    </th>
+    <td>
+     2018-03-09 20:16:17.089820
+    </td>
+    <td>
+     http://localhost:8000/page_a
+    </td>
+   </tr>
+   <tr>
+    <th>
+     3
+    </th>
+    <td>
+     2018-03-09 20:16:17.091435
+    </td>
+    <td>
+     http://localhost:8000/page_b
+    </td>
+   </tr>
+   <tr>
+    <th>
+     4
+    </th>
+    <td>
+     2018-03-09 20:16:17.092620
+    </td>
+    <td>
+     http://localhost:8000/page_a
+    </td>
+   </tr>
+   <tr>
+    <th>
+     5
+    </th>
+    <td>
+     2018-03-09 20:16:17.093510
+    </td>
+    <td>
+     http://localhost:8000/page_b
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</section>
 
 That looks excellent! Let us now plot page popularity using a simple Pandas
 value count on the `url` column.
@@ -457,60 +459,62 @@ counts.tail()
 
 __Output:__
 
-<table>
- <thead>
-  <tr>
-   <th>
-    timestamp
-   </th>
-   <th>
-    url
-   </th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <th>
-    2018-03-09 20:16:17.283
-   </th>
-   <td>
-    0
-   </td>
-  </tr>
-  <tr>
-   <th>
-    2018-03-09 20:16:17.284
-   </th>
-   <td>
-    1
-   </td>
-  </tr>
-  <tr>
-   <th>
-    2018-03-09 20:16:17.285
-   </th>
-   <td>
-    1
-   </td>
-  </tr>
-  <tr>
-   <th>
-    2018-03-09 20:16:17.286
-   </th>
-   <td>
-    1
-   </td>
-  </tr>
-  <tr>
-   <th>
-    2018-03-09 20:16:17.287
-   </th>
-   <td>
-    1
-   </td>
-  </tr>
- </tbody>
-</table>
+<section class="table-wrapper">
+ <table>
+  <thead>
+   <tr>
+    <th>
+     timestamp
+    </th>
+    <th>
+     url
+    </th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr>
+    <th>
+     2018-03-09 20:16:17.283
+    </th>
+    <td>
+     0
+    </td>
+   </tr>
+   <tr>
+    <th>
+     2018-03-09 20:16:17.284
+    </th>
+    <td>
+     1
+    </td>
+   </tr>
+   <tr>
+    <th>
+     2018-03-09 20:16:17.285
+    </th>
+    <td>
+     1
+    </td>
+   </tr>
+   <tr>
+    <th>
+     2018-03-09 20:16:17.286
+    </th>
+    <td>
+     1
+    </td>
+   </tr>
+   <tr>
+    <th>
+     2018-03-09 20:16:17.287
+    </th>
+    <td>
+     1
+    </td>
+   </tr>
+  </tbody>
+ </table>
+</section>
 
 That's good enough for our purposes and we can simply plot the data:
 

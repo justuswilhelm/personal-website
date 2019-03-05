@@ -1,6 +1,12 @@
 /* My Stuff */
-body {
-  margin: 10% 20%;
+@media (min-width: 400px) {
+  body {
+    margin: 10% 20%;
+  }
+}
+
+.table-wrapper, pre {
+  overflow-x: scroll;
 }
 
 /* This handy trick has been brought to you by
