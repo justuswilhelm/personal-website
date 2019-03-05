@@ -71,8 +71,8 @@ fileName4Code name source ext = filename
       (case ext of
          Just "msc" -> ".svg"
          Just "dot" -> ".svg"
-         Just e  -> "." ¤ e
-         Nothing -> "")
+         Just e     -> "." ¤ e
+         Nothing    -> "")
     filename = T.unpack dirname </> T.unpack barename
 
 getCaption :: M.Map Text Text -> (Text, Text)
@@ -125,3 +125,7 @@ renderAll cblock@(CodeBlock (id, classes, attrs) content)
             ("/" </> img, T.unpack caption)
         ]
 renderAll x = return x
+
+stripHeading :: Block -> Block
+stripHeading cblock@(Header level att content) = Null
+stripHeading x                                 = x

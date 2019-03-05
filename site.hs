@@ -4,9 +4,9 @@
 import           Data.Monoid          (mappend)
 import           Hakyll
 
-import           PandocFilterGraphviz (renderAll)
+import           PandocFilterGraphviz (renderAll, stripHeading)
 import           Text.Pandoc          (Format (..), Pandoc, WriterOptions (..))
-import           Text.Pandoc.Walk     (walkM)
+import           Text.Pandoc.Walk     (walk, walkM)
 
 import           Hakyll.Web.Html      (withUrls)
 
@@ -32,12 +32,12 @@ main =
     match "posts/*" $
       version "noToc" $ do
         route $ setExtension "toc-html"
-        compile $ pandocCompiler >>= saveSnapshot "content"
+        compile $ customTeaserPandocCompiler >>= saveSnapshot "content"
             -- >>= relativizeUrls
     match "posts/*" $ do
       route $ setExtension "html"
       compile $
-        customPandocCompiler >>=
+        customPostPandocCompiler >>=
         loadAndApplyTemplate "templates/post.html" postCtx >>=
         loadAndApplyTemplate "templates/default.html" postCtx
             -- >>= relativizeUrls
@@ -96,12 +96,19 @@ woptions =
     , writerHtmlQTags = True
     }
 
-customPandocCompiler :: Compiler (Item String)
-customPandocCompiler =
+customPostPandocCompiler :: Compiler (Item String)
+customPostPandocCompiler =
   pandocCompilerWithTransformM
     defaultHakyllReaderOptions
     woptions
     (unsafeCompiler . walkM renderAll)
+
+customTeaserPandocCompiler :: Compiler (Item String)
+customTeaserPandocCompiler =
+  pandocCompilerWithTransform
+    defaultHakyllReaderOptions
+    defaultHakyllWriterOptions
+    (walk stripHeading)
 
 replaceTocExtension :: Item String -> Compiler (Item String)
 replaceTocExtension = return . fmap (withUrls replacer)
