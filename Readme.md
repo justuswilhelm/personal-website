@@ -1,26 +1,16 @@
-# Portfolio
-This is where I put my portfolio and blog
+# Personal Website
+
+This is my [personal website](https://www.justus.pw). It is made in [Hakyll](https://jaspervdj.be/hakyll/).
 
 ## Quickstart
-```
-virtualenv env -ppython3
-pip install -r requirements.txt
-source env/bin/activate
-make test
-```
 
-## How to configure server
+Assuming that you have stack installed, simply run
+
 ```
-# Download caddy
-curl https://caddyserver.com/download/linux/amd64?plugins=dns > caddy.tar.xz
-# Untar caddy
-tar xvfz caddy.tar.xz -C caddy
-# Execute on dev machine
-scp caddy/Caddyfile root@justus.pw:~/Caddyfile
-make
+stack build
+stack exec site clean
+stack exec site watch
 ```
 
 ## Requirements
-- Python 3 with pip
-- GNU Make
-- Aspell
+- [Stack](https://docs.haskellstack.org/en/stable/README/)
