@@ -5,6 +5,13 @@
   }
 }
 
+/* This will prevent the code snippets from looking strange on my iphone */
+@media (max-width: 400px) {
+  .sourceCode {
+    -webkit-text-size-adjust:none;
+  }
+}
+
 .table-wrapper, pre {
   overflow-x: scroll;
 }
