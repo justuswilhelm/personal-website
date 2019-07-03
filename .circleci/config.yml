@@ -1,0 +1,32 @@
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: haskell:8.4.4
+    steps:
+      - checkout
+      - run:
+          name: Install graphviz
+          command: "apt update && apt install -y graphviz mscgen"
+      - restore_cache:
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          name: Restore Cached Dependencies
+          keys:
+            - dependencies-{{ checksum "stack.yaml" }}
+      - run:
+          name: Resolve/Update Dependencies
+          command: stack setup
+      - run: stack build
+      - save_cache:
+          name: Cache Dependencies
+          key: dependencies-{{ checksum "stack.yaml" }}
+          paths:
+            - "/root/.stack"
+            - ".stack-work"
+      - run: stack exec site build
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
