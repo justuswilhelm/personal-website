@@ -1,2 +1,4 @@
 #!/bin/sh
-$EDITOR _posts/$(date +'%F')-$1.md
+file="posts/$(date +'%F')-$1.md"
+cp bin/post-template.md $file
+$EDITOR $file
