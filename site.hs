@@ -83,8 +83,8 @@ teaserCtx :: Context String
 teaserCtx = teaserField "teaser" "content" `mappend` postCtx
 
 ---
-woptions :: WriterOptions
-woptions =
+postHakyllWriterOptions :: WriterOptions
+postHakyllWriterOptions =
   defaultHakyllWriterOptions
     { writerSectionDivs = True
     , writerTableOfContents = True
@@ -100,7 +100,7 @@ customPostPandocCompiler :: Compiler (Item String)
 customPostPandocCompiler =
   pandocCompilerWithTransformM
     defaultHakyllReaderOptions
-    woptions
+    postHakyllWriterOptions
     (unsafeCompiler . walkM renderAll)
 
 customTeaserPandocCompiler :: Compiler (Item String)
