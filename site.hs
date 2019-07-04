@@ -66,7 +66,7 @@ main =
         pages <- loadAll "pages/*"
         let allPosts = return (pages ++ posts)
         let sitemapCtx =
-              mconcat [listField "entries" postCtx allPosts, defaultContext]
+              mconcat [listField "entries" postCtx allPosts, pageDefaultContext]
         makeItem "" >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
 --------------------------------------------------------------------------------

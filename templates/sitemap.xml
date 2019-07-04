@@ -4,6 +4,9 @@
     <loc>$baseUrl$$url$</loc>
     <changefreq>weekly</changefreq>
     $if(lastmod)$<lastmod>$lastmod$</lastmod>$endif$
-    <priority>0.8</priority>
+  </url>$endfor$
+  <url>
+    <loc>$baseUrl$/</loc>
+    <changefreq>weekly</changefreq>
   </url>
-$endfor$</urlset>
+</urlset>
