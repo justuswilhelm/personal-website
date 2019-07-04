@@ -7,8 +7,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install graphviz
-          command: "apt update && apt install -y graphviz mscgen"
+          name: Download and add nodejs apt
+          command: "curl -sL https://deb.nodesource.com/setup_12.x | bash -"
+      - run:
+          name: Install apt packages
+          command: "apt update && apt install -y graphviz mscgen curl nodejs"
+      - run:
+          name: Install netlify-cli
+          command: npm install netlify-cli -g
       - restore_cache:
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           name: Restore Cached Dependencies
@@ -25,6 +31,9 @@ jobs:
             - "/root/.stack"
             - ".stack-work"
       - run: stack exec site build
+      - run:
+          name: Deploy
+          command: netlify deploy --dir _site/ --prod
 workflows:
   version: 2
   build:
