@@ -77,7 +77,10 @@ pageDefaultContext =
   defaultContext
 
 postCtx :: Context String
-postCtx = dateField "date" "%B %e, %Y" `mappend` pageDefaultContext
+postCtx =
+  dateField "lastmod" "%Y-%m-%d" `mappend`
+  dateField "date" "%B %e, %Y" `mappend`
+  pageDefaultContext
 
 teaserCtx :: Context String
 teaserCtx = teaserField "teaser" "content" `mappend` postCtx
