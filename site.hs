@@ -29,24 +29,25 @@ main =
     match "css/*" $ do
       route idRoute
       compile compressCssCompiler
-    match "posts/*" $
-      version "noToc" $ do
-        route $ setExtension "toc-html"
-        compile $ customTeaserPandocCompiler >>= saveSnapshot "content"
-            -- >>= relativizeUrls
     match "posts/*" $ do
-      route $ setExtension "html"
-      compile $
-        customPostPandocCompiler >>=
-        loadAndApplyTemplate "templates/post.html" postCtx >>=
-        loadAndApplyTemplate "templates/default.html" postCtx
-            -- >>= relativizeUrls
+      version "full" $ do
+        route $ setExtension "html"
+        compile $
+          customPostPandocCompiler >>=
+          loadAndApplyTemplate "templates/post.html" postCtx >>=
+          loadAndApplyTemplate "templates/default.html" postCtx >>=
+          saveSnapshot "content"
+      version "teaser" $ do
+        route $ setExtension "toc-html"
+        compile $
+          customTeaserPandocCompiler >>=
+          saveSnapshot "content"
     match "index.html" $ do
       route idRoute
       compile $ do
         posts <-
           recentFirst =<<
-          loadAllSnapshots ("posts/*" .&&. hasVersion "noToc") "content"
+          loadAllSnapshots ("posts/*" .&&. hasVersion "teaser") "content"
         let indexCtx =
               listField "posts" teaserCtx (return posts) `mappend`
               constField "title" "Home" `mappend`
@@ -62,7 +63,9 @@ main =
     create ["sitemap.xml"] $ do
       route idRoute
       compile $ do
-        posts <- recentFirst =<< loadAll "posts/*"
+        posts <-
+          recentFirst =<<
+          loadAllSnapshots ("posts/*" .&&. hasVersion "full") "content"
         pages <- loadAll "pages/*"
         let allPosts = return (pages ++ posts)
         let sitemapCtx =
