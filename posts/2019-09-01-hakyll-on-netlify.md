@@ -9,6 +9,8 @@ teaser: |
   than actually writing posts for your blog.
 ---
 
+# Why I never write any posts
+
 If you are like me, you are more busy switching between static site generators
 than actually writing posts for your blog. If you take a closer look at the
 [commit history](https://github.com/justuswilhelm/personal-website/commits/master) for this website, you will notice that I have
@@ -114,6 +116,8 @@ digraph G {Hello->World}
 ```
 
 [(Source)](https://github.com/jgm/pandocfilters/blob/master/examples/graphviz-sample.md)
+
+# Enter HASKELL and HAKYLL
 
 At some point when you go down the customization road, you will discover that
 you need something that was made with _extreme_ customizability in mind. That
