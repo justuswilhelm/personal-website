@@ -37,7 +37,12 @@ article img {
 }
 
 body, p {
-  font-family: "Courier New", "Courier", monospace;
+  font-family: 'Hepta Slab', serif;
+  text-align: justify;
+}
+
+p {
+  line-height: 1.5em;
 }
 
 pre {
