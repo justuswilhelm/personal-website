@@ -1,14 +1,20 @@
 /* My Stuff */
-@media (min-width: 400px) {
-  body {
-    margin: 10% 20%;
+/* This will prevent the code snippets from looking strange on my iphone */
+@media (max-width: 600px) {
+  .sourceCode {
+    -webkit-text-size-adjust:none;
   }
 }
 
-/* This will prevent the code snippets from looking strange on my iphone */
-@media (max-width: 400px) {
-  .sourceCode {
-    -webkit-text-size-adjust:none;
+@media (min-width: 400px) {
+  body {
+    margin: 5% 5%;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    margin: 10% 20%;
   }
 }
 
