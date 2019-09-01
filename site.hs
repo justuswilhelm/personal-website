@@ -71,12 +71,31 @@ main =
         let sitemapCtx =
               mconcat [listField "entries" postCtx allPosts, pageDefaultContext]
         makeItem "" >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
+    create ["atom.xml"] $ do
+      route idRoute
+      compile $ do
+          let feedCtx = postCtx `mappend` bodyField "description"
+
+                  -- constField "description" "This is the post description"
+          posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "full") "content"
+
+          renderAtom feedConfiguration feedCtx posts
 
 --------------------------------------------------------------------------------
+baseUrl :: String
+baseUrl = "https://www.justus.pw"
+
+pageTitle :: String
+pageTitle = "Justus Perlwitz"
+
+authorName :: String
+authorName = "Justus Perkwitz"
+
 pageDefaultContext :: Context String
 pageDefaultContext =
-  constField "baseUrl" "https://www.justus.pw" `mappend`
-  constField "pageTitle" "Justus Perlwitz" `mappend`
+  constField "baseUrl" baseUrl `mappend`
+  constField "pageTitle" pageTitle `mappend`
+  constField "authorName" authorName `mappend`
   defaultContext
 
 postCtx :: Context String
@@ -87,6 +106,17 @@ postCtx =
 
 teaserCtx :: Context String
 teaserCtx = teaserField "teaser" "content" `mappend` postCtx
+
+
+--- For RSS
+feedConfiguration :: FeedConfiguration
+feedConfiguration = FeedConfiguration
+    { feedTitle       = pageTitle
+    , feedDescription = "Articles about software and life"
+    , feedAuthorName  = authorName
+    , feedAuthorEmail = "hello@justus.pw"
+    , feedRoot        = baseUrl
+    }
 
 ---
 postHakyllWriterOptions :: WriterOptions
