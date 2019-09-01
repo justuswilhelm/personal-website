@@ -89,7 +89,7 @@ pageTitle :: String
 pageTitle = "Justus Perlwitz"
 
 authorName :: String
-authorName = "Justus Perkwitz"
+authorName = "Justus Perlwitz"
 
 pageDefaultContext :: Context String
 pageDefaultContext =
