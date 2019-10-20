@@ -111,174 +111,15 @@ df
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     date
-    </th>
-    <th>
-     category
-    </th>
-    <th>
-     value
-    </th>
-    <th>
-     customer
-    </th>
-    <th>
-     purchase
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     2017-01-05
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     18
-    </td>
-    <td>
-     5
-    </td>
-    <td>
-     4
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     2017-01-16
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     70
-    </td>
-    <td>
-     7
-    </td>
-    <td>
-     26
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     2017-01-07
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     72
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     29
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     2017-01-30
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     41
-    </td>
-    <td>
-     6
-    </td>
-    <td>
-     4
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     2017-01-18
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     84
-    </td>
-    <td>
-     10
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     2017-01-08
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     12
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     13
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | date       | category   | value   | customer   | purchase   |
+|:----------|:-----------|:-----------|:--------|:-----------|:-----------|
+| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          |
+| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         |
+| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         |
+| __...__   | ...        | ...        | ...     | ...        | ...        |
+| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          |
+| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          |
+| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         |
 
 That should give us some useful purchase data to work with.
 
@@ -309,78 +150,15 @@ values.to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     purchase
-    </th>
-    <th>
-     value
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     146
-    </td>
-   </tr>
-   <tr>
-    <th>
-     3
-    </th>
-    <td>
-     398
-    </td>
-   </tr>
-   <tr>
-    <th>
-     4
-    </th>
-    <td>
-     377
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     28
-    </th>
-    <td>
-     89
-    </td>
-   </tr>
-   <tr>
-    <th>
-     29
-    </th>
-    <td>
-     329
-    </td>
-   </tr>
-   <tr>
-    <th>
-     30
-    </th>
-    <td>
-     63
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| purchase   | value   |
+|:-----------|:--------|
+| __2__      | 146     |
+| __3__      | 398     |
+| __4__      | 377     |
+| __...__    | ...     |
+| __28__     | 89      |
+| __29__     | 329     |
+| __30__     | 63      |
 
 What we get is a Pandas Series containing the total purchase values for every
 purchase ID. Since we used a group by on the purchase ID, `purchase` is the
@@ -596,198 +374,15 @@ df.join(values, on='purchase', rsuffix='_total')
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     date
-    </th>
-    <th>
-     category
-    </th>
-    <th>
-     value
-    </th>
-    <th>
-     customer
-    </th>
-    <th>
-     purchase
-    </th>
-    <th>
-     value_total
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     2017-01-05
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     18
-    </td>
-    <td>
-     5
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     377
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     2017-01-16
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     70
-    </td>
-    <td>
-     7
-    </td>
-    <td>
-     26
-    </td>
-    <td>
-     213
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     2017-01-07
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     72
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     29
-    </td>
-    <td>
-     329
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     2017-01-30
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     41
-    </td>
-    <td>
-     6
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     377
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     2017-01-18
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     84
-    </td>
-    <td>
-     10
-    </td>
-    <td>
-     3
-    </td>
-    <td>
-     398
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     2017-01-08
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     12
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     13
-    </td>
-    <td>
-     241
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | date       | category   | value   | customer   | purchase   | value_total   |
+|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:--------------|
+| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 377           |
+| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 213           |
+| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 329           |
+| __...__   | ...        | ...        | ...     | ...        | ...        | ...           |
+| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 377           |
+| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 398           |
+| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 241           |
 
 As we have discussed before, we want to calculate the ratio of a single
 purchase item to the total purchase value. We therefore need to calculate
@@ -810,198 +405,15 @@ df.assign(
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     date
-    </th>
-    <th>
-     category
-    </th>
-    <th>
-     value
-    </th>
-    <th>
-     customer
-    </th>
-    <th>
-     purchase
-    </th>
-    <th>
-     value_pct
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     2017-01-05
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     18
-    </td>
-    <td>
-     5
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     4.77
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     2017-01-16
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     70
-    </td>
-    <td>
-     7
-    </td>
-    <td>
-     26
-    </td>
-    <td>
-     32.86
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     2017-01-07
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     72
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     29
-    </td>
-    <td>
-     21.88
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     2017-01-30
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     41
-    </td>
-    <td>
-     6
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     10.88
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     2017-01-18
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     84
-    </td>
-    <td>
-     10
-    </td>
-    <td>
-     3
-    </td>
-    <td>
-     21.11
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     2017-01-08
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     12
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     13
-    </td>
-    <td>
-     4.98
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | date       | category   | value   | customer   | purchase   | value_pct   |
+|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:------------|
+| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 4.77        |
+| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 32.86       |
+| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 21.88       |
+| __...__   | ...        | ...        | ...     | ...        | ...        | ...         |
+| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 10.88       |
+| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 21.11       |
+| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 4.98        |
 
 To be honest, for a long time I thought that this was the only way to do it. At
 the same time I was more than concerned with how burdensome it is to join the
@@ -1076,102 +488,15 @@ Name: value, Length: 100, dtype: int64
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     category
-    </th>
-    <th>
-     value
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     Magazine
-    </td>
-    <td>
-     18
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     Beverage
-    </td>
-    <td>
-     70
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     Food
-    </td>
-    <td>
-     72
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     Beverage
-    </td>
-    <td>
-     41
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     Magazine
-    </td>
-    <td>
-     84
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     Food
-    </td>
-    <td>
-     12
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | category   | value   |
+|:----------|:-----------|:--------|
+| __0__     | Magazine   | 18      |
+| __1__     | Beverage   | 70      |
+| __2__     | Food       | 72      |
+| __...__   | ...        | ...     |
+| __97__    | Beverage   | 41      |
+| __98__    | Magazine   | 84      |
+| __99__    | Food       | 12      |
 
 It is interesting to see that Pandas executes `return_print` on the first
 column twice. Therefore, we also see it being printed twice. This is done for
@@ -1214,78 +539,15 @@ df.value.transform(
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     value_standard_score
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     -1.354992
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     0.643862
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     0.720741
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     -0.470884
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     1.182015
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     -1.585630
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | value_standard_score   |
+|:----------|:-----------------------|
+| __0__     | -1.354992              |
+| __1__     | 0.643862               |
+| __2__     | 0.720741               |
+| __...__   | ...                    |
+| __97__    | -0.470884              |
+| __98__    | 1.182015               |
+| __99__    | -1.585630              |
 
 An observant reader will quickly notice that we could also perform the
 following calculation to retrieve the same result:
@@ -1300,78 +562,15 @@ following calculation to retrieve the same result:
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     value_standard_score_alt
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     -1.354992
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     0.643862
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     0.720741
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     -0.470884
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     1.182015
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     -1.585630
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | value_standard_score_alt   |
+|:----------|:---------------------------|
+| __0__     | -1.354992                  |
+| __1__     | 0.643862                   |
+| __2__     | 0.720741                   |
+| __...__   | ...                        |
+| __97__    | -0.470884                  |
+| __98__    | 1.182015                   |
+| __99__    | -1.585630                  |
 
 That is absolutely correct. I can see both forms having their advantages and
 disadvantages. I see the advantage of using `.transform()` instead of operating
@@ -1607,78 +806,15 @@ ts.to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     value
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     377
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     213
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     329
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     377
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     398
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     241
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | value   |
+|:----------|:--------|
+| __0__     | 377     |
+| __1__     | 213     |
+| __2__     | 329     |
+| __...__   | ...     |
+| __97__    | 377     |
+| __98__    | 398     |
+| __99__    | 241     |
 
 As we can see above, instead of directly calling `.transform()` on our
 well-known and beloved DataFrame, we first group by the purchase ID column.
@@ -1697,198 +833,15 @@ df.join(ts, rsuffix='_total')
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     date
-    </th>
-    <th>
-     category
-    </th>
-    <th>
-     value
-    </th>
-    <th>
-     customer
-    </th>
-    <th>
-     purchase
-    </th>
-    <th>
-     value_total
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     2017-01-05
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     18
-    </td>
-    <td>
-     5
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     377
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     2017-01-16
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     70
-    </td>
-    <td>
-     7
-    </td>
-    <td>
-     26
-    </td>
-    <td>
-     213
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     2017-01-07
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     72
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     29
-    </td>
-    <td>
-     329
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     2017-01-30
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     41
-    </td>
-    <td>
-     6
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     377
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     2017-01-18
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     84
-    </td>
-    <td>
-     10
-    </td>
-    <td>
-     3
-    </td>
-    <td>
-     398
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     2017-01-08
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     12
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     13
-    </td>
-    <td>
-     241
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | date       | category   | value   | customer   | purchase   | value_total   |
+|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:--------------|
+| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 377           |
+| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 213           |
+| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 329           |
+| __...__   | ...        | ...        | ...     | ...        | ...        | ...           |
+| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 377           |
+| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 398           |
+| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 241           |
 
 Even more exciting, we can perform the same calculation that we have performed
 before, and achieve what required an additional, unpleasant `.join()` before.
@@ -1906,198 +859,15 @@ df.assign(
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     item_id
-    </th>
-    <th>
-     date
-    </th>
-    <th>
-     category
-    </th>
-    <th>
-     value
-    </th>
-    <th>
-     customer
-    </th>
-    <th>
-     purchase
-    </th>
-    <th>
-     value_pct
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     2017-01-05
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     18
-    </td>
-    <td>
-     5
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     4.77
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     2017-01-16
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     70
-    </td>
-    <td>
-     7
-    </td>
-    <td>
-     26
-    </td>
-    <td>
-     32.86
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     2017-01-07
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     72
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     29
-    </td>
-    <td>
-     21.88
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     97
-    </th>
-    <td>
-     2017-01-30
-    </td>
-    <td>
-     Beverage
-    </td>
-    <td>
-     41
-    </td>
-    <td>
-     6
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     10.88
-    </td>
-   </tr>
-   <tr>
-    <th>
-     98
-    </th>
-    <td>
-     2017-01-18
-    </td>
-    <td>
-     Magazine
-    </td>
-    <td>
-     84
-    </td>
-    <td>
-     10
-    </td>
-    <td>
-     3
-    </td>
-    <td>
-     21.11
-    </td>
-   </tr>
-   <tr>
-    <th>
-     99
-    </th>
-    <td>
-     2017-01-08
-    </td>
-    <td>
-     Food
-    </td>
-    <td>
-     12
-    </td>
-    <td>
-     4
-    </td>
-    <td>
-     13
-    </td>
-    <td>
-     4.98
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| item_id   | date       | category   | value   | customer   | purchase   | value_pct   |
+|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:------------|
+| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 4.77        |
+| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 32.86       |
+| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 21.88       |
+| __...__   | ...        | ...        | ...     | ...        | ...        | ...         |
+| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 10.88       |
+| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 21.11       |
+| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 4.98        |
 
 That wasn't so bad, was it? Let's see what we can take away from today's
 article

@@ -75,111 +75,14 @@ df
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Fruit
-    </th>
-    <th>
-     Satisfaction
-    </th>
-    <th>
-     Weight
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     Apple
-    </td>
-    <td>
-     full
-    </td>
-    <td>
-     100
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     Orange
-    </td>
-    <td>
-     none
-    </td>
-    <td>
-     200
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     Pear
-    </td>
-    <td>
-     full
-    </td>
-    <td>
-     300
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     Pear
-    </td>
-    <td>
-     partial
-    </td>
-    <td>
-     100
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     Banana
-    </td>
-    <td>
-     full
-    </td>
-    <td>
-     400
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     Banana
-    </td>
-    <td>
-     full
-    </td>
-    <td>
-     300
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             | Fruit   | Satisfaction   |   Weight |
+|:------------|:--------|:---------------|---------:|
+| __Franz__   | Apple   | full           |      100 |
+| __Gerhard__ | Orange  | none           |      200 |
+| __Gerhard__ | Pear    | full           |      300 |
+| __Hans__    | Pear    | partial        |      100 |
+| __Hans__    | Banana  | full           |      400 |
+| __Hans__    | Banana  | full           |      300 |
 
 Are you as excited as I am to learn the first few magic incantations of
 `.aggregate()`? Let's move on and start working on the DataFrame.
@@ -227,69 +130,11 @@ df.groupby(level=0).aggregate('count')
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Fruit
-    </th>
-    <th>
-     Satisfaction
-    </th>
-    <th>
-     Weight
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     3
-    </td>
-    <td>
-     3
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             |   Fruit |   Satisfaction |   Weight |
+|:------------|--------:|---------------:|---------:|
+| __Franz__   |       1 |              1 |        1 |
+| __Gerhard__ |       2 |              2 |        2 |
+| __Hans__    |       3 |              3 |        3 |
 
 Our informed reader will surely let us know, that `count()` can also be invoked
 more directly and will give us the same result:
@@ -301,69 +146,11 @@ df.groupby(level=0).count()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Fruit
-    </th>
-    <th>
-     Satisfaction
-    </th>
-    <th>
-     Weight
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     3
-    </td>
-    <td>
-     3
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             |   Fruit |   Satisfaction |   Weight |
+|:------------|--------:|---------------:|---------:|
+| __Franz__   |       1 |              1 |        1 |
+| __Gerhard__ |       2 |              2 |        2 |
+| __Hans__    |       3 |              3 |        3 |
 
 That is absolutely true, and in simple situations just using `.count()` on a
 group by object will be much easier to understand. On the other hand,
@@ -400,45 +187,11 @@ df.apply(most_frequent).to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     0
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Fruit
-    </th>
-    <td>
-     Banana
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Satisfaction
-    </th>
-    <td>
-     full
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Weight
-    </th>
-    <td>
-     100
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                  | 0      |
+|:-----------------|:-------|
+| __Fruit__        | Banana |
+| __Satisfaction__ | full   |
+| __Weight__       | 100    |
 
 Let's put everything together and calculate the aggregate.
 
@@ -449,69 +202,11 @@ df.groupby(level=0).aggregate(lambda s: s.value_counts().idxmax())
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Fruit
-    </th>
-    <th>
-     Satisfaction
-    </th>
-    <th>
-     Weight
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     Apple
-    </td>
-    <td>
-     full
-    </td>
-    <td>
-     100
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     Pear
-    </td>
-    <td>
-     none
-    </td>
-    <td>
-     300
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     Banana
-    </td>
-    <td>
-     full
-    </td>
-    <td>
-     400
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             | Fruit   | Satisfaction   |   Weight |
+|:------------|:--------|:---------------|---------:|
+| __Franz__   | Apple   | full           |      100 |
+| __Gerhard__ | Pear    | none           |      300 |
+| __Hans__    | Banana  | full           |      400 |
 
 ## 3.3. Combining Aggregates
 
@@ -677,45 +372,11 @@ df.dtypes.to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     0
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Fruit
-    </th>
-    <td>
-     object
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Satisfaction
-    </th>
-    <td>
-     category
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Weight
-    </th>
-    <td>
-     int64
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                  | 0        |
+|:-----------------|:---------|
+| __Fruit__        | object   |
+| __Satisfaction__ | category |
+| __Weight__       | int64    |
 
 - The `Fruit` column contains data of the type `object`, which is the way
 Pandas stores Python `str` (string) data in columns,
@@ -732,69 +393,11 @@ df.groupby(level=0).aggregate('count')
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Fruit
-    </th>
-    <th>
-     Satisfaction
-    </th>
-    <th>
-     Weight
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     3
-    </td>
-    <td>
-     3
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             |   Fruit |   Satisfaction |   Weight |
+|:------------|--------:|---------------:|---------:|
+| __Franz__   |       1 |              1 |        1 |
+| __Gerhard__ |       2 |              2 |        2 |
+| __Hans__    |       3 |              3 |        3 |
 
 We look at the `.dtypes` attribute of our aggregate.
 
@@ -805,45 +408,11 @@ df.groupby(level=0).aggregate('count').dtypes.to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     0
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Fruit
-    </th>
-    <td>
-     int64
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Satisfaction
-    </th>
-    <td>
-     int64
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Weight
-    </th>
-    <td>
-     int64
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                  | 0     |
+|:-----------------|:------|
+| __Fruit__        | int64 |
+| __Satisfaction__ | int64 |
+| __Weight__       | int64 |
 
 This reveals that `count` will be stored as `int64` unlike the original
 columns, which had the data types `object` and `category`. Pandas returns a
@@ -1078,45 +647,11 @@ df.nunique().to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     0
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Fruit
-    </th>
-    <td>
-     4
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Satisfaction
-    </th>
-    <td>
-     3
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Weight
-    </th>
-    <td>
-     4
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                  |   0 |
+|:-----------------|----:|
+| __Fruit__        |   4 |
+| __Satisfaction__ |   3 |
+| __Weight__       |   4 |
 
 Furthermore, the method can also be applied on a group by object to retrieve
 the unique number of values per group. We see below the number of unique fruits
@@ -1129,69 +664,11 @@ df.groupby(level=0).nunique()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Fruit
-    </th>
-    <th>
-     Satisfaction
-    </th>
-    <th>
-     Weight
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             |   Fruit |   Satisfaction |   Weight |
+|:------------|--------:|---------------:|---------:|
+| __Franz__   |       1 |              1 |        1 |
+| __Gerhard__ |       2 |              2 |        2 |
+| __Hans__    |       2 |              2 |        3 |
 
 Now, `nunique` is also available in aggregates. The reason why we would use
 `nunique` in aggregates is if we want to retrieve multiple results for one
@@ -1207,69 +684,11 @@ df.groupby(level=0).agg('nunique')
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Fruit
-    </th>
-    <th>
-     Satisfaction
-    </th>
-    <th>
-     Weight
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             |   Fruit |   Satisfaction |   Weight |
+|:------------|--------:|---------------:|---------:|
+| __Franz__   |       1 |              1 |        1 |
+| __Gerhard__ |       2 |              2 |        2 |
+| __Hans__    |       2 |              2 |        3 |
 
 ## 5.2. Using Aggregate Results
 
@@ -1287,57 +706,11 @@ fruit_counts
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     nunique
-    </th>
-    <th>
-     count
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             |   nunique |   count |
+|:------------|----------:|--------:|
+| __Franz__   |         1 |       1 |
+| __Gerhard__ |         2 |       2 |
+| __Hans__    |         2 |       3 |
 
 We decide to neatly display the variety counts with a quick `.apply` call in
 which we format the resulting floats using a Python format string.
@@ -1353,45 +726,11 @@ which we format the resulting floats using a Python format string.
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Variety
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     100.00%
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     100.00%
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     66.67%
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             | Variety   |
+|:------------|:----------|
+| __Franz__   | 100.00%   |
+| __Gerhard__ | 100.00%   |
+| __Hans__    | 66.67%    |
 
 ## 5.3. All Built-In Aggregates
 
@@ -1417,105 +756,11 @@ df.groupby(level=0).Fruit.aggregate([
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     count
-    </th>
-    <th>
-     min
-    </th>
-    <th>
-     max
-    </th>
-    <th>
-     first
-    </th>
-    <th>
-     last
-    </th>
-    <th>
-     nunique
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     Franz
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     Apple
-    </td>
-    <td>
-     Apple
-    </td>
-    <td>
-     Apple
-    </td>
-    <td>
-     Apple
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Gerhard
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     Orange
-    </td>
-    <td>
-     Pear
-    </td>
-    <td>
-     Orange
-    </td>
-    <td>
-     Pear
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     Hans
-    </th>
-    <td>
-     3
-    </td>
-    <td>
-     Banana
-    </td>
-    <td>
-     Pear
-    </td>
-    <td>
-     Pear
-    </td>
-    <td>
-     Banana
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|             |   count | min    | max   | first   | last   |   nunique |
+|:------------|--------:|:-------|:------|:--------|:-------|----------:|
+| __Franz__   |       1 | Apple  | Apple | Apple   | Apple  |         1 |
+| __Gerhard__ |       2 | Orange | Pear  | Orange  | Pear   |         2 |
+| __Hans__    |       3 | Banana | Pear  | Pear    | Banana |         2 |
 
 Here are the data types that work with __numerical__ data types.
 

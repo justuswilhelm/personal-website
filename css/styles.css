@@ -18,7 +18,8 @@
   }
 }
 
-.table-wrapper, pre {
+article table, article pre {
+  display: block;
   overflow-x: scroll;
 }
 
