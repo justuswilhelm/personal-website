@@ -5,6 +5,15 @@ jobs:
     docker:
       - image: haskell:8.4.4
     steps:
+      - run:
+          name: Download and add git-lfs apt
+          command: "curl -sL https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash -"
+      - run:
+          name: Install git lfs
+          command: "apt install -y git-lfs openssh-client"
+      - run:
+          name: Git LFS pull
+          command: "git lfs install"
       - checkout
       - run:
           name: Download and add nodejs apt
@@ -12,6 +21,9 @@ jobs:
       - run:
           name: Install apt packages
           command: "apt update && apt install -y graphviz mscgen curl nodejs"
+      - run:
+          name: Install tex apt packages
+          command: apt install -y texlive texlive-xetex texlive-luatex texlive-latex-recommended git-lfs
       - run:
           name: Install netlify-cli
           command: npm install netlify-cli -g
