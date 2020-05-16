@@ -58,8 +58,9 @@ hexSha3_512 bs = show (hash bs :: Digest SHA3_512)
 sha :: String -> String
 sha = hexSha3_512 . B16.encode . C8.pack
 
-data RenderFormat =
-  SVG
+data RenderFormat
+  = SVG
+  | EPS
   deriving (Show)
 
 fileName4Code :: RenderFormat -> String -> String -> FilePath
@@ -70,6 +71,7 @@ fileName4Code format toolName source = filename
     extension =
       case format of
         SVG -> ".svg"
+        EPS -> ".eps"
     barename = shaN ++ extension
     filename = dirname </> barename
 
@@ -80,6 +82,7 @@ formatToFlag :: RenderFormat -> String
 formatToFlag format =
   case format of
     SVG -> "svg"
+    EPS -> "eps"
 
 renderDotLike :: String -> RenderFormat -> FilePath -> String -> IO ()
 renderDotLike cmd format dst src = do
