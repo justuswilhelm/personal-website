@@ -8,6 +8,7 @@ executable site
   other-modules:
     PandocFilterGraphviz
     Compilers
+    Contexts
   build-depends:    base == 4.*
                   , hakyll == 4.12.*
                   , base16-bytestring
