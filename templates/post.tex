@@ -1,0 +1,62 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[
+]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{unicode-math}
+
+\defaultfontfeatures{Scale=MatchLowercase}
+\defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+
+\usepackage{xeCJK}
+\setCJKmainfont{NotoSansCJKjp-Regular.otf}[%
+  Path = fonts/NotoSans/ ,
+]
+\usepackage{xcolor}
+\usepackage[
+  colorlinks=true,
+  linkcolor=Maroon,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=Blue,
+]{hyperref}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=2cm]{geometry}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+$highlighting-macros$
+\usepackage{longtable,booktabs}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+
+\title{$title$}
+\author{$author$}
+\date{$date$}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+
+$body$
+
+% TODO clean this up somehow and remove the if
+$if(lot)$
+\listoftables
+$endif$
+$if(lof)$
+\listoffigures
+$endif$
+
+\end{document}

@@ -27,6 +27,15 @@ main =
       route idRoute
       compile compressCssCompiler
     match "posts/*" $ do
+      version "pdf" $ do
+        route $ setExtension "pdf"
+        -- todo find a way we can pass the context here
+        compile $ do
+          body@(Item _ _) <- getResourceBody
+          readPandocWith defaultHakyllReaderOptions body >>=
+            C.relativizeUrlsWithCompiler "." >>=
+            C.traverseRenderAll >>=
+            C.writePandocLatexWith body
       version "full" $ do
         route $ setExtension "html"
         compile $

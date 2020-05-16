@@ -35,6 +35,7 @@ module PandocFilterGraphviz
   , stripHeading
   , RenderFormat(..)
   , RenderAllOptions(..)
+  , relativizePandocUrls
   ) where
 
 import           Crypto.Hash
@@ -131,6 +132,11 @@ renderAll options cblock@(CodeBlock (blockId, classes, attrs) content)
             , caption)
         ]
 renderAll _ x = return x
+
+relativizePandocUrls :: String -> Inline -> Inline
+relativizePandocUrls with (Image a b (url, title)) =
+  Image a b (with ++ url, title)
+relativizePandocUrls _ x = x
 
 stripHeading :: Block -> Block
 stripHeading Header {} = Null
