@@ -1,14 +1,12 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 
-import           Data.Monoid          (mappend)
+import           Data.Monoid     (mappend)
 import           Hakyll
 
-import           PandocFilterGraphviz (renderAll, stripHeading)
-import           Text.Pandoc          (Format (..), Pandoc, WriterOptions (..))
-import           Text.Pandoc.Walk     (walk, walkM)
+import           Hakyll.Web.Html (withUrls)
 
-import           Hakyll.Web.Html      (withUrls)
+import qualified Compilers       as C
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -33,13 +31,13 @@ main =
       version "full" $ do
         route $ setExtension "html"
         compile $
-          customPostPandocCompiler >>=
+          C.customPostPandocCompiler >>=
           loadAndApplyTemplate "templates/post.html" postCtx >>=
           loadAndApplyTemplate "templates/default.html" postCtx >>=
           saveSnapshot "content"
       version "teaser" $ do
         route $ setExtension "toc-html"
-        compile $ customTeaserPandocCompiler >>= saveSnapshot "content"
+        compile $ C.customTeaserPandocCompiler >>= saveSnapshot "content"
     match "index.html" $ do
       route idRoute
       compile $ do
@@ -52,7 +50,7 @@ main =
               pageDefaultContext
         getResourceBody >>= applyAsTemplate indexCtx >>=
           loadAndApplyTemplate "templates/default.html" indexCtx >>=
-          replaceTocExtension >>=
+          C.replaceTocExtension >>=
           relativizeUrls
     match "templates/*" $ compile templateBodyCompiler
     match "robots.txt" $ do
@@ -113,36 +111,4 @@ feedConfiguration =
     , feedAuthorEmail = "hello@justus.pw"
     , feedRoot = baseUrl
     }
-
 ---
-postHakyllWriterOptions :: WriterOptions
-postHakyllWriterOptions =
-  defaultHakyllWriterOptions
-    { writerSectionDivs = True
-    , writerTableOfContents = True
-    , writerColumns = 120
-    , writerTemplate =
-        Just
-          "<div id=\"TOC\">$toc$</div>\n<div id=\"markdownBody\">$body$</div>"
-    , writerTOCDepth = 4
-    , writerHtmlQTags = True
-    }
-
-customPostPandocCompiler :: Compiler (Item String)
-customPostPandocCompiler =
-  pandocCompilerWithTransformM
-    defaultHakyllReaderOptions
-    postHakyllWriterOptions
-    (unsafeCompiler . walkM renderAll)
-
-customTeaserPandocCompiler :: Compiler (Item String)
-customTeaserPandocCompiler =
-  pandocCompilerWithTransform
-    defaultHakyllReaderOptions
-    defaultHakyllWriterOptions
-    (walk stripHeading)
-
-replaceTocExtension :: Item String -> Compiler (Item String)
-replaceTocExtension = return . fmap (withUrls replacer)
-  where
-    replacer = replaceAll "\\.toc-html" (const ".html")

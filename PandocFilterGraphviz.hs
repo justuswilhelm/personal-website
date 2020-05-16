@@ -33,6 +33,8 @@
 module PandocFilterGraphviz
   ( renderAll
   , stripHeading
+  , RenderFormat(..)
+  , RenderAllOptions(..)
   ) where
 
 import           Control.Arrow          ((***))
@@ -40,12 +42,12 @@ import           Control.Monad          (join, unless)
 import           Crypto.Hash
 
 import           Data.Byteable          (toBytes)
-import           Data.ByteString        (ByteString)
 import qualified Data.ByteString.Base16 as B16
+import           Data.ByteString.Char8  (ByteString)
 import qualified Data.ByteString.Char8  as C8
+import           Data.Maybe             (fromMaybe)
 
 import qualified Data.Map.Strict        as M
-import           Data.Text              as T
 import           Data.Text.Encoding     as E
 
 import           System.Directory
@@ -56,78 +58,73 @@ import           System.Process         (readProcess, system)
 import           Text.Pandoc
 import           Text.Pandoc.JSON
 
-(¤) :: Text -> Text -> Text
-(¤) = T.append
+hexSha3_512 :: ByteString -> String
+hexSha3_512 bs = show (hash bs :: Digest SHA3_512)
 
-hexSha3_512 :: ByteString -> ByteString
-hexSha3_512 bs = C8.pack $ show (hash bs :: Digest SHA3_512)
+sha :: String -> String
+sha = hexSha3_512 . B16.encode . C8.pack
 
-sha :: Text -> Text
-sha = E.decodeUtf8 . hexSha3_512 . B16.encode . E.encodeUtf8
+data RenderFormat =
+  SVG
+  deriving (Show)
 
-fileName4Code :: Text -> Text -> Maybe Text -> FilePath
-fileName4Code name source ext = filename
+fileName4Code :: RenderFormat -> String -> String -> FilePath
+fileName4Code format toolName source = filename
   where
-    dirname = name ¤ "-images"
+    dirname = toolName ++ "-images"
     shaN = sha source
-    barename =
-      shaN ¤
-      (case ext of
-         Just "msc" -> ".svg"
-         Just "dot" -> ".svg"
-         Just e     -> "." ¤ e
-         Nothing    -> "")
-    filename = T.unpack dirname </> T.unpack barename
+    extension =
+      case format of
+        SVG -> ".svg"
+    barename = shaN ++ extension
+    filename = dirname </> barename
 
-getCaption :: M.Map Text Text -> (Text, Text)
-getCaption m =
-  case M.lookup "caption" m of
-    Just cap -> (cap, "fig:")
-    Nothing  -> ("", "")
+ensureFileWriteable :: FilePath -> IO ()
+ensureFileWriteable fp = createDirectoryIfMissing True $ takeDirectory fp
 
-ensureFile fp =
-  let dir = takeDirectory fp
-   in createDirectoryIfMissing True dir >> doesFileExist fp >>= \exist ->
-        unless exist $ writeFile fp ""
+formatToFlag :: RenderFormat -> String
+formatToFlag format =
+  case format of
+    SVG -> "svg"
 
-renderDot :: String -> FilePath -> IO FilePath
-renderDot src dst =
-  readProcess "dot" ["-Tsvg", "-o" ++ dst] src >>
-  return dst
+renderDotLike :: String -> RenderFormat -> FilePath -> String -> IO ()
+renderDotLike cmd format dst src = do
+  ensureFileWriteable dst
+  readProcess cmd ["-T", formatToFlag format, "-o", dst] src
+  return ()
+
+renderDot :: RenderFormat -> FilePath -> String -> IO ()
+renderDot = renderDotLike "dot"
 
 -- Here is some msc rendering stuff
-renderMsc :: String -> FilePath -> IO FilePath
-renderMsc src dst =
-  readProcess "mscgen" ["-Tsvg", "-o" ++ dst] src >>
-  return dst
+renderMsc :: RenderFormat -> FilePath -> String -> IO ()
+renderMsc = renderDotLike "mscgen"
 
 -- and we combine everything into one function
-renderAll :: Block -> IO Block
-renderAll cblock@(CodeBlock (id, classes, attrs) content)
-  | "msc" `elem` classes =
-    let dest = fileName4Code "mscgen" (T.pack content) (Just "msc")
-     in do ensureFile dest
-           img <- renderMsc content dest
-           return $ image img
-  | "graphviz" `elem` classes =
-    let dest = fileName4Code "graphviz" (T.pack content) (Just "dot")
-     in do ensureFile dest
-           img <- renderDot content dest
-           return $ image img
+data RenderAllOptions = RenderAllOptions
+  { renderFormat :: RenderFormat
+  } deriving (Show)
+
+renderAll :: RenderAllOptions -> Block -> IO Block
+renderAll options cblock@(CodeBlock (id, classes, attrs) content)
+  | "msc" `elem` classes = do
+    let dest = destForTool "mscgen"
+    renderMsc format dest content
+    return $ image dest
+  | "graphviz" `elem` classes = do
+    let dest = destForTool "graphviz"
+    renderDot format dest content
+    return $ image dest
   | otherwise = return cblock
   where
-    toTextPairs = Prelude.map $ mapTuple T.pack
-    mapTuple = join (***)
-    m = M.fromList $ toTextPairs attrs
-    (caption, typedef) = getCaption m
+    format = renderFormat options
+    destForTool toolName = fileName4Code format toolName content
+    m = M.fromList attrs
+    caption = fromMaybe "" (getCaption m)
+    getCaption = M.lookup "caption"
     image img =
-      Para
-        [ Image
-            (id, classes, attrs)
-            [Str $ T.unpack caption]
-            ("/" </> img, T.unpack caption)
-        ]
-renderAll x = return x
+      Para [Image (id, classes, attrs) [Str caption] ("/" </> img, caption)]
+renderAll pre x = return x
 
 stripHeading :: Block -> Block
 stripHeading cblock@(Header level att content) = Null
