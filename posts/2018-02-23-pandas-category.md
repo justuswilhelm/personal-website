@@ -108,69 +108,14 @@ example.to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     0
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     aqbmhTgz
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     YuLsulQC
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     YuLsulQC
-    </td>
-   </tr>
-   <tr>
-    <th>
-     3
-    </th>
-    <td>
-     LRmijlfp
-    </td>
-   </tr>
-   <tr>
-    <th>
-     4
-    </th>
-    <td>
-     aqbmhTgz
-    </td>
-   </tr>
-   <tr>
-    <th>
-     5
-    </th>
-    <td>
-     aqbmhTgz
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|       | 0        |
+|:------|:---------|
+| __0__ | aqbmhTgz |
+| __1__ | YuLsulQC |
+| __2__ | YuLsulQC |
+| __3__ | LRmijlfp |
+| __4__ | aqbmhTgz |
+| __5__ | aqbmhTgz |
 
 We can then easily see that this Series has exactly 3 categories by inspecting
 its `.dtype` attribute.
@@ -242,69 +187,14 @@ memory_usage.to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     memory_usage
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     one_category
-    </th>
-    <td>
-     10225
-    </td>
-   </tr>
-   <tr>
-    <th>
-     several_categories
-    </th>
-    <td>
-     11050
-    </td>
-   </tr>
-   <tr>
-    <th>
-     many_categories
-    </th>
-    <td>
-     21700
-    </td>
-   </tr>
-   <tr>
-    <th>
-     many_objects
-    </th>
-    <td>
-     650080
-    </td>
-   </tr>
-   <tr>
-    <th>
-     one_object
-    </th>
-    <td>
-     650080
-    </td>
-   </tr>
-   <tr>
-    <th>
-     several_objects
-    </th>
-    <td>
-     650080
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                        |   memory_usage |
+|:-----------------------|---------------:|
+| __one_category__       |          10225 |
+| __several_categories__ |          11050 |
+| __many_categories__    |          21700 |
+| __many_objects__       |         650080 |
+| __one_object__         |         650080 |
+| __several_objects__    |         650080 |
 
 We can see that category data in Pandas use considerably less memory than plain
 Python objects.
@@ -380,101 +270,15 @@ sizes
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Memory usage for n categories (object data type)
-    </th>
-    <th>
-     Memory usage for n categories (categorical data type)
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     130080
-    </td>
-    <td>
-     2225
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     130080
-    </td>
-    <td>
-     2290
-    </td>
-   </tr>
-   <tr>
-    <th>
-     3
-    </th>
-    <td>
-     130080
-    </td>
-    <td>
-     2355
-    </td>
-   </tr>
-   <tr>
-    <th>
-     ...
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1998
-    </th>
-    <td>
-     130080
-    </td>
-    <td>
-     127460
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1999
-    </th>
-    <td>
-     130080
-    </td>
-    <td>
-     127395
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2000
-    </th>
-    <td>
-     130080
-    </td>
-    <td>
-     127460
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|          | Memory usage for n categories (object data type)   | Memory usage for n categories (categorical data type)   |
+|:---------|:---------------------------------------------------|:--------------------------------------------------------|
+| __1__    | 130080                                             | 2225                                                    |
+| __2__    | 130080                                             | 2290                                                    |
+| __3__    | 130080                                             | 2355                                                    |
+| __...__  | ...                                                | ...                                                     |
+| __1998__ | 130080                                             | 127460                                                  |
+| __1999__ | 130080                                             | 127395                                                  |
+| __2000__ | 130080                                             | 127460                                                  |
 
 We can plot these values against each other. Since the Python object Series
 always contain the same amount of data regardless of the number of categories

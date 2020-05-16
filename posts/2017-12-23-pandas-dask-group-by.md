@@ -118,179 +118,22 @@ create_df(14)
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     Date
-    </th>
-    <th>
-     Rain
-    </th>
-    <th>
-     Temperature
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     2001-01-01
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     18
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-02
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     11
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-03
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     23
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-04
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     25
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-05
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     10
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-06
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     23
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-07
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     25
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-08
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     16
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-09
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     15
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-10
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     19
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-11
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     23
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-12
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     9
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-13
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     28
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-14
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     28
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| Date           | Rain   |   Temperature |
+|:---------------|:-------|--------------:|
+| __2001-01-01__ | True   |            18 |
+| __2001-01-02__ | True   |            11 |
+| __2001-01-03__ | False  |            23 |
+| __2001-01-04__ | False  |            25 |
+| __2001-01-05__ | True   |            10 |
+| __2001-01-06__ | True   |            23 |
+| __2001-01-07__ | True   |            25 |
+| __2001-01-08__ | True   |            16 |
+| __2001-01-09__ | True   |            15 |
+| __2001-01-10__ | False  |            19 |
+| __2001-01-11__ | False  |            23 |
+| __2001-01-12__ | True   |             9 |
+| __2001-01-13__ | False  |            28 |
+| __2001-01-14__ | True   |            28 |
 
 ## 2.2. Dask
 
@@ -322,47 +165,10 @@ create_ddf(7)
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     npartitions=1
-    </th>
-    <th>
-     Rain
-    </th>
-    <th>
-     Temperature
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     2001-01-01
-    </th>
-    <td>
-     bool
-    </td>
-    <td>
-     int64
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-07
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| npartitions=1   | Rain   | Temperature   |
+|:----------------|:-------|:--------------|
+| __2001-01-01__  | bool   | int64         |
+| __2001-01-07__  | ...    | ...           |
 
 A Dask DataFrame can be evaluated by calling the `compute()` method on it.
 Since we are not using `Dask.distributed` right now, this will simply be
@@ -375,102 +181,15 @@ create_ddf(7).compute()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     Date
-    </th>
-    <th>
-     Rain
-    </th>
-    <th>
-     Temperature
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     2001-01-01
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     13
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-02
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     12
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-03
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     8
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-04
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     11
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-05
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     26
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-06
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     22
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2001-01-07
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     8
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| Date           | Rain   |   Temperature |
+|:---------------|:-------|--------------:|
+| __2001-01-01__ | False  |            13 |
+| __2001-01-02__ | False  |            12 |
+| __2001-01-03__ | True   |             8 |
+| __2001-01-04__ | True   |            11 |
+| __2001-01-05__ | True   |            26 |
+| __2001-01-06__ | False  |            22 |
+| __2001-01-07__ | True   |             8 |
 
 # 3. Longest number of consecutive rainy days
 
@@ -498,90 +217,14 @@ sunny_example
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Date
-    </th>
-    <th>
-     Rain
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     0
-    </td>
-    <td>
-     False
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     1
-    </td>
-    <td>
-     False
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     False
-    </td>
-   </tr>
-   <tr>
-    <th>
-     3
-    </th>
-    <td>
-     3
-    </td>
-    <td>
-     True
-    </td>
-   </tr>
-   <tr>
-    <th>
-     4
-    </th>
-    <td>
-     4
-    </td>
-    <td>
-     True
-    </td>
-   </tr>
-   <tr>
-    <th>
-     5
-    </th>
-    <td>
-     5
-    </td>
-    <td>
-     False
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|       |   Date | Rain   |
+|:------|-------:|:-------|
+| __0__ |      0 | False  |
+| __1__ |      1 | False  |
+| __2__ |      2 | False  |
+| __3__ |      3 | True   |
+| __4__ |      4 | True   |
+| __5__ |      5 | False  |
 
 Using `Series.shift()` a difference list is calculated.
 
@@ -593,69 +236,14 @@ diff.to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Rain
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     True
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     False
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     False
-    </td>
-   </tr>
-   <tr>
-    <th>
-     3
-    </th>
-    <td>
-     True
-    </td>
-   </tr>
-   <tr>
-    <th>
-     4
-    </th>
-    <td>
-     False
-    </td>
-   </tr>
-   <tr>
-    <th>
-     5
-    </th>
-    <td>
-     True
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|       | Rain   |
+|:------|:-------|
+| __0__ | True   |
+| __1__ | False  |
+| __2__ | False  |
+| __3__ | True   |
+| __4__ | False  |
+| __5__ | True   |
 
 Now, the value is `True` only when the weather changes from rainy to sunny or
 vice versa. Following this, the difference list is summed up using
@@ -668,69 +256,14 @@ diff.cumsum().to_frame()
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Rain
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     3
-    </th>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     4
-    </th>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     5
-    </th>
-    <td>
-     3
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|       |   Rain |
+|:------|-------:|
+| __0__ |      1 |
+| __1__ |      1 |
+| __2__ |      1 |
+| __3__ |      2 |
+| __4__ |      2 |
+| __5__ |      3 |
 
 Using these values, rainy and non-rainy consecutive days can be grouped:
 
@@ -744,70 +277,11 @@ sunny_example_result
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     Rain
-    </th>
-    <th>
-     min
-    </th>
-    <th>
-     max
-    </th>
-    <th>
-     count
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     1
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     False
-    </td>
-    <td>
-     3
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2
-    </th>
-    <td>
-     True
-    </td>
-    <td>
-     True
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     3
-    </th>
-    <td>
-     False
-    </td>
-    <td>
-     False
-    </td>
-    <td>
-     1
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| Rain   | min   | max   |   count |
+|:-------|:------|:------|--------:|
+| __1__  | False | False |       3 |
+| __2__  | True  | True  |       2 |
+| __3__  | False | False |       1 |
 
 And the longest series of rainy days can be retrieved. `min` and `max` being
 `True` tells us that the days in question only contain the boolean value `True`
@@ -829,45 +303,11 @@ __Output:__
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     2
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     min
-    </th>
-    <td>
-     True
-    </td>
-   </tr>
-   <tr>
-    <th>
-     max
-    </th>
-    <td>
-     True
-    </td>
-   </tr>
-   <tr>
-    <th>
-     count
-    </th>
-    <td>
-     2
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|           |    2 |
+|:----------|-----:|
+| __min__   | True |
+| __max__   | True |
+| __count__ |    2 |
 
 ## 3.2. Pandas
 
@@ -957,47 +397,10 @@ sunny_example_Dask
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-     npartitions=1
-    </th>
-    <th>
-     Date
-    </th>
-    <th>
-     Rain
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     0
-    </th>
-    <td>
-     int64
-    </td>
-    <td>
-     bool
-    </td>
-   </tr>
-   <tr>
-    <th>
-     5
-    </th>
-    <td>
-     ...
-    </td>
-    <td>
-     ...
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+| npartitions=1   | Date   | Rain   |
+|:----------------|:-------|:-------|
+| __0__           | int64  | bool   |
+| __5__           | ...    | ...    |
 
 The computation graph for creating a Dask DataFrame from Pandas and retrieving
 the maximum can be visualized quite easily.
@@ -1062,133 +465,22 @@ cold_example
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     Temperature
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     2017-01-01
-    </th>
-    <td>
-     0
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-02
-    </th>
-    <td>
-     0
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-03
-    </th>
-    <td>
-     0
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-04
-    </th>
-    <td>
-     0
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-05
-    </th>
-    <td>
-     0
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-06
-    </th>
-    <td>
-     0
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-07
-    </th>
-    <td>
-     0
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-08
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-09
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-10
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-11
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-12
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-13
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-14
-    </th>
-    <td>
-     1
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                |   Temperature |
+|:---------------|--------------:|
+| __2017-01-01__ |             0 |
+| __2017-01-02__ |             0 |
+| __2017-01-03__ |             0 |
+| __2017-01-04__ |             0 |
+| __2017-01-05__ |             0 |
+| __2017-01-06__ |             0 |
+| __2017-01-07__ |             0 |
+| __2017-01-08__ |             1 |
+| __2017-01-09__ |             1 |
+| __2017-01-10__ |             1 |
+| __2017-01-11__ |             1 |
+| __2017-01-12__ |             1 |
+| __2017-01-13__ |             1 |
+| __2017-01-14__ |             1 |
 
 In order to resample the temperature by weeks, we can use the
 `DataFrame.resample()` method. We take extra care to sample only full weeks and
@@ -1224,57 +516,11 @@ agg
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     sum
-    </th>
-    <th>
-     count
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     2016-12-26
-    </th>
-    <td>
-     0
-    </td>
-    <td>
-     2
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-02
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     7
-    </td>
-   </tr>
-   <tr>
-    <th>
-     2017-01-09
-    </th>
-    <td>
-     5
-    </td>
-    <td>
-     5
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                |   sum |   count |
+|:---------------|------:|--------:|
+| __2016-12-26__ |     0 |       2 |
+| __2017-01-02__ |     2 |       7 |
+| __2017-01-09__ |     5 |       5 |
 
 We can therefore easily filter out partial weeks with the following query:
 
@@ -1285,35 +531,9 @@ agg.query("count == 7")
 
 __Output:__
 
-<section class="table-wrapper">
- <table>
-  <thead>
-   <tr>
-    <th>
-    </th>
-    <th>
-     sum
-    </th>
-    <th>
-     count
-    </th>
-   </tr>
-  </thead>
-  <tbody>
-   <tr>
-    <th>
-     2017-01-02
-    </th>
-    <td>
-     2
-    </td>
-    <td>
-     7
-    </td>
-   </tr>
-  </tbody>
- </table>
-</section>
+|                |   sum |   count |
+|:---------------|------:|--------:|
+| __2017-01-02__ |     2 |       7 |
 
 And the coldest week is the following:
 
