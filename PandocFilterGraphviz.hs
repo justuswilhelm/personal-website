@@ -102,7 +102,8 @@ renderMsc = renderDotLike "mscgen"
 
 -- and we combine everything into one function
 data RenderAllOptions = RenderAllOptions
-  { renderFormat :: RenderFormat
+  { urlPrefix    :: Maybe String
+  , renderFormat :: RenderFormat
   } deriving (Show)
 
 renderAll :: RenderAllOptions -> Block -> IO Block
@@ -123,7 +124,15 @@ renderAll options cblock@(CodeBlock (id, classes, attrs) content)
     caption = fromMaybe "" (getCaption m)
     getCaption = M.lookup "caption"
     image img =
-      Para [Image (id, classes, attrs) [Str caption] ("/" </> img, caption)]
+      Para
+        [ Image
+            (id, classes, attrs)
+            [Str caption]
+            ( case urlPrefix options of
+                Just prefix -> prefix </> img
+                Nothing     -> img
+            , caption)
+        ]
 renderAll pre x = return x
 
 stripHeading :: Block -> Block

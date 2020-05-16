@@ -38,7 +38,7 @@ customPostPandocCompiler =
     postHakyllWriterOptions
     (unsafeCompiler . walkM (renderAll fmt))
   where
-    fmt = RenderAllOptions {renderFormat = SVG}
+    fmt = RenderAllOptions {urlPrefix = Nothing, renderFormat = SVG}
 
 customTeaserPandocCompiler :: Compiler (Item String)
 customTeaserPandocCompiler =
