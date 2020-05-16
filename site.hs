@@ -39,9 +39,7 @@ main =
           saveSnapshot "content"
       version "teaser" $ do
         route $ setExtension "toc-html"
-        compile $
-          customTeaserPandocCompiler >>=
-          saveSnapshot "content"
+        compile $ customTeaserPandocCompiler >>= saveSnapshot "content"
     match "index.html" $ do
       route idRoute
       compile $ do
@@ -74,12 +72,12 @@ main =
     create ["atom.xml"] $ do
       route idRoute
       compile $ do
-          let feedCtx = postCtx `mappend` bodyField "description"
-
+        let feedCtx = postCtx `mappend` bodyField "description"
                   -- constField "description" "This is the post description"
-          posts <- fmap (take 10) . recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "full") "content"
-
-          renderAtom feedConfiguration feedCtx posts
+        posts <-
+          fmap (take 10) . recentFirst =<<
+          loadAllSnapshots ("posts/*" .&&. hasVersion "full") "content"
+        renderAtom feedConfiguration feedCtx posts
 
 --------------------------------------------------------------------------------
 baseUrl :: String
@@ -93,29 +91,27 @@ authorName = "Justus Perlwitz"
 
 pageDefaultContext :: Context String
 pageDefaultContext =
-  constField "baseUrl" baseUrl `mappend`
-  constField "pageTitle" pageTitle `mappend`
+  constField "baseUrl" baseUrl `mappend` constField "pageTitle" pageTitle `mappend`
   constField "authorName" authorName `mappend`
   defaultContext
 
 postCtx :: Context String
 postCtx =
-  dateField "lastmod" "%Y-%m-%d" `mappend`
-  dateField "date" "%B %e, %Y" `mappend`
+  dateField "lastmod" "%Y-%m-%d" `mappend` dateField "date" "%B %e, %Y" `mappend`
   pageDefaultContext
 
 teaserCtx :: Context String
 teaserCtx = teaserField "teaser" "content" `mappend` postCtx
 
-
 --- For RSS
 feedConfiguration :: FeedConfiguration
-feedConfiguration = FeedConfiguration
-    { feedTitle       = pageTitle
+feedConfiguration =
+  FeedConfiguration
+    { feedTitle = pageTitle
     , feedDescription = "Articles about software and life"
-    , feedAuthorName  = authorName
+    , feedAuthorName = authorName
     , feedAuthorEmail = "hello@justus.pw"
-    , feedRoot        = baseUrl
+    , feedRoot = baseUrl
     }
 
 ---
