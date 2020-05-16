@@ -1,12 +1,10 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
 
-import           Data.Monoid     (mappend)
+import           Data.Monoid (mappend)
 import           Hakyll
 
-import           Hakyll.Web.Html (withUrls)
-
-import qualified Compilers       as C
+import qualified Compilers   as C
 
 --------------------------------------------------------------------------------
 main :: IO ()

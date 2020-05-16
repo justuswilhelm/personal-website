@@ -11,7 +11,7 @@ import           Hakyll               (Compiler, Item,
                                        pandocCompilerWithTransform,
                                        pandocCompilerWithTransformM, replaceAll,
                                        unsafeCompiler, withUrls)
-import           Text.Pandoc          (Format (..), Pandoc, WriterOptions (..))
+import           Text.Pandoc          (WriterOptions (..))
 import           Text.Pandoc.Walk     (walk, walkM)
 
 import           PandocFilterGraphviz (RenderAllOptions (..),

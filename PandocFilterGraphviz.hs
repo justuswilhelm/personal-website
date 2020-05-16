@@ -37,26 +37,20 @@ module PandocFilterGraphviz
   , RenderAllOptions(..)
   ) where
 
-import           Control.Arrow          ((***))
-import           Control.Monad          (join, unless)
 import           Crypto.Hash
 
-import           Data.Byteable          (toBytes)
 import qualified Data.ByteString.Base16 as B16
 import           Data.ByteString.Char8  (ByteString)
 import qualified Data.ByteString.Char8  as C8
 import           Data.Maybe             (fromMaybe)
 
 import qualified Data.Map.Strict        as M
-import           Data.Text.Encoding     as E
 
 import           System.Directory
-import           System.Exit
 import           System.FilePath
-import           System.Process         (readProcess, system)
+import           System.Process         (readProcess)
 
 import           Text.Pandoc
-import           Text.Pandoc.JSON
 
 hexSha3_512 :: ByteString -> String
 hexSha3_512 bs = show (hash bs :: Digest SHA3_512)
@@ -90,7 +84,7 @@ formatToFlag format =
 renderDotLike :: String -> RenderFormat -> FilePath -> String -> IO ()
 renderDotLike cmd format dst src = do
   ensureFileWriteable dst
-  readProcess cmd ["-T", formatToFlag format, "-o", dst] src
+  _ <- readProcess cmd ["-T", formatToFlag format, "-o", dst] src
   return ()
 
 renderDot :: RenderFormat -> FilePath -> String -> IO ()
@@ -107,7 +101,7 @@ data RenderAllOptions = RenderAllOptions
   } deriving (Show)
 
 renderAll :: RenderAllOptions -> Block -> IO Block
-renderAll options cblock@(CodeBlock (id, classes, attrs) content)
+renderAll options cblock@(CodeBlock (blockId, classes, attrs) content)
   | "msc" `elem` classes = do
     let dest = destForTool "mscgen"
     renderMsc format dest content
@@ -126,15 +120,15 @@ renderAll options cblock@(CodeBlock (id, classes, attrs) content)
     image img =
       Para
         [ Image
-            (id, classes, attrs)
+            (blockId, classes, attrs)
             [Str caption]
             ( case urlPrefix options of
                 Just prefix -> prefix </> img
                 Nothing     -> img
             , caption)
         ]
-renderAll pre x = return x
+renderAll _ x = return x
 
 stripHeading :: Block -> Block
-stripHeading cblock@(Header level att content) = Null
-stripHeading x                                 = x
+stripHeading Header {} = Null
+stripHeading x         = x
