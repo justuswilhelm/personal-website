@@ -51,7 +51,7 @@ import           Data.Text.Encoding     as E
 import           System.Directory
 import           System.Exit
 import           System.FilePath
-import           System.Process         (readProcessWithExitCode, system)
+import           System.Process         (readProcess, system)
 
 import           Text.Pandoc
 import           Text.Pandoc.JSON
@@ -92,13 +92,13 @@ ensureFile fp =
 
 renderDot :: String -> FilePath -> IO FilePath
 renderDot src dst =
-  readProcessWithExitCode "dot" ["-Tsvg", "-o" ++ show dst, "-"] src >>
+  readProcess "dot" ["-Tsvg", "-o" ++ dst] src >>
   return dst
 
 -- Here is some msc rendering stuff
 renderMsc :: String -> FilePath -> IO FilePath
 renderMsc src dst =
-  readProcessWithExitCode "mscgen" ["-Tsvg", "-o" ++ show dst, "-"] src >>
+  readProcess "mscgen" ["-Tsvg", "-o" ++ dst] src >>
   return dst
 
 -- and we combine everything into one function
@@ -106,15 +106,13 @@ renderAll :: Block -> IO Block
 renderAll cblock@(CodeBlock (id, classes, attrs) content)
   | "msc" `elem` classes =
     let dest = fileName4Code "mscgen" (T.pack content) (Just "msc")
-     in do ensureFile dest >> writeFile dest content
+     in do ensureFile dest
            img <- renderMsc content dest
-           ensureFile img
            return $ image img
   | "graphviz" `elem` classes =
     let dest = fileName4Code "graphviz" (T.pack content) (Just "dot")
-     in do ensureFile dest >> writeFile dest content
+     in do ensureFile dest
            img <- renderDot content dest
-           ensureFile img
            return $ image img
   | otherwise = return cblock
   where
