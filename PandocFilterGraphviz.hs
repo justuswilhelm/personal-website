@@ -33,6 +33,8 @@
 module PandocFilterGraphviz
   ( renderAll
   , stripHeading
+  , RenderFormat(..)
+  , RenderAllOptions(..)
   ) where
 
 import           Control.Arrow          ((***))
@@ -99,8 +101,12 @@ renderMsc :: RenderFormat -> FilePath -> String -> IO ()
 renderMsc = renderDotLike "mscgen"
 
 -- and we combine everything into one function
-renderAll :: Block -> IO Block
-renderAll cblock@(CodeBlock (id, classes, attrs) content)
+data RenderAllOptions = RenderAllOptions
+  { renderFormat :: RenderFormat
+  } deriving (Show)
+
+renderAll :: RenderAllOptions -> Block -> IO Block
+renderAll options cblock@(CodeBlock (id, classes, attrs) content)
   | "msc" `elem` classes = do
     let dest = destForTool "mscgen"
     renderMsc format dest content
@@ -111,14 +117,14 @@ renderAll cblock@(CodeBlock (id, classes, attrs) content)
     return $ image dest
   | otherwise = return cblock
   where
+    format = renderFormat options
     destForTool toolName = fileName4Code format toolName content
-    format = SVG
     m = M.fromList attrs
     caption = fromMaybe "" (getCaption m)
     getCaption = M.lookup "caption"
     image img =
       Para [Image (id, classes, attrs) [Str caption] ("/" </> img, caption)]
-renderAll x = return x
+renderAll pre x = return x
 
 stripHeading :: Block -> Block
 stripHeading cblock@(Header level att content) = Null

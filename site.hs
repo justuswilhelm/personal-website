@@ -4,7 +4,9 @@
 import           Data.Monoid          (mappend)
 import           Hakyll
 
-import           PandocFilterGraphviz (renderAll, stripHeading)
+import           PandocFilterGraphviz (RenderAllOptions (..),
+                                       RenderFormat (SVG), renderAll,
+                                       stripHeading)
 import           Text.Pandoc          (Format (..), Pandoc, WriterOptions (..))
 import           Text.Pandoc.Walk     (walk, walkM)
 
@@ -133,7 +135,9 @@ customPostPandocCompiler =
   pandocCompilerWithTransformM
     defaultHakyllReaderOptions
     postHakyllWriterOptions
-    (unsafeCompiler . walkM renderAll)
+    (unsafeCompiler . walkM (renderAll fmt))
+  where
+    fmt = RenderAllOptions {renderFormat = SVG}
 
 customTeaserPandocCompiler :: Compiler (Item String)
 customTeaserPandocCompiler =
