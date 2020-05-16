@@ -30,9 +30,13 @@
 --- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 {-# LANGUAGE OverloadedStrings #-}
 
-module PandocFilterGraphviz where
+module PandocFilterGraphviz
+  ( renderAll
+  , stripHeading
+  ) where
 
-import           Control.Monad          (unless)
+import           Control.Arrow          ((***))
+import           Control.Monad          (join, unless)
 import           Crypto.Hash
 
 import           Data.Byteable          (toBytes)
@@ -114,7 +118,8 @@ renderAll cblock@(CodeBlock (id, classes, attrs) content)
            return $ image img
   | otherwise = return cblock
   where
-    toTextPairs = Prelude.map (\(f, s) -> (T.pack f, T.pack s))
+    toTextPairs = Prelude.map $ mapTuple T.pack
+    mapTuple = join (***)
     m = M.fromList $ toTextPairs attrs
     (caption, typedef) = getCaption m
     image img =
