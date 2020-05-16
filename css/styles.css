@@ -38,11 +38,14 @@ article img {
 
 body, p {
   font-family: 'Hepta Slab', serif;
-  text-align: justify;
 }
 
 p {
   line-height: 1.5em;
+}
+
+li, p {
+  text-align: justify;
 }
 
 pre {
