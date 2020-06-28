@@ -35,7 +35,10 @@ jobs:
       - run:
           name: Resolve/Update Dependencies
           command: stack setup
-      - run: stack build
+      - run:
+          name: Build everything
+          command: stack build
+          no_output_timeout: 30m
       - save_cache:
           name: Cache Dependencies
           key: dependencies-{{ checksum "stack.yaml" }}
