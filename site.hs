@@ -41,6 +41,7 @@ main =
         compile $
           C.customPostPandocCompiler >>=
           loadAndApplyTemplate "templates/post.html" Ctx.postCtx >>=
+          saveSnapshot "atom" >>=
           loadAndApplyTemplate "templates/default.html" Ctx.postCtx >>=
           saveSnapshot "content"
       version "teaser" $ do
@@ -85,7 +86,7 @@ main =
                   -- constField "description" "This is the post description"
         posts <-
           fmap (take 10) . recentFirst =<<
-          loadAllSnapshots ("posts/*" .&&. hasVersion "full") "content"
+          loadAllSnapshots ("posts/*" .&&. hasVersion "full") "atom"
         renderAtom feedConfiguration feedCtx posts
 
 --------------------------------------------------------------------------------
