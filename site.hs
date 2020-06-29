@@ -26,27 +26,29 @@ main =
     match "css/*" $ do
       route idRoute
       compile compressCssCompiler
-    match "posts/*" $ do
-      version "pdf" $ do
-        route $ setExtension "pdf"
-        -- todo find a way we can pass the context here
-        compile $ do
-          body@(Item _ _) <- getResourceBody
-          readPandocWith defaultHakyllReaderOptions body >>=
-            C.relativizeUrlsWithCompiler "." >>=
-            C.traverseRenderAll >>=
-            C.writePandocLatexWith body
-      version "full" $ do
-        route $ setExtension "html"
-        compile $
-          C.customPostPandocCompiler >>=
-          loadAndApplyTemplate "templates/post.html" Ctx.postCtx >>=
-          saveSnapshot "atom" >>=
-          loadAndApplyTemplate "templates/default.html" Ctx.postCtx >>=
-          saveSnapshot "content"
-      version "teaser" $ do
-        route $ setExtension "toc-html"
-        compile $ C.customTeaserPandocCompiler >>= saveSnapshot "content"
+    match "posts/*" $ version "html" $ do
+      route $ setExtension "html"
+      compile $
+        C.customPostPandocCompiler >>=
+        loadAndApplyTemplate "templates/post.html" Ctx.postCtx >>=
+        saveSnapshot "atom" >>=
+        loadAndApplyTemplate "templates/default.html" Ctx.postCtx >>=
+        saveSnapshot "content"
+    match "posts/*" $ version "pdf" $ do
+      route $ setExtension "pdf"
+      -- todo find a way we can pass the context here
+      compile $ do
+        body <- getResourceBody
+        readPandocWith defaultHakyllReaderOptions body >>=
+          C.relativizeUrlsWithCompiler "." >>=
+          C.traverseRenderAll >>=
+          C.writePandocLatexWith body
+    match "posts/*" $ version "teaser" $ do
+      -- A little bit hacky, it generates a toc-html file which we don't need
+      -- The only reason we create it is that we want to have some
+      -- post link the we can direct to when showing this in the index
+      route $ setExtension "toc-html"
+      compile $ C.customTeaserPandocCompiler >>= saveSnapshot "content"
     match "index.html" $ do
       route idRoute
       compile $ do
@@ -70,7 +72,16 @@ main =
       compile $ do
         posts <-
           recentFirst =<<
-          loadAllSnapshots ("posts/*" .&&. hasVersion "full") "content"
+          loadAllSnapshots ("posts/*" .&&. hasVersion "html") "content"
+        -- TODO add pdf to sitempa
+        -- postsPdf <-
+        --   recentFirst =<<
+        --   loadAll ("posts/*" .&&. hasVersion "pdf")
+        -- we get this error right now
+        -- [ERROR] Hakyll.Core.Compiler.Require.load:
+        -- posts/2015-09-10-post.md (pdf) (snapshot _final) was found in the
+        -- cache, but does not have the right type: expected [Char] but got
+        -- ByteString
         pages <- loadAll "pages/*"
         let allPosts = return (pages ++ posts)
         let sitemapCtx =
