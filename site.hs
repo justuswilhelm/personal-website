@@ -94,10 +94,9 @@ main =
       route idRoute
       compile $ do
         let feedCtx = Ctx.postCtx `mappend` bodyField "description"
-                  -- constField "description" "This is the post description"
         posts <-
-          fmap (take 10) . recentFirst =<<
-          loadAllSnapshots ("posts/*" .&&. hasVersion "full") "atom"
+          recentFirst =<<
+          loadAllSnapshots ("posts/*" .&&. hasVersion "html") "atom"
         renderAtom feedConfiguration feedCtx posts
 
 --------------------------------------------------------------------------------
