@@ -26,8 +26,7 @@ pageDefaultContext =
 
 postCtx :: Context String
 postCtx =
-  dateField "lastmod" "%Y-%m-%d" `mappend`
-  dateField "date" "%B %e, %Y" `mappend`
+  dateField "lastmod" "%Y-%m-%d" `mappend` dateField "date" "%B %e, %Y" `mappend`
   pageDefaultContext `mappend`
   mapContext replacePdfWithHtml (urlField "pdfUrl")
   where

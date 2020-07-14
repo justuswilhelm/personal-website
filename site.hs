@@ -26,29 +26,33 @@ main =
     match "css/*" $ do
       route idRoute
       compile compressCssCompiler
-    match "posts/*" $ version "html" $ do
-      route $ setExtension "html"
-      compile $
-        C.customPostPandocCompiler >>=
-        loadAndApplyTemplate "templates/post.html" Ctx.postCtx >>=
-        saveSnapshot "atom" >>=
-        loadAndApplyTemplate "templates/default.html" Ctx.postCtx >>=
-        saveSnapshot "content"
-    match "posts/*" $ version "pdf" $ do
-      route $ setExtension "pdf"
+    match "posts/*" $
+      version "html" $ do
+        route $ setExtension "html"
+        compile $
+          C.customPostPandocCompiler >>=
+          loadAndApplyTemplate "templates/post.html" Ctx.postCtx >>=
+          saveSnapshot "atom" >>=
+          loadAndApplyTemplate "templates/default.html" Ctx.postCtx >>=
+          saveSnapshot "content"
+    match "posts/*" $
+      version "pdf" $ do
+        route $ setExtension "pdf"
       -- todo find a way we can pass the context here
-      compile $ do
-        body <- getResourceBody
-        readPandocWith defaultHakyllReaderOptions body >>=
-          C.relativizeUrlsWithCompiler "." >>=
-          C.traverseRenderAll >>=
-          C.writePandocLatexWith body
-    match "posts/*" $ version "teaser" $ do
+        compile $ do
+          body <- getResourceBody
+          readPandocWith defaultHakyllReaderOptions body >>=
+            C.relativizeUrlsWithCompiler "." >>=
+            C.traverseRenderAll >>=
+            C.writePandocLatexWith body
+    match "posts/*" $
+      version "teaser" $
       -- A little bit hacky, it generates a toc-html file which we don't need
       -- The only reason we create it is that we want to have some
       -- post link the we can direct to when showing this in the index
-      route $ setExtension "toc-html"
-      compile $ C.customTeaserPandocCompiler >>= saveSnapshot "content"
+       do
+        route $ setExtension "toc-html"
+        compile $ C.customTeaserPandocCompiler >>= saveSnapshot "content"
     match "index.html" $ do
       route idRoute
       compile $ do
