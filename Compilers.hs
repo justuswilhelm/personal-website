@@ -48,7 +48,9 @@ customPostPandocCompiler =
     postHakyllWriterOptions
     (unsafeCompiler . walkM (renderAll fmt))
   where
-    fmt = RenderAllOptions {urlPrefix = Nothing, renderFormat = SVG}
+    fmt =
+      RenderAllOptions
+        {urlPrefix = Nothing, renderFormat = SVG, embedRendered = True}
 
 customTeaserPandocCompiler :: Compiler (Item String)
 customTeaserPandocCompiler =
@@ -106,7 +108,8 @@ pdfHakyllWriterOptions options template =
 
 traverseRenderAll :: Item Pandoc -> Compiler (Item Pandoc)
 traverseRenderAll =
-  traverse
-    (unsafeCompiler .
-     walkM
-       (renderAll $ RenderAllOptions {urlPrefix = Just "./", renderFormat = EPS}))
+  traverse (unsafeCompiler . walkM (renderAll renderAllOptions))
+  where
+    renderAllOptions =
+      RenderAllOptions
+        {urlPrefix = Just "./", renderFormat = EPS, embedRendered = False}

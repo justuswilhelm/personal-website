@@ -64,10 +64,10 @@ data RenderFormat
   | EPS
   deriving (Show)
 
-fileName4Code :: RenderFormat -> String -> String -> FilePath
+fileName4Code :: RenderFormat -> RenderTool -> String -> FilePath
 fileName4Code format toolName source = filename
   where
-    dirname = toolName ++ "-images"
+    dirname = show toolName ++ "-images"
     shaN = sha source
     extension =
       case format of
@@ -85,37 +85,65 @@ formatToFlag format =
     SVG -> "svg"
     EPS -> "eps"
 
-renderDotLike :: String -> RenderFormat -> FilePath -> String -> IO ()
-renderDotLike cmd format dst src = do
+data RenderTool
+  = Mscgen
+  | Graphviz
+  deriving (Show)
+
+renderToolToCmd :: RenderTool -> String
+renderToolToCmd tool =
+  case tool of
+    Mscgen   -> "mscgen"
+    Graphviz -> "dot"
+
+renderDotLike :: RenderTool -> RenderFormat -> String -> FilePath -> IO FilePath
+renderDotLike renderTool format src dst = do
   ensureFileWriteable dst
   _ <- readProcess cmd ["-T", formatToFlag format, "-o", dst] src
-  return ()
+  return dst
+  where
+    cmd = renderToolToCmd renderTool
 
-renderDot :: RenderFormat -> FilePath -> String -> IO ()
-renderDot = renderDotLike "dot"
-
--- Here is some msc rendering stuff
-renderMsc :: RenderFormat -> FilePath -> String -> IO ()
-renderMsc = renderDotLike "mscgen"
+renderDotLikeEmbed :: RenderTool -> RenderFormat -> String -> IO String
+renderDotLikeEmbed renderTool format =
+  readProcess cmd $ ["-T", formatToFlag format] ++ outputFlag
+  where
+    cmd = renderToolToCmd renderTool
+    outputFlag =
+      case renderTool
+         -- Mscgen is unhappy when -o is not passed
+            of
+        Mscgen   -> ["-o", "-"]
+        Graphviz -> []
 
 -- and we combine everything into one function
 data RenderAllOptions = RenderAllOptions
-  { urlPrefix    :: Maybe String
-  , renderFormat :: RenderFormat
+  { urlPrefix     :: Maybe String
+  , renderFormat  :: RenderFormat
+  , embedRendered :: Bool
   } deriving (Show)
 
 renderAll :: RenderAllOptions -> Block -> IO Block
 renderAll options cblock@(CodeBlock (blockId, classes, attrs) content)
   | "msc" `elem` classes = do
-    let dest = destForTool "mscgen"
-    renderMsc format dest content
-    return $ image dest
+    let dest = destForTool Mscgen
+    destpath <- renderDotLike Mscgen format content dest
+    source <- renderDotLikeEmbed Mscgen format content
+    return $
+      if embed
+        then embedImage source
+        else image destpath
   | "graphviz" `elem` classes = do
-    let dest = destForTool "graphviz"
-    renderDot format dest content
-    return $ image dest
+    let dest = destForTool Graphviz
+    destpath <- renderDotLike Graphviz format content dest
+    source <- renderDotLikeEmbed Graphviz format content
+    return $
+      if embed
+        then embedImage source
+        else image destpath
   | otherwise = return cblock
   where
+    embed = embedRendered options
     format = renderFormat options
     destForTool toolName = fileName4Code format toolName content
     m = M.fromList attrs
@@ -131,6 +159,7 @@ renderAll options cblock@(CodeBlock (blockId, classes, attrs) content)
                 Nothing     -> img
             , caption)
         ]
+    embedImage = RawBlock (Format "html")
 renderAll _ x = return x
 
 relativizePandocUrls :: String -> Inline -> Inline
