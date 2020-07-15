@@ -11,16 +11,7 @@ import qualified Contexts    as Ctx
 main :: IO ()
 main =
   hakyll $ do
-    match "static/*" $ do
-      route idRoute
-      compile copyFileCompiler
-    match "images/*" $ do
-      route idRoute
-      compile copyFileCompiler
-    match "mscgen-images/*.svg" $ do
-      route idRoute
-      compile copyFileCompiler
-    match "graphviz-images/*.svg" $ do
+    match "static/**" $ do
       route idRoute
       compile copyFileCompiler
     match "css/*" $ do
