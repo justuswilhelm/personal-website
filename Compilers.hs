@@ -17,8 +17,9 @@ import           Hakyll               (Compiler, ContextField (..), Item (..),
                                        pandocCompilerWithTransformM, replaceAll,
                                        unContext, unsafeCompiler,
                                        unsafeCompiler, withUrls, withUrls)
-import           Text.Pandoc          (Pandoc, WriterOptions (..), runIO,
-                                       writeLaTeX)
+import           Text.Pandoc          (HTMLMathMethod (MathJax), Pandoc,
+                                       WriterOptions (..), pandocExtensions,
+                                       runIO, writeLaTeX)
 import           Text.Pandoc.PDF      (makePDF)
 import           Text.Pandoc.Walk     (walk, walkM)
 
@@ -33,12 +34,13 @@ postHakyllWriterOptions =
   defaultHakyllWriterOptions
     { writerSectionDivs = True
     , writerTableOfContents = True
-    , writerColumns = 120
     , writerTemplate =
         Just
           "<div id=\"TOC\">$toc$</div>\n<div id=\"markdownBody\">$body$</div>"
     , writerTOCDepth = 4
     , writerHtmlQTags = True
+    , writerExtensions = pandocExtensions
+    , writerHTMLMathMethod = MathJax ""
     }
 
 customPostPandocCompiler :: Compiler (Item String)
