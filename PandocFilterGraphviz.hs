@@ -38,20 +38,21 @@ module PandocFilterGraphviz
   , relativizePandocUrls
   ) where
 
-import           Crypto.Hash
+import Crypto.Hash
 
 import qualified Data.ByteString.Base16 as B16
-import           Data.ByteString.Char8  (ByteString)
-import qualified Data.ByteString.Char8  as C8
-import           Data.Maybe             (fromMaybe)
+import Data.ByteString.Char8 (ByteString)
+import qualified Data.ByteString.Char8 as C8
+import Data.Maybe (fromMaybe)
+import qualified Data.Text as T
 
-import qualified Data.Map.Strict        as M
+import qualified Data.Map.Strict as M
 
-import           System.Directory
-import           System.FilePath
-import           System.Process         (readProcess)
+import System.Directory
+import System.FilePath
+import System.Process (readProcess)
 
-import           Text.Pandoc
+import Text.Pandoc
 
 hexSha3_512 :: ByteString -> String
 hexSha3_512 bs = show (hash bs :: Digest SHA3_512)
@@ -64,11 +65,11 @@ data RenderFormat
   | EPS
   deriving (Show)
 
-fileName4Code :: RenderFormat -> RenderTool -> String -> FilePath
+fileName4Code :: RenderFormat -> RenderTool -> T.Text -> FilePath
 fileName4Code format toolName source = filename
   where
     dirname = show toolName ++ "-images"
-    shaN = sha source
+    shaN = sha $ T.unpack source
     extension =
       case format of
         SVG -> ".svg"
@@ -93,13 +94,13 @@ data RenderTool
 renderToolToCmd :: RenderTool -> String
 renderToolToCmd tool =
   case tool of
-    Mscgen   -> "mscgen"
+    Mscgen -> "mscgen"
     Graphviz -> "dot"
 
-renderDotLike :: RenderTool -> RenderFormat -> String -> FilePath -> IO FilePath
+renderDotLike :: RenderTool -> RenderFormat -> T.Text -> FilePath -> IO FilePath
 renderDotLike renderTool format src dst = do
   ensureFileWriteable dst
-  _ <- readProcess cmd ["-T", formatToFlag format, "-o", dst] src
+  _ <- readProcess cmd ["-T", formatToFlag format, "-o", dst] $ T.unpack src
   return dst
   where
     cmd = renderToolToCmd renderTool
@@ -113,34 +114,36 @@ renderDotLikeEmbed renderTool format =
       case renderTool
          -- Mscgen is unhappy when -o is not passed
             of
-        Mscgen   -> ["-o", "-"]
+        Mscgen -> ["-o", "-"]
         Graphviz -> []
 
 -- and we combine everything into one function
-data RenderAllOptions = RenderAllOptions
-  { urlPrefix     :: Maybe String
-  , renderFormat  :: RenderFormat
-  , embedRendered :: Bool
-  } deriving (Show)
+data RenderAllOptions =
+  RenderAllOptions
+    { urlPrefix :: Maybe String
+    , renderFormat :: RenderFormat
+    , embedRendered :: Bool
+    }
+  deriving (Show)
 
 renderAll :: RenderAllOptions -> Block -> IO Block
 renderAll options cblock@(CodeBlock (blockId, classes, attrs) content)
   | "msc" `elem` classes = do
     let dest = destForTool Mscgen
     destpath <- renderDotLike Mscgen format content dest
-    source <- renderDotLikeEmbed Mscgen format content
+    source <- renderDotLikeEmbed Mscgen format $ T.unpack content
     return $
       if embed
-        then embedImage source
-        else image destpath
+        then embedImage $ T.pack source
+        else image $ T.pack destpath
   | "graphviz" `elem` classes = do
     let dest = destForTool Graphviz
     destpath <- renderDotLike Graphviz format content dest
-    source <- renderDotLikeEmbed Graphviz format content
+    source <- renderDotLikeEmbed Graphviz format $ T.unpack content
     return $
       if embed
-        then embedImage source
-        else image destpath
+        then embedImage $ T.pack source
+        else image $ T.pack destpath
   | otherwise = return cblock
   where
     embed = embedRendered options
@@ -149,24 +152,25 @@ renderAll options cblock@(CodeBlock (blockId, classes, attrs) content)
     m = M.fromList attrs
     caption = fromMaybe "" (getCaption m)
     getCaption = M.lookup "caption"
+    image :: T.Text -> Block
     image img =
       Para
         [ Image
             (blockId, classes, attrs)
             [Str caption]
             ( case urlPrefix options of
-                Just prefix -> prefix </> img
-                Nothing     -> img
+                Just prefix -> T.pack $ prefix </> T.unpack img
+                Nothing -> img
             , caption)
         ]
     embedImage = RawBlock (Format "html")
 renderAll _ x = return x
 
-relativizePandocUrls :: String -> Inline -> Inline
+relativizePandocUrls :: T.Text -> Inline -> Inline
 relativizePandocUrls with (Image a b (url, title)) =
-  Image a b (with ++ url, title)
+  Image a b (T.append with url, title)
 relativizePandocUrls _ x = x
 
 stripHeading :: Block -> Block
 stripHeading Header {} = Null
-stripHeading x         = x
+stripHeading x = x

@@ -10,13 +10,14 @@ executable site
     Compilers
     Contexts
   build-depends:    base == 4.*
-                  , hakyll == 4.12.*
+                  , hakyll >= 4
                   , base16-bytestring
                   , byteable
                   , bytestring
                   , containers
                   , cryptonite
                   , directory
+                  , doctemplates
                   , filepath
                   , pandoc
                   , pandoc-types

@@ -8,48 +8,83 @@ module Compilers
   , traverseRenderAll
   ) where
 
-import           Data.ByteString.Lazy (ByteString)
+import Data.ByteString.Lazy (ByteString)
 
-import           Hakyll               (Compiler, ContextField (..), Item (..),
-                                       defaultHakyllReaderOptions,
-                                       defaultHakyllWriterOptions, makeItem,
-                                       pandocCompilerWithTransform,
-                                       pandocCompilerWithTransformM, replaceAll,
-                                       unContext, unsafeCompiler,
-                                       unsafeCompiler, withUrls, withUrls)
-import           Text.Pandoc          (HTMLMathMethod (MathJax), Pandoc,
-                                       WriterOptions (..), pandocExtensions,
-                                       runIO, writeLaTeX)
-import           Text.Pandoc.PDF      (makePDF)
-import           Text.Pandoc.Walk     (walk, walkM)
+import qualified Data.Map as M
+import qualified Data.Text as T
+import Hakyll
+  ( Compiler
+  , ContextField(..)
+  , Item(..)
+  , defaultHakyllReaderOptions
+  , defaultHakyllWriterOptions
+  , makeItem
+  , pandocCompilerWithTransform
+  , pandocCompilerWithTransformM
+  , replaceAll
+  , unContext
+  , unsafeCompiler
+  , unsafeCompiler
+  , withUrls
+  , withUrls
+  )
+import Text.DocTemplates
+  ( Context(..)
+  , Template
+  , Val(..)
+  , compileTemplate
+  , compileTemplateFile
+  , toVal
+  )
+import Text.Pandoc
+  ( HTMLMathMethod(MathJax)
+  , Pandoc
+  , WriterOptions(..)
+  , pandocExtensions
+  , runIO
+  , runPure
+  , runWithDefaultPartials
+  , writeLaTeX
+  )
+import Text.Pandoc.PDF (makePDF)
+import Text.Pandoc.Walk (walk, walkM)
 
-import           PandocFilterGraphviz (RenderAllOptions (..), RenderFormat (..),
-                                       relativizePandocUrls, renderAll,
-                                       stripHeading)
+import PandocFilterGraphviz
+  ( RenderAllOptions(..)
+  , RenderFormat(..)
+  , relativizePandocUrls
+  , renderAll
+  , stripHeading
+  )
 
-import           Contexts             (postCtx)
+import Contexts (postCtx)
 
-postHakyllWriterOptions :: WriterOptions
-postHakyllWriterOptions =
+makePostHakyllWriterOptions :: Template T.Text -> WriterOptions
+makePostHakyllWriterOptions template =
   defaultHakyllWriterOptions
     { writerSectionDivs = True
     , writerTableOfContents = True
-    , writerTemplate =
-        Just
-          "<div id=\"TOC\">$toc$</div>\n<div id=\"markdownBody\">$body$</div>"
+    , writerTemplate = Just template
     , writerTOCDepth = 4
     , writerHtmlQTags = True
     , writerExtensions = pandocExtensions
-    , writerHTMLMathMethod = MathJax ""
+    , writerHTMLMathMethod = MathJax $ T.pack ""
     }
 
 customPostPandocCompiler :: Compiler (Item String)
-customPostPandocCompiler =
+customPostPandocCompiler = do
+  let template =
+        either error id $
+        either (error . show) id $
+        runPure $ runWithDefaultPartials $compileTemplate "toc" templateText
   pandocCompilerWithTransformM
     defaultHakyllReaderOptions
-    postHakyllWriterOptions
+    (makePostHakyllWriterOptions template)
     (unsafeCompiler . walkM (renderAll fmt))
   where
+    templateText =
+      T.pack
+        "<div id=\"TOC\">$toc$</div>\n<div id=\"markdownBody\">$body$</div>"
     fmt =
       RenderAllOptions
         {urlPrefix = Nothing, renderFormat = SVG, embedRendered = True}
@@ -72,40 +107,53 @@ writePandocLatexWith item (Item _ doc) = do
   author <- getStringFromContext "authorName"
   title <- getStringFromContext "title"
   date <- getStringFromContext "lastmod"
-  let variables = [("author", author), ("title", title), ("date", date)]
+  let variables =
+        [ (T.pack "author", toVal author)
+        , (T.pack "title", toVal title)
+        , (T.pack "date", toVal date)
+        ]
   pdfString <-
     unsafeCompiler $ do
-      template <- readFile "templates/post.tex"
-      let options = pdfHakyllWriterOptions variables template
-      pdfOrError <- runIO $ makePDF "xelatex" [] writeLaTeX options doc
-      -- Homework: Find out why this is a nested Either
-      case pdfOrError of
-        Left err -> error $ "Main.writePandocLatexWith:" ++ show err
-        Right success ->
-          case success of
-            Left err  -> error $ "Main.writePandocLatexWith:" ++ show err
-            Right pdf -> return pdf
+      compiledTemplate <- compileTemplateFile templatePath
+      case compiledTemplate of
+        Left err -> makeErrorString err title
+        Right template -> do
+          let options = pdfHakyllWriterOptions variables template
+          pdfOrError <- runIO $ makePDF "xelatex" [] writeLaTeX options doc
+          -- Homework: Find out why this is a nested Either
+          case pdfOrError of
+            Left err -> makeErrorString err title
+            Right success ->
+              case success of
+                Left err -> makeErrorString err title
+                Right pdf -> return pdf
   makeItem pdfString
   where
-    getString (StringField s) = return s
-    getString (ListField _ _) = return ""
-    getStringFromContext s = unContext postCtx s [] item >>= getString
+    makeErrorString err title =
+      error $ "Main.writePandocLatexWith: " ++ show err ++ T.unpack title
+    getString (StringField s) = return $ T.pack s
+    getString (ListField _ _) = return $ T.pack ""
+    getString EmptyField = error "wtf"
+    getStringFromContext s = Hakyll.unContext postCtx s [] item >>= getString
+    templatePath = "templates/post.tex"
 
 relativizeUrlsWithCompiler :: String -> Item Pandoc -> Compiler (Item Pandoc)
 relativizeUrlsWithCompiler _ item =
-  return $ fmap (walk $ relativizePandocUrls ".") item
+  return $ fmap (walk $ relativizePandocUrls $ T.pack ".") item
 
-pdfHakyllWriterOptions :: [(String, String)] -> String -> WriterOptions
+pdfHakyllWriterOptions ::
+     [(T.Text, Val T.Text)] -> Template T.Text -> WriterOptions
 pdfHakyllWriterOptions options template =
   defaultHakyllWriterOptions
     { writerSectionDivs = True
     , writerTableOfContents = True
     , writerTOCDepth = 4
     , writerTemplate = Just template
-    , writerVariables = latexVariables
+    -- is this some typeclass magic? XXX
+    , writerVariables = Context $ M.fromList latexVariables
     }
   where
-    latexVariables :: [(String, String)]
+    latexVariables :: [(T.Text, Val T.Text)]
     latexVariables = options
 
 traverseRenderAll :: Item Pandoc -> Compiler (Item Pandoc)
