@@ -7,7 +7,7 @@ module Contexts
   , teaserCtx
   ) where
 
-import           Hakyll
+import Hakyll
 
 baseUrl :: String
 baseUrl = "https://www.justus.pw"

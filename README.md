@@ -14,3 +14,17 @@ stack exec site watch
 
 ## Requirements
 - [Stack](https://docs.haskellstack.org/en/stable/README/)
+
+## Indentation
+
+```
+stack install hindent
+stack exec hindent *.hs
+```
+
+## Linting
+
+```
+stack install hlint
+stack exec hlint
+```
