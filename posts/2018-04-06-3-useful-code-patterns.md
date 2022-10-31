@@ -54,7 +54,6 @@ of validations and input data verifications. In our imaginary example, the last
 step — updating user account data — can only happen if all the previous steps
 execute correctly.
 
-
 ```python
 def update_user(user, new_data, auth):
     if request.has_perm(auth, 'update_user'):
@@ -83,7 +82,6 @@ An alternative approach would be to return early if any of the assertions fall
 through. Check out the snippet below. Here we check each individual
 precondition and return early if it's not satisfied.
 
-
 ```python
 def update_user(user, new_data, auth):
     if not request.has_perm(auth, 'update_user'):
@@ -91,10 +89,10 @@ def update_user(user, new_data, auth):
 
     if not new_data.validate():
         return "Could not validate"
-    
+
     if not user.data.update(new_data):
         return "Could not update"
-        
+
     return "Success"
 ```
 
@@ -102,17 +100,14 @@ It's tremendously useful to express complicated sets of preconditions in a s
 flat a way as possible. This allows the reader to quickly scan up and down and
 see where the actual processing of information happens.
 
-In our `update_user()` function, the actual step lies in `if not
-user.data.update(new_data)` and you can find it without having to scan left and
+In our `update_user()` function, the actual step lies in `if not user.data.update(new_data)` and you can find it without having to scan left and
 right.
-
 
 # 2. Precise Exceptions
 
 Another thing that took me a while to realize is the importance of being
 specific in error handling. For example, if we take code that reads and
 processes sensor data, we can imagine a function like the following:
-
 
 ```python
 def process():
@@ -128,7 +123,6 @@ when time is running out, finding exactly where and how failures in an API call
 could happen becomes a low-priority task. And finding the right exception type
 is often difficult, since you might want to be able to handle several exception
 types correctly. It would typically look like this:
-
 
 ```python
 def process():
@@ -146,7 +140,6 @@ that it's too easy to forget 6 months later which of the 3 lines after `try:`
 could actually raise SensorError. Since we know that only
 `receive_sensor_data()` can raise this exception, we readjust our code. Take a
 look and see what has improved.
-
 
 ```python
 def process():
@@ -181,7 +174,6 @@ the failure modes of a piece of code. This matters if the same failing function
 is used in another block of code somewhere else. A pattern we often see is the
 following:
 
-
 ```python
 def process():
     try:
@@ -198,7 +190,6 @@ libraries you're using. It might take you 2 weeks to find out that
 `receive_sensor_data()` will raise the exception `SensorError` and nothing
 else. You can share this knowledge immediately by precisely specifying this
 exception class in the `except:` block.
-
 
 ```python
 def process():
@@ -217,7 +208,6 @@ properly and a `ValueError` is raised. By specifying that the exception
 handling should only take place for `SomethingComplexException`, you won't
 accidentally bury this issue and render your program state invalid.
 
-
 # 3. Use Generators
 
 Generators in Python are incredibly useful. A generator is a piece of
@@ -225,12 +215,11 @@ suspendible code that executes until a `yield` statement is encountered. The
 execution can be continued by calling `next()` on it in Python. We typically
 use a generator like this:
 
-
 ```python
 def generator():
     for i in range(10):
         yield i * 2
-        
+
 g = generator()
 ```
 
@@ -241,12 +230,11 @@ generator. More specifically, this means a generator can't return values
 directly to its caller. If we look at the contents of `g`, we will see what
 `generator()` returns.
 
-
 ```python
 g
 ```
 
-__Output:__
+**Output:**
 
 ```
 <generator object generator at 0x10574ed00>
@@ -255,12 +243,11 @@ __Output:__
 We can continue the execution of the generator and retrieve the first value it
 `yield`s by using `next()` on it:
 
-
 ```python
 next(g)
 ```
 
-__Output:__
+**Output:**
 
 ```
 0
@@ -269,12 +256,11 @@ __Output:__
 As we can see, this is nothing more than `i * 2` for `i = 0`. We can call it
 one more time and retrieve the next value:
 
-
 ```python
 next(g)
 ```
 
-__Output:__
+**Output:**
 
 ```
 2
@@ -282,13 +268,12 @@ __Output:__
 
 We can also take a shortcut here and easily retrieve all the items at once:
 
-
 ```python
 l = list(generator())
 l
 ```
 
-__Output:__
+**Output:**
 
 ```
 [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
@@ -301,13 +286,12 @@ After that, all the individual items that were retrieved are put into a list.
 This can also be done with `tuple()`. In that case, the resulting object will
 be a `tuple`, not a `list`:
 
-
 ```python
 t = tuple(generator())
 t
 ```
 
-__Output:__
+**Output:**
 
 ```
 (0, 2, 4, 6, 8, 10, 12, 14, 16, 18)
@@ -316,7 +300,6 @@ __Output:__
 So we immediately see that generators offer a lot of flexibility. As a more
 complicated example, let's consider a `get_plots()` function that goes through
 a list of items, then generates and returns a list of plots to the caller:
-
 
 ```python
 def get_plots(items):
@@ -341,7 +324,6 @@ In order to use `get_plots()`, you'd call it as follows:
 If we think back to the previous generator example, we can take a productive
 shortcut when defining `get_plots`:
 
-
 ```python
 def get_plots(items):
     for item in items:
@@ -365,7 +347,6 @@ We can also skip storing the results and process them further instead. For
 example, if we want to draw the plots, we can imagine creating a `draw_plots()`
 function, like so:
 
-
 ```python
 def draw_plots(items):
     for plot in items:
@@ -382,4 +363,3 @@ like so:
 >>> draw_plots(plots)
 ...
 ```
-

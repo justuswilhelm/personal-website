@@ -34,16 +34,16 @@ move on. Sometimes the current phase requires more work. Understanding this
 only comes with experience and this knowledge can only be based on a lot of
 trial-and-error. The four phases for data science projects are:
 
-- __Strategy__: Understanding what the client needs
-- __Exploration__: Knowing what can and can't be done
-- __Development__: Creating a shippable solution
-- __Maintenance__: Maintaining the shipped solution
+- **Strategy**: Understanding what the client needs
+- **Exploration**: Knowing what can and can't be done
+- **Development**: Creating a shippable solution
+- **Maintenance**: Maintaining the shipped solution
 
 I will now describe each phase in further detail.
 
 # Strategy (Phase 1)
 
-The __strategy__ phase is about getting to know what your client does, what his
+The **strategy** phase is about getting to know what your client does, what his
 business problems are that you can specifically solve and whether they can be
 solved by you. This will typically last 1 week. In this phase, the following
 activities will take place:
@@ -72,7 +72,7 @@ the project will be.
 # Exploration (Phase 2)
 
 After having established what particular problem you want to solve, the
-feasibility of solving it needs to be understood further in the __exploration__
+feasibility of solving it needs to be understood further in the **exploration**
 phase. This can take up to two weeks, as techniques and methods need to be
 evaluated and presented to the client so that a sensible choice for developing
 the actual solution can be made. In this phase a data source that can help
@@ -95,7 +95,7 @@ feel of how the end solution can look like.
 
 # Engineering (Phase 3)
 
-The __engineering__ phase is dedicated to the nitty-gritty of software
+The **engineering** phase is dedicated to the nitty-gritty of software
 development. After having established that you are working on the right
 solution, you will now concentrate your efforts on making this solution as good
 as possible. This can range from simple API integration work to performing a

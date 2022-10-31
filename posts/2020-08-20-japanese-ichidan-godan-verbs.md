@@ -48,14 +48,14 @@ Conjugation is messy.
 German, a heavily inflecting language, with a reputation for precision and
 rigor isn't any better. Yes, once you know sehen/sah/gesehen, you're closer to
 the goal, but now you need to know how to procure singular and plural, and
-third person plural, and then in passive, and __Konjunktiv II__ (usually called
+third person plural, and then in passive, and **Konjunktiv II** (usually called
 subjunctive), and so on.
 
 And for the record, I only vaguely know how to deliberately use the Konjunktiv
 II in German, despite it being my native language.
 
-Many more languages have their complicated __edge cases__ and __irregular
-conjugations__, so there is a lot of _fun_ to be had conjugating verbs.
+Many more languages have their complicated **edge cases** and **irregular
+conjugations**, so there is a lot of _fun_ to be had conjugating verbs.
 
 I've noticed something interesting about how JFL learners learn grammar, and
 how JNL speakers experience learn the grammar of their own language. One of
@@ -63,8 +63,8 @@ those differences is how conjugation is taught.
 
 # Japanese Conjugation Classes
 
-Japanese like many other languages has the concept of so called __verb
-classes__. In Japanese grammar parlance, these are called N-dan. N here is the
+Japanese like many other languages has the concept of so called **verb
+classes**. In Japanese grammar parlance, these are called N-dan. N here is the
 class number and can be a 1, 2, 4, or 5. And since we are counting in Japanese,
 we would say ichidan, nidan, yodan, and godan.
 
@@ -80,18 +80,19 @@ answer.
 
 The so called [Gojūon](https://en.wikipedia.org/wiki/Goj%C5%ABon) table has
 exactly five rows (five dan), when read from top to bottom, and produces all
-possible Japanese kana.  The five rows correspond to each vowel used in Modern
-Japanese, __a__, __i__, __u__, __e__ and __o__. N-dan then will simply indicate
+possible Japanese kana. The five rows correspond to each vowel used in Modern
+Japanese, **a**, **i**, **u**, **e** and **o**. N-dan then will simply indicate
 how many of those vowels will be used when conjugating a specific verb. But
 more on that later.
 
-|Other |W-     |R-     |Y-     |M-     |H-     |N-     |T-      |S-      |K-     |$$\emptyset$$|Vowel|
-| :--- | :---- | :---- | :---- | :---- | :---- | :---- | :----- | :----- | :---- | :---------- | :-- |
-|ん (n)|わ (wa)|ら (ra)|や (ya)|ま (ma)|は (ha)|な (na)|た (ta) |さ (sa) |か (ka)|あ (a)       |a    |
-|      |ゐ (wi)|り (ri)|       |み (mi)|ひ (hi)|に (ni)|ち (chi)|し (shi)|き (ki)|い (i)       |i    |
-|      |       |る (ru)|ゆ (yu)|む (mu)|ふ (fu)|ぬ (nu)|つ (tsu)|す (su) |く (ku)|う (u)       |u    |
-|      |ゑ (we)|れ (re)|       |め (me)|へ (he)|ね (ne)|て (te) |せ (se) |け (ke)|え (e)       |e    |
-|      |を (wo)|ろ (ro)|よ (yo)|も (mo)|ほ (ho)|の (no)|と (to) |そ (so) |こ (ko)|お (o)       |o    |
+| Other  | W-      | R-      | Y-      | M-      | H-      | N-      | T-       | S-       | K-      | $$\emptyset$$ | Vowel |
+| :----- | :------ | :------ | :------ | :------ | :------ | :------ | :------- | :------- | :------ | :------------ | :---- |
+| ん (n) | わ (wa) | ら (ra) | や (ya) | ま (ma) | は (ha) | な (na) | た (ta)  | さ (sa)  | か (ka) | あ (a)        | a     |
+|        | ゐ (wi) | り (ri) |         | み (mi) | ひ (hi) | に (ni) | ち (chi) | し (shi) | き (ki) | い (i)        | i     |
+|        |         | る (ru) | ゆ (yu) | む (mu) | ふ (fu) | ぬ (nu) | つ (tsu) | す (su)  | く (ku) | う (u)        | u     |
+|        | ゑ (we) | れ (re) |         | め (me) | へ (he) | ね (ne) | て (te)  | せ (se)  | け (ke) | え (e)        | e     |
+|        | を (wo) | ろ (ro) | よ (yo) | も (mo) | ほ (ho) | の (no) | と (to)  | そ (so)  | こ (ko) | お (o)        | o     |
+
 : Gojūon table (with Hiragana and Rōmaji)
 
 # How I learned Japanese Conjugation
@@ -105,7 +106,7 @@ target audiences might be received different information.
 Of course, as a diligent student of Japanese grammar, I have previously tried
 my best to memorize my _dans_. The way it was taught to me was:
 
-> There are __exactly__ two verb classes. 一段 (ichidan) and 五段 (godan)
+> There are **exactly** two verb classes. 一段 (ichidan) and 五段 (godan)
 > conjugation. And some する(suru) and くる(kuru) edge cases.
 
 Simple enough, right? Sure beats learning Russian conjugation. In my history as
@@ -116,8 +117,8 @@ Ichidan verbs are all those, that end on a "ru", and godan are those that do
 not. Let's, for a second, ignore the fact that some godan verbs end on a る but
 are conjugated like ichidan verbs.
 
-Sometimes, ichidan verbs are also called __consonant-stem__ verbs, and godan
-verbs are called __vowel-stem__ verbs. There is no limit how creatively
+Sometimes, ichidan verbs are also called **consonant-stem** verbs, and godan
+verbs are called **vowel-stem** verbs. There is no limit how creatively
 teachers seem to name Japanese verb conjugation, and in the wild, one might
 also encounter group I/II verbs. Either way you call it, verb classes are being
 treated as an _a_ or _b_ binary concept.
@@ -146,6 +147,7 @@ which seem to be the usual way to describe verb conjugations.
 | Attributive | 食べ (tabe)     | 書け (kake)               | え          |
 | Conditional | 食べ (tabe)     | 書け (kake)               | え          |
 | Imperative  | 食べ (tabe)     | 書こ (kake)               | え          |
+
 : Conjugation of 食べる (taberu, ichidan) and 書く (kaku, godan)
 
 Ichidan verb conjugation, like with 食べる, is extremely straightforward.
@@ -283,15 +285,15 @@ ichidan and godan? We will start by listing all 9 classes of conjugation in
 LMJ. These are the classes that are taught in kokugo class in the Japanese
 school system.
 
-- 四段 (yodan), also called __quadrigrade__
-- 上一段 (kamiichidan), also called __upper monograde__
-- 上二段 (kaminidan), also called __upper bigrade__
-- 下一段 (shimoichidan), also called __lower monograde__
-- 下二段 (shimonidan), also called __lower bigrade__
-- カ行変格活用 (kagyōhenkakukatsuyō), also called __k-irregular__
-- サ行変格活用 (sagyōhenkakukatsuyō), also called __s-irregular__
-- ナ行変格活用 (nagyōhenkakukatsuyō), also called __n-irregular__
-- ラ行変格活用 (ragyōhenkakukatsuyō), also called __r-irregular__
+- 四段 (yodan), also called **quadrigrade**
+- 上一段 (kamiichidan), also called **upper monograde**
+- 上二段 (kaminidan), also called **upper bigrade**
+- 下一段 (shimoichidan), also called **lower monograde**
+- 下二段 (shimonidan), also called **lower bigrade**
+- カ行変格活用 (kagyōhenkakukatsuyō), also called **k-irregular**
+- サ行変格活用 (sagyōhenkakukatsuyō), also called **s-irregular**
+- ナ行変格活用 (nagyōhenkakukatsuyō), also called **n-irregular**
+- ラ行変格活用 (ragyōhenkakukatsuyō), also called **r-irregular**
 
 To gain a better understanding, we will first take a look at the superficial
 differences between what we've learned so far on Modern Japanese conjugation
@@ -312,13 +314,13 @@ Then, LMJ conjugation has four irregular conjugation classes, that are each
 named after a consonant: k, s, n and r. These conjugation classes contain words
 such as
 
-- 来る (kuru), "to come" is __k-irregular__
-- 為 (su), "to do" is __s-irregular__
-- 愛す (aisu), "to love" is __s-irregular__
-- 死ぬ (shinu), "to die" is __n-irregular__
-- 往ぬ (inu), "to go home" is __n-irregular__
-- あり (ari), "to be" is __r-irregular__
-- 侍り (haberi), "to serve" is __r-irregular__
+- 来る (kuru), "to come" is **k-irregular**
+- 為 (su), "to do" is **s-irregular**
+- 愛す (aisu), "to love" is **s-irregular**
+- 死ぬ (shinu), "to die" is **n-irregular**
+- 往ぬ (inu), "to go home" is **n-irregular**
+- あり (ari), "to be" is **r-irregular**
+- 侍り (haberi), "to serve" is **r-irregular**
 
 Modern Japanese verbs has less irregular conjugation, but these verbs are still
 around in some form or another. 来る (kuru) and 死ぬ (shinu), for example,
@@ -353,6 +355,7 @@ verb, we will choose our trusty 書く (kaku) again.
 | Attributive | 書く (kaku) | う          |
 | Realis      | 書け (kake) | え          |
 | Imperative  | 書け (kake) | え          |
+
 : LMJ Conjugation of 書く
 
 Note how the realis (已然形) in LMJ has become the conditional (仮定形）in
@@ -378,6 +381,7 @@ up), which is the old form of 起きる (okiru).
 | Attributive | 起くる (okuru) | う          |
 | Realis      | 起くれ (okure) | う          |
 | Imperative  | 起き (oki)     | い          |
+
 : LMJ Conjugation of 起く
 
 And to give the _classical_ response to our conjugation of 食べる (taberu)
@@ -393,6 +397,7 @@ vowels _e_ and _u_.
 | Attributive | 食ぶる (taburu) | う          |
 | Realis      | 食ぶれ (tabure) | う          |
 | Imperative  | 食べよ (tabeyo) | え          |
+
 : LMJ Conjugation of 起く
 
 Here, we see that the _u_ part of the conjugation remains unchanged, when
@@ -433,11 +438,11 @@ Wikipedia on Japanese grammar, since it used some questionable phrasings on the
 exact nature of who is [learning the
 grammar](https://ja.wikipedia.org/w/index.php?title=%E4%B8%8A%E4%B8%80%E6%AE%B5%E6%B4%BB%E7%94%A8&oldid=76809213):
 
-> 外国人を対象にした日本語教育においては下一段活用とともに｢グループ2｣と呼ばれる。
+> 外国人を対象にした日本語教育においては下一段活用とともに｢グループ 2｣と呼ばれる。
 
 Which translates to
 
-> Japanese language education targeted at __foreigners__ calls it together with
+> Japanese language education targeted at **foreigners** calls it together with
 > lower monograde conjugation "Group 2".
 
 To which I have to say:

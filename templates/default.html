@@ -1,32 +1,36 @@
 ---
 title: Home
 ---
-<!doctype HTML>
+
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="$authorName$">
-    <title>
-      $pageTitle$ - $title$
-    </title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="$authorName$" />
+    <title>$pageTitle$ - $title$</title>
+    <link rel="alternate" href="$baseUrl$$url$" hreflang="en" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <link
       rel="alternate"
-      href="$baseUrl$$url$"
-      hreflang="en">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="$baseUrl$/atom.xml">
-    <link href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap" rel="stylesheet">
-    <script type="text/javascript" async
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
+      type="application/atom+xml"
+      title="Atom 0.3"
+      href="$baseUrl$/atom.xml"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Hepta+Slab&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
+    ></script>
   </head>
   <body>
     $partial("templates/nav.html")$
-    <div class="container">
-      $body$
-    </div>
+    <div class="container">$body$</div>
     $partial("templates/footer.html")$
   </body>
 </html>

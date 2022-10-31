@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  },
+  "prettier": {},
+  "name": "personal-website",
+  "description": "This is my [personal website](https://www.justus.pw). It is made in [Hakyll](https://jaspervdj.be/hakyll/).",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "prettier --ignore-path .gitignore --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justuswilhelm/personal-website.git"
+  },
+  "author": "Justus Perlwitz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/justuswilhelm/personal-website/issues"
+  },
+  "homepage": "https://github.com/justuswilhelm/personal-website#readme"
+}

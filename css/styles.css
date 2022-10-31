@@ -2,7 +2,7 @@
 /* This will prevent the code snippets from looking strange on my iphone */
 @media (max-width: 600px) {
   .sourceCode {
-    -webkit-text-size-adjust:none;
+    -webkit-text-size-adjust: none;
   }
 }
 
@@ -18,27 +18,31 @@
   }
 }
 
-article table, article pre {
+article table,
+article pre {
   display: block;
   overflow-x: scroll;
 }
 
-article img, article svg {
+article img,
+article svg {
   display: block;
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
 }
 
-body, p {
-  font-family: 'Hepta Slab', serif;
+body,
+p {
+  font-family: "Hepta Slab", serif;
 }
 
 p {
   line-height: 1.5em;
 }
 
-li, p {
+li,
+p {
   text-align: justify;
 }
 
@@ -263,4 +267,3 @@ code span.wa {
   font-style: italic;
 }
 /* Warning */
-
