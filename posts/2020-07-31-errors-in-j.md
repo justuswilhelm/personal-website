@@ -136,8 +136,7 @@ Errors I typically encounter with J are (ranked by how vexing they are):
 2. length errors, and
 3. rank errors.
 
-A comprehensive overview of all error message can be found [here](
-https://code.jsoftware.com/wiki/Vocabulary/ErrorMessages).
+A comprehensive overview of all error message can be found [here](https://code.jsoftware.com/wiki/Vocabulary/ErrorMessages).
 
 First, I want to explain how J error messages are formatted. Knowing their
 formatting makes it slightly easier to dissect where exactly the error was
@@ -345,7 +344,7 @@ combine data that is obviously not meant to be combined. Like a list of rows
 with a list of columns.
 
 Then, after making sure that the correct data is being operated on, it's a good
-idea to see whether cells are being matched correctly.  While `1 2 3 + i. 2 3`
+idea to see whether cells are being matched correctly. While `1 2 3 + i. 2 3`
 can not be matched, we can modify the verb to make it agree. For this, we have
 to use the [rank
 conjunction](https://code.jsoftware.com/wiki/Vocabulary/quote). When applied
@@ -382,7 +381,7 @@ noun ranks it accepts:
 ```
 
 When invoking `x | y`, the verb works on atomic cells of `x` and `y`, as
-indicated by the `0 0`.  What we want instead, is for an atom of `x` to operate
+indicated by the `0 0`. What we want instead, is for an atom of `x` to operate
 on a list of `y`, so for `2` to be matched with `0 1 2 3 ...`. Therefore, we
 can modify `|` with the rank modifier again and see it working:
 
@@ -406,7 +405,7 @@ it, but is incredibly intimidating on a newcomer. Rank can have two meanings:
    number has the rank 0, a list has the rank 1, a table rank 2, and so on.
    This is more or less the same as the _dimensionality_ of an array in other
    programming languages.
-2. The rank of a verb indicates the highest rank of its operand nouns.  For
+2. The rank of a verb indicates the highest rank of its operand nouns. For
    example, a verb of rank 2 indicates that the highest rank of it's operand
    can be 2 and therefore a table. A verb can also have rank _infinity_,
    indicating that it can operate on nouns of any rank. And since J has the

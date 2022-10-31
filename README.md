@@ -13,6 +13,7 @@ stack exec site watch
 ```
 
 ## Requirements
+
 - [Stack](https://docs.haskellstack.org/en/stable/README/)
 
 ## Indentation
@@ -27,4 +28,11 @@ stack exec hindent *.hs
 ```
 stack install hlint
 stack exec hlint
+```
+
+## Formatting
+
+```
+npm ci
+npm run format
 ```

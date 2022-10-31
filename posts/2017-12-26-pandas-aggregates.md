@@ -26,7 +26,6 @@ flexibility exactly a user can get while using `aggregate()`.
 First things first and we do business as usual. We import `pandas` in order to
 create the DataFrames we use in our examples.
 
-
 ```python
 import pandas as pd
 ```
@@ -43,7 +42,6 @@ So the columns are:
 - `Fruit`: Fruit consumed
 - `Satisfaction`: Satisfaction with consumed fruit
 - `Weight`: Weight of the consumed fruit in grams
-
 
 ```python
 df = pd.DataFrame(
@@ -73,20 +71,19 @@ df.Satisfaction = df.Satisfaction.astype('category')
 df
 ```
 
-__Output:__
+**Output:**
 
-|             | Fruit   | Satisfaction   |   Weight |
-|:------------|:--------|:---------------|---------:|
-| __Franz__   | Apple   | full           |      100 |
-| __Gerhard__ | Orange  | none           |      200 |
-| __Gerhard__ | Pear    | full           |      300 |
-| __Hans__    | Pear    | partial        |      100 |
-| __Hans__    | Banana  | full           |      400 |
-| __Hans__    | Banana  | full           |      300 |
+|             | Fruit  | Satisfaction | Weight |
+| :---------- | :----- | :----------- | -----: |
+| **Franz**   | Apple  | full         |    100 |
+| **Gerhard** | Orange | none         |    200 |
+| **Gerhard** | Pear   | full         |    300 |
+| **Hans**    | Pear   | partial      |    100 |
+| **Hans**    | Banana | full         |    400 |
+| **Hans**    | Banana | full         |    300 |
 
 Are you as excited as I am to learn the first few magic incantations of
 `.aggregate()`? Let's move on and start working on the DataFrame.
-
 
 # 3. Aggregate Heaven
 
@@ -107,12 +104,11 @@ this way we can leave it implicit and save us a bit of typing. [See the docs](h
 ttps://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.
 html) for some more information on how `groupby()` can be invoked.
 
-
 ```python
 df.groupby(level=0)
 ```
 
-__Output:__
+**Output:**
 
 ```
 <pandas.core.groupby.DataFrameGroupBy object at 0x10b88ada0>
@@ -123,34 +119,32 @@ aggregation on it in order to get a meaningful result. Let's do the actual
 calculation now and see what we get. We call `.aggregate('count')` on the
 `DataFrameGroupBy` object.
 
-
 ```python
 df.groupby(level=0).aggregate('count')
 ```
 
-__Output:__
+**Output:**
 
-|             |   Fruit |   Satisfaction |   Weight |
-|:------------|--------:|---------------:|---------:|
-| __Franz__   |       1 |              1 |        1 |
-| __Gerhard__ |       2 |              2 |        2 |
-| __Hans__    |       3 |              3 |        3 |
+|             | Fruit | Satisfaction | Weight |
+| :---------- | ----: | -----------: | -----: |
+| **Franz**   |     1 |            1 |      1 |
+| **Gerhard** |     2 |            2 |      2 |
+| **Hans**    |     3 |            3 |      3 |
 
 Our informed reader will surely let us know, that `count()` can also be invoked
 more directly and will give us the same result:
-
 
 ```python
 df.groupby(level=0).count()
 ```
 
-__Output:__
+**Output:**
 
-|             |   Fruit |   Satisfaction |   Weight |
-|:------------|--------:|---------------:|---------:|
-| __Franz__   |       1 |              1 |        1 |
-| __Gerhard__ |       2 |              2 |        2 |
-| __Hans__    |       3 |              3 |        3 |
+|             | Fruit | Satisfaction | Weight |
+| :---------- | ----: | -----------: | -----: |
+| **Franz**   |     1 |            1 |      1 |
+| **Gerhard** |     2 |            2 |      2 |
+| **Hans**    |     3 |            3 |      3 |
 
 That is absolutely true, and in simple situations just using `.count()` on a
 group by object will be much easier to understand. On the other hand,
@@ -171,7 +165,6 @@ desired result.
 In our case we would like to simply define a lambda to facilitate this
 calculation:
 
-
 ```python
 most_frequent = lambda s: s.value_counts().idxmax()
 ```
@@ -180,33 +173,31 @@ We can try calling `most_frequent` on the whole DataFrame and check the result.
 We use `.apply()` in this case to apply a function to every column in a
 DataFrame.
 
-
 ```python
 df.apply(most_frequent).to_frame()
 ```
 
-__Output:__
+**Output:**
 
 |                  | 0      |
-|:-----------------|:-------|
-| __Fruit__        | Banana |
-| __Satisfaction__ | full   |
-| __Weight__       | 100    |
+| :--------------- | :----- |
+| **Fruit**        | Banana |
+| **Satisfaction** | full   |
+| **Weight**       | 100    |
 
 Let's put everything together and calculate the aggregate.
-
 
 ```python
 df.groupby(level=0).aggregate(lambda s: s.value_counts().idxmax())
 ```
 
-__Output:__
+**Output:**
 
-|             | Fruit   | Satisfaction   |   Weight |
-|:------------|:--------|:---------------|---------:|
-| __Franz__   | Apple   | full           |      100 |
-| __Gerhard__ | Pear    | none           |      300 |
-| __Hans__    | Banana  | full           |      400 |
+|             | Fruit  | Satisfaction | Weight |
+| :---------- | :----- | :----------- | -----: |
+| **Franz**   | Apple  | full         |    100 |
+| **Gerhard** | Pear   | none         |    300 |
+| **Hans**    | Banana | full         |    400 |
 
 ## 3.3. Combining Aggregates
 
@@ -243,7 +234,6 @@ Otherwise, using a lambda will lead to the resulting column to also be called
 
 The full dictionary is defined as follows:
 
-
 ```python
 aggregate = {
     'Fruit': [
@@ -259,12 +249,11 @@ aggregate = {
 
 Let's run the actual calculation then and see what the result looks like.
 
-
 ```python
 df.groupby(level=0).aggregate(aggregate)
 ```
 
-__Output:__
+**Output:**
 
 <section class="table-wrapper">
  <table>
@@ -365,54 +354,51 @@ Note that when running aggregates, the result type of an aggregated column can
 be different from the source column. To get back to our `count()` example,
 observe the following data types for the source DataFrame:
 
-
 ```python
 df.dtypes.to_frame()
 ```
 
-__Output:__
+**Output:**
 
 |                  | 0        |
-|:-----------------|:---------|
-| __Fruit__        | object   |
-| __Satisfaction__ | category |
-| __Weight__       | int64    |
+| :--------------- | :------- |
+| **Fruit**        | object   |
+| **Satisfaction** | category |
+| **Weight**       | int64    |
 
 - The `Fruit` column contains data of the type `object`, which is the way
-Pandas stores Python `str` (string) data in columns,
+  Pandas stores Python `str` (string) data in columns,
 - `Satisfaction` contains category data, as indicated previously, and
 - `Weight` contains `int64` data.
 
 Now, observe one more time what happens when the count aggregate is retrieved
 on the same DataFrame.
 
-
 ```python
 df.groupby(level=0).aggregate('count')
 ```
 
-__Output:__
+**Output:**
 
-|             |   Fruit |   Satisfaction |   Weight |
-|:------------|--------:|---------------:|---------:|
-| __Franz__   |       1 |              1 |        1 |
-| __Gerhard__ |       2 |              2 |        2 |
-| __Hans__    |       3 |              3 |        3 |
+|             | Fruit | Satisfaction | Weight |
+| :---------- | ----: | -----------: | -----: |
+| **Franz**   |     1 |            1 |      1 |
+| **Gerhard** |     2 |            2 |      2 |
+| **Hans**    |     3 |            3 |      3 |
 
 We look at the `.dtypes` attribute of our aggregate.
-
 
 ```python
 df.groupby(level=0).aggregate('count').dtypes.to_frame()
 ```
 
-__Output:__
+**Output:**
 
 |                  | 0     |
-|:-----------------|:------|
-| __Fruit__        | int64 |
-| __Satisfaction__ | int64 |
-| __Weight__       | int64 |
+| :--------------- | :---- |
+| **Fruit**        | int64 |
+| **Satisfaction** | int64 |
+| **Weight**       | int64 |
 
 This reveals that `count` will be stored as `int64` unlike the original
 columns, which had the data types `object` and `category`. Pandas returns a
@@ -430,12 +416,11 @@ lists of numbers.
 We can easily take a look at the underlying data type of a Pandas column by
 accessing the `.values` attribute.
 
-
 ```python
 type(df.Fruit.values)
 ```
 
-__Output:__
+**Output:**
 
 ```
 numpy.ndarray
@@ -444,12 +429,11 @@ numpy.ndarray
 And simply evaluating `df.Fruit.values` reveals that it has the data type
 `object`, as is indicated by the `dtype` value.
 
-
 ```python
 df.Fruit.values
 ```
 
-__Output:__
+**Output:**
 
 ```
 array(['Apple', 'Orange', 'Pear', 'Pear', 'Banana', 'Banana'], dtype=object)
@@ -471,7 +455,6 @@ can be verified using a memory profiler. Luckily, a PyPi package called
 furthermore import NumPy to directly create NumPy arrays without requiring
 Pandas.
 
-
 ```python
 from pympler import asizeof
 import numpy as np
@@ -479,14 +462,13 @@ import numpy as np
 
 We decide to create an `ndarray` containing `10**6` strings "hello".
 
-
 ```python
 numpy_hello = np.zeros(10 ** 6, dtype=object)
 numpy_hello.fill('hello')
 numpy_hello
 ```
 
-__Output:__
+**Output:**
 
 ```
 array(['hello', 'hello', 'hello', ..., 'hello', 'hello', 'hello'], dtype=object)
@@ -494,14 +476,13 @@ array(['hello', 'hello', 'hello', ..., 'hello', 'hello', 'hello'], dtype=object)
 
 We create an equivalent Python `list` that contains "hello" `10**6` times.
 
-
 ```python
 python_hello = ["hello" for _ in range(10 ** 6)]
 # Print the first 3 items
 python_hello[:3]
 ```
 
-__Output:__
+**Output:**
 
 ```
 ['hello', 'hello', 'hello']
@@ -510,12 +491,11 @@ __Output:__
 Now for the evaluation: We print the size of the NumPy `ndarray` in bytes using
 Pympler's `asizeof` method.
 
-
 ```python
 asizeof.asizeof(numpy_hello)
 ```
 
-__Output:__
+**Output:**
 
 ```
 8000096
@@ -523,12 +503,11 @@ __Output:__
 
 To compare, we print the size of the Python `list`.
 
-
 ```python
 asizeof.asizeof(python_hello)
 ```
 
-__Output:__
+**Output:**
 
 ```
 8697520
@@ -541,7 +520,7 @@ print("NumPy array size in relation to Python list size: {:2.2%}".format(
 ))
 ```
 
-__Output:__
+**Output:**
 
 ```
 NumPy array size in relation to Python list size: 91.98%
@@ -550,7 +529,7 @@ NumPy array size in relation to Python list size: 91.98%
 The NumPy array only takes 91.98% of the space required by the Python list,
 even though the data that they store is the same.
 
-__About Pympler__
+**About Pympler**
 
 Note that Pympler prints accurate sizes by traversing the object and summing up
 attribute sizes for all descendant attributes. This is unlike `sys.getsizeof`,
@@ -559,14 +538,13 @@ especially for user defined classes.
 
 We can easily see the difference:
 
-
 ```python
 from sys import getsizeof
 
 getsizeof(python_hello)
 ```
 
-__Output:__
+**Output:**
 
 ```
 8697464
@@ -575,12 +553,11 @@ __Output:__
 Now here the difference is minimal, but as soon as we nest objects even
 further, the difference of `sys.getsizeof` and `asizeof` becomes quite obvious:
 
-
 ```python
 getsizeof([[[]]])
 ```
 
-__Output:__
+**Output:**
 
 ```
 72
@@ -590,7 +567,7 @@ __Output:__
 asizeof.asizeof([[[]]])
 ```
 
-__Output:__
+**Output:**
 
 ```
 208
@@ -599,14 +576,13 @@ __Output:__
 As a bonus, we compare the previous two objects `numpy_hello` and
 `python_hello` to using a `tuple()` instead.
 
-
 ```python
 tuple_hello = tuple("hello" for _ in range(10 ** 6))
 # Print the first 3 items
 tuple_hello[:3]
 ```
 
-__Output:__
+**Output:**
 
 ```
 ('hello', 'hello', 'hello')
@@ -615,12 +591,11 @@ __Output:__
 `tuple_hello` is smaller than the list object `python_hello`, but still bigger
 than `numpy_hello`:
 
-
 ```python
 asizeof.asizeof(tuple_hello)
 ```
 
-__Output:__
+**Output:**
 
 ```
 8000104
@@ -631,7 +606,6 @@ of storing fixed-size array data.
 
 This concludes our short excursion on Python and NumPy memory usage.
 
-
 # 5. More About Aggregates
 
 ## 5.1. `nunique`
@@ -640,35 +614,33 @@ In Pandas, `nunique` counts the number of unique values in a column. We can
 apply this to the whole DataFrame and get a count of the unique fruit and
 satisfaction values:
 
-
 ```python
 df.nunique().to_frame()
 ```
 
-__Output:__
+**Output:**
 
 |                  |   0 |
-|:-----------------|----:|
-| __Fruit__        |   4 |
-| __Satisfaction__ |   3 |
-| __Weight__       |   4 |
+| :--------------- | --: |
+| **Fruit**        |   4 |
+| **Satisfaction** |   3 |
+| **Weight**       |   4 |
 
 Furthermore, the method can also be applied on a group by object to retrieve
 the unique number of values per group. We see below the number of unique fruits
 and satisfactions that have been assigned to each person.
 
-
 ```python
 df.groupby(level=0).nunique()
 ```
 
-__Output:__
+**Output:**
 
-|             |   Fruit |   Satisfaction |   Weight |
-|:------------|--------:|---------------:|---------:|
-| __Franz__   |       1 |              1 |        1 |
-| __Gerhard__ |       2 |              2 |        2 |
-| __Hans__    |       2 |              2 |        3 |
+|             | Fruit | Satisfaction | Weight |
+| :---------- | ----: | -----------: | -----: |
+| **Franz**   |     1 |            1 |      1 |
+| **Gerhard** |     2 |            2 |      2 |
+| **Hans**    |     2 |            2 |      3 |
 
 Now, `nunique` is also available in aggregates. The reason why we would use
 `nunique` in aggregates is if we want to retrieve multiple results for one
@@ -677,18 +649,17 @@ but can potentially also save us some computational time, as a group only needs
 to be created once and each operation can then be applied to it one after
 another.
 
-
 ```python
 df.groupby(level=0).agg('nunique')
 ```
 
-__Output:__
+**Output:**
 
-|             |   Fruit |   Satisfaction |   Weight |
-|:------------|--------:|---------------:|---------:|
-| __Franz__   |       1 |              1 |        1 |
-| __Gerhard__ |       2 |              2 |        2 |
-| __Hans__    |       2 |              2 |        3 |
+|             | Fruit | Satisfaction | Weight |
+| :---------- | ----: | -----------: | -----: |
+| **Franz**   |     1 |            1 |      1 |
+| **Gerhard** |     2 |            2 |      2 |
+| **Hans**    |     2 |            2 |      3 |
 
 ## 5.2. Using Aggregate Results
 
@@ -698,23 +669,21 @@ value to compare it to the total count of fruits consumed. This allows us to
 calculate a variety score for each person. We define a variety of 100 % as a
 fruit consumption pattern in which a new fruit is tried every time.
 
-
 ```python
 fruit_counts = df.groupby(level=0).Fruit.aggregate(['nunique', 'count'])
 fruit_counts
 ```
 
-__Output:__
+**Output:**
 
-|             |   nunique |   count |
-|:------------|----------:|--------:|
-| __Franz__   |         1 |       1 |
-| __Gerhard__ |         2 |       2 |
-| __Hans__    |         2 |       3 |
+|             | nunique | count |
+| :---------- | ------: | ----: |
+| **Franz**   |       1 |     1 |
+| **Gerhard** |       2 |     2 |
+| **Hans**    |       2 |     3 |
 
 We decide to neatly display the variety counts with a quick `.apply` call in
 which we format the resulting floats using a Python format string.
-
 
 ```python
 (
@@ -724,22 +693,21 @@ which we format the resulting floats using a Python format string.
 ).to_frame('Variety')
 ```
 
-__Output:__
+**Output:**
 
-|             | Variety   |
-|:------------|:----------|
-| __Franz__   | 100.00%   |
-| __Gerhard__ | 100.00%   |
-| __Hans__    | 66.67%    |
+|             | Variety |
+| :---------- | :------ |
+| **Franz**   | 100.00% |
+| **Gerhard** | 100.00% |
+| **Hans**    | 66.67%  |
 
 ## 5.3. All Built-In Aggregates
 
 What follows now is a list of all the built-in aggregates that I could find in
 Pandas.
 
-These are the aggregates that work with __all__ data types. To save some space
+These are the aggregates that work with **all** data types. To save some space
 we limit ourselves to the Fruit column.
-
 
 ```python
 df.groupby(level=0).Fruit.aggregate([
@@ -754,16 +722,15 @@ df.groupby(level=0).Fruit.aggregate([
 )
 ```
 
-__Output:__
+**Output:**
 
-|             |   count | min    | max   | first   | last   |   nunique |
-|:------------|--------:|:-------|:------|:--------|:-------|----------:|
-| __Franz__   |       1 | Apple  | Apple | Apple   | Apple  |         1 |
-| __Gerhard__ |       2 | Orange | Pear  | Orange  | Pear   |         2 |
-| __Hans__    |       3 | Banana | Pear  | Pear    | Banana |         2 |
+|             | count | min    | max   | first  | last   | nunique |
+| :---------- | ----: | :----- | :---- | :----- | :----- | ------: |
+| **Franz**   |     1 | Apple  | Apple | Apple  | Apple  |       1 |
+| **Gerhard** |     2 | Orange | Pear  | Orange | Pear   |       2 |
+| **Hans**    |     3 | Banana | Pear  | Pear   | Banana |       2 |
 
-Here are the data types that work with __numerical__ data types.
-
+Here are the data types that work with **numerical** data types.
 
 ```python
 df.groupby(level=0).aggregate([
@@ -782,7 +749,7 @@ df.groupby(level=0).aggregate([
 )
 ```
 
-__Output:__
+**Output:**
 
 <section class="table-wrapper">
  <table>
@@ -950,14 +917,13 @@ aggregates in one `.aggregate()` call, or separate aggregates applied to a new
 group by object each time? We choose to aggregate `min` and `max` on our
 DataFrame.
 
-
 ```python
 %%timeit
 df.groupby(df.index).min()
 df.groupby(df.index).max()
 ```
 
-__Output:__
+**Output:**
 
 ```
 26.1 ms ± 819 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
@@ -968,7 +934,7 @@ __Output:__
 df.groupby(df.index).aggregate(['min', 'max'])
 ```
 
-__Output:__
+**Output:**
 
 ```
 9.02 ms ± 75.6 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
@@ -981,13 +947,12 @@ hardly any difference when only one aggregate value is required. In this case,
 the shorter amount of code should win the contest, since it simply requires
 less typing.
 
-
 ```python
 %%timeit
 df.groupby(df.index).min()
 ```
 
-__Output:__
+**Output:**
 
 ```
 13.6 ms ± 945 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
@@ -998,7 +963,7 @@ __Output:__
 df.groupby(df.index).aggregate('min')
 ```
 
-__Output:__
+**Output:**
 
 ```
 16.5 ms ± 4.14 ms per loop (mean ± std. dev. of 7 runs, 100 loops each)
@@ -1012,4 +977,3 @@ dealing with multiple aggregate calculations, especially in a group by setting.
 
 I certainly could not do without `.aggregate()`, as it saves me a lot of time
 when typing out IPython notebooks.
-

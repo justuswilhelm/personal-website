@@ -7,7 +7,7 @@ cta: Talk to us to learn more about safely updating smart contracts
 As time goes on, smart contract requirements change. Often, a feature is added
 or a bug is found. But, once a smart contract has been deployed on the
 blockchain, it can't be upgraded. The entire value proposition of a blockchain
-is immutability. Yet, in the real world, contracts change all the time.  For
+is immutability. Yet, in the real world, contracts change all the time. For
 example, a labor contract will change when new labor laws are introduced.
 Similarly, there are many circumstances under which smart contracts change as
 well, such as
@@ -30,7 +30,6 @@ using the `DELEGATECALL` opcode.
 
 An example implementation can be seen [in this StackExchange
 post](https://ethereum.stackexchange.com/a/190).
-
 
 The main idea is to define a fallback function that forwards all function
 calls.

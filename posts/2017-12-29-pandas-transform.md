@@ -7,6 +7,7 @@ toc: true
 
 The Pandas API surprises me with a new feature or method almost every day, and
 I have yet again discovered an interesting piece of functionality.
+
 <!--more-->It turns out to be quite useful in some situations.
 
 Using `.transform()`, you can, excuse the pun, transform the way you aggregate
@@ -21,7 +22,6 @@ ways we can utilize `.transform()` in our Data Analysis work flow.
 We import Pandas for DataFrame creation, `random` for generation of random data
 in our DataFrame, and `datetime.datetime` and `datetime.timedelta` for purchase
 date creation. We furthermore import Matplotlib to inspect the data.
-
 
 ```python
 import pandas as pd
@@ -53,7 +53,6 @@ manually setting a value.
 We choose 6 as the maximum number of rows, including the head _and_ tail of a
 DataFrame.
 
-
 ```python
 pd.set_option('display.max_rows', 6)
 ```
@@ -68,12 +67,11 @@ purchase can have several purchase items. To sum it up, we create the following
 columns.
 
 - `date`: Date of purchase
-- `category`: Category of item, either __Food__, __Beverage__ or __Magazine__
+- `category`: Category of item, either **Food**, **Beverage** or **Magazine**
 - `value`: Purchase value of item, ranges from 10 to 100
 - `customer`: ID of customer that purchased this item, a random ID from 1 to 10
 - `purchase`: ID of purchase, there are 30 purchases with IDs ranging from 1 to
-30
-
+  30
 
 ```python
 random.seed(1)
@@ -109,17 +107,17 @@ df.index.name = "item_id"
 df
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | date       | category   | value   | customer   | purchase   |
-|:----------|:-----------|:-----------|:--------|:-----------|:-----------|
-| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          |
-| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         |
-| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         |
-| __...__   | ...        | ...        | ...     | ...        | ...        |
-| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          |
-| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          |
-| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         |
+| item_id | date       | category | value | customer | purchase |
+| :------ | :--------- | :------- | :---- | :------- | :------- |
+| **0**   | 2017-01-05 | Magazine | 18    | 5        | 4        |
+| **1**   | 2017-01-16 | Beverage | 70    | 7        | 26       |
+| **2**   | 2017-01-07 | Food     | 72    | 1        | 29       |
+| **...** | ...        | ...      | ...   | ...      | ...      |
+| **97**  | 2017-01-30 | Beverage | 41    | 6        | 4        |
+| **98**  | 2017-01-18 | Magazine | 84    | 10       | 3        |
+| **99**  | 2017-01-08 | Food     | 12    | 4        | 13       |
 
 That should give us some useful purchase data to work with.
 
@@ -142,28 +140,26 @@ Let's take it step by step and look at the necessary calculation steps. First,
 we need to group by a purchase ID and sum up the total purchase value.
 Therefore, we need to group by `purchase` and sum up the `value` column:
 
-
 ```python
 values = df.groupby('purchase').value.sum()
 values.to_frame()
 ```
 
-__Output:__
+**Output:**
 
-| purchase   | value   |
-|:-----------|:--------|
-| __2__      | 146     |
-| __3__      | 398     |
-| __4__      | 377     |
-| __...__    | ...     |
-| __28__     | 89      |
-| __29__     | 329     |
-| __30__     | 63      |
+| purchase | value |
+| :------- | :---- |
+| **2**    | 146   |
+| **3**    | 398   |
+| **4**    | 377   |
+| **...**  | ...   |
+| **28**   | 89    |
+| **29**   | 329   |
+| **30**   | 63    |
 
 What we get is a Pandas Series containing the total purchase values for every
 purchase ID. Since we used a group by on the purchase ID, `purchase` is the
 index of this Series. We can visualize this data with a bar plot.
-
 
 ```python
 fig, ax = plt.subplots(1, figsize=(20, 5))
@@ -171,7 +167,7 @@ values.plot(kind='bar', ax=ax)
 fig
 ```
 
-__Output:__
+**Output:**
 
 <img alt="matplotlib.figure.Figure at 0x1074f6710" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIcAAAFDCAYAAACgMG6eAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDIuMS4xLCBo
@@ -346,12 +342,11 @@ value of the right side should receive the suffix `_total`. If we take a look
 again at our total purchase values, we can see that the name of the Series is
 the following.
 
-
 ```python
 values.name
 ```
 
-__Output:__
+**Output:**
 
 ```
 'value'
@@ -367,27 +362,25 @@ contains the total purchase values.
 
 Let's perform the actual join then 🚀
 
-
 ```python
 df.join(values, on='purchase', rsuffix='_total')
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | date       | category   | value   | customer   | purchase   | value_total   |
-|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:--------------|
-| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 377           |
-| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 213           |
-| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 329           |
-| __...__   | ...        | ...        | ...     | ...        | ...        | ...           |
-| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 377           |
-| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 398           |
-| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 241           |
+| item_id | date       | category | value | customer | purchase | value_total |
+| :------ | :--------- | :------- | :---- | :------- | :------- | :---------- |
+| **0**   | 2017-01-05 | Magazine | 18    | 5        | 4        | 377         |
+| **1**   | 2017-01-16 | Beverage | 70    | 7        | 26       | 213         |
+| **2**   | 2017-01-07 | Food     | 72    | 1        | 29       | 329         |
+| **...** | ...        | ...      | ...   | ...      | ...      | ...         |
+| **97**  | 2017-01-30 | Beverage | 41    | 6        | 4        | 377         |
+| **98**  | 2017-01-18 | Magazine | 84    | 10       | 3        | 398         |
+| **99**  | 2017-01-08 | Food     | 12    | 4        | 13       | 241         |
 
 As we have discussed before, we want to calculate the ratio of a single
 purchase item to the total purchase value. We therefore need to calculate
 `value / value_total * 100` to retrieve the ratio as a percentage.
-
 
 ```python
 df.assign(
@@ -403,17 +396,17 @@ df.assign(
 ).round(2)
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | date       | category   | value   | customer   | purchase   | value_pct   |
-|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:------------|
-| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 4.77        |
-| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 32.86       |
-| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 21.88       |
-| __...__   | ...        | ...        | ...     | ...        | ...        | ...         |
-| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 10.88       |
-| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 21.11       |
-| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 4.98        |
+| item_id | date       | category | value | customer | purchase | value_pct |
+| :------ | :--------- | :------- | :---- | :------- | :------- | :-------- |
+| **0**   | 2017-01-05 | Magazine | 18    | 5        | 4        | 4.77      |
+| **1**   | 2017-01-16 | Beverage | 70    | 7        | 26       | 32.86     |
+| **2**   | 2017-01-07 | Food     | 72    | 1        | 29       | 21.88     |
+| **...** | ...        | ...      | ...   | ...      | ...      | ...       |
+| **97**  | 2017-01-30 | Beverage | 41    | 6        | 4        | 10.88     |
+| **98**  | 2017-01-18 | Magazine | 84    | 10       | 3        | 21.11     |
+| **99**  | 2017-01-08 | Food     | 12    | 4        | 13       | 4.98      |
 
 To be honest, for a long time I thought that this was the only way to do it. At
 the same time I was more than concerned with how burdensome it is to join the
@@ -437,7 +430,6 @@ Now I would like to present the perfect use case for `.transform()`. First,
 let's take a look at what the method exactly returns. We will define a method
 that prints the value it receives and returns the same value.
 
-
 ```python
 def return_print(value):
     print(value)
@@ -449,19 +441,18 @@ the result from getting too long we only apply it to the category and value
 column. We will immediately see that the category column is evaluated twice,
 which seems strange. Read on to find out why.
 
-
 ```python
 df[['category', 'value']].transform(return_print)
 ```
 
-__Output:__
+**Output:**
 
 ```
 item_id
 0     Magazine
 1     Beverage
 2         Food
-        ...   
+        ...
 97    Beverage
 98    Magazine
 99        Food
@@ -470,7 +461,7 @@ item_id
 0     Magazine
 1     Beverage
 2         Food
-        ...   
+        ...
 97    Beverage
 98    Magazine
 99        Food
@@ -486,17 +477,17 @@ item_id
 Name: value, Length: 100, dtype: int64
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | category   | value   |
-|:----------|:-----------|:--------|
-| __0__     | Magazine   | 18      |
-| __1__     | Beverage   | 70      |
-| __2__     | Food       | 72      |
-| __...__   | ...        | ...     |
-| __97__    | Beverage   | 41      |
-| __98__    | Magazine   | 84      |
-| __99__    | Food       | 12      |
+| item_id | category | value |
+| :------ | :------- | :---- |
+| **0**   | Magazine | 18    |
+| **1**   | Beverage | 70    |
+| **2**   | Food     | 72    |
+| **...** | ...      | ...   |
+| **97**  | Beverage | 41    |
+| **98**  | Magazine | 84    |
+| **99**  | Food     | 12    |
 
 It is interesting to see that Pandas executes `return_print` on the first
 column twice. Therefore, we also see it being printed twice. This is done for
@@ -504,7 +495,7 @@ reasons of optimization: Pandas needs to find out which code path it can
 execute, as there is a fast and slow way of transforming ndarrays. Therefore,
 the first column is evaluated twice. As always, [the documentation](https://pan
 das.pydata.org/pandas-docs/stable/groupby.html#flexible-apply) describes this
-mechanism quite well (look for the __Warning__ section).
+mechanism quite well (look for the **Warning** section).
 
 We can furthermore observe that the result is a completely unchanged DataFrame.
 This is reassuring and lets us understand the next example even better.
@@ -530,28 +521,26 @@ where `x` denotes a column we are calculating the standard scores for. Since
 not every column is numerical, we limit ourselves to the `value` column and
 calculate standard scores for all purchase item values.
 
-
 ```python
 df.value.transform(
     lambda x: (x - x.mean()) / x.std()
 ).to_frame('value_standard_score')
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | value_standard_score   |
-|:----------|:-----------------------|
-| __0__     | -1.354992              |
-| __1__     | 0.643862               |
-| __2__     | 0.720741               |
-| __...__   | ...                    |
-| __97__    | -0.470884              |
-| __98__    | 1.182015               |
-| __99__    | -1.585630              |
+| item_id | value_standard_score |
+| :------ | :------------------- |
+| **0**   | -1.354992            |
+| **1**   | 0.643862             |
+| **2**   | 0.720741             |
+| **...** | ...                  |
+| **97**  | -0.470884            |
+| **98**  | 1.182015             |
+| **99**  | -1.585630            |
 
 An observant reader will quickly notice that we could also perform the
 following calculation to retrieve the same result:
-
 
 ```python
 (
@@ -560,31 +549,30 @@ following calculation to retrieve the same result:
 ).to_frame('value_standard_score_alt')
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | value_standard_score_alt   |
-|:----------|:---------------------------|
-| __0__     | -1.354992                  |
-| __1__     | 0.643862                   |
-| __2__     | 0.720741                   |
-| __...__   | ...                        |
-| __97__    | -0.470884                  |
-| __98__    | 1.182015                   |
-| __99__    | -1.585630                  |
+| item_id | value_standard_score_alt |
+| :------ | :----------------------- |
+| **0**   | -1.354992                |
+| **1**   | 0.643862                 |
+| **2**   | 0.720741                 |
+| **...** | ...                      |
+| **97**  | -0.470884                |
+| **98**  | 1.182015                 |
+| **99**  | -1.585630                |
 
 That is absolutely correct. I can see both forms having their advantages and
 disadvantages. I see the advantage of using `.transform()` instead of operating
 on raw columns as the following:
 
 - Define reusable methods, for example for standard score calculation, that can
-be applied over any DataFrame. Code reuse for the win.
+  be applied over any DataFrame. Code reuse for the win.
 - Avoid retyping the column name that you operate on. This means typing `x`
-versus typing `df.value` all the time.
+  versus typing `df.value` all the time.
 - `.transform()` can apply several transformations at once.
 
 Let's take a look at an example for multiple transformations applied at the
 same time.
-
 
 ```python
 def standard_score(series):
@@ -604,7 +592,7 @@ df.transform({
 })
 ```
 
-__Output:__
+**Output:**
 
 <section class="table-wrapper">
  <table>
@@ -798,23 +786,22 @@ purchase value.
 
 Let's try it out then, shall we?
 
-
 ```python
 ts = df.groupby('purchase').value.transform('sum')
 ts.to_frame()
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | value   |
-|:----------|:--------|
-| __0__     | 377     |
-| __1__     | 213     |
-| __2__     | 329     |
-| __...__   | ...     |
-| __97__    | 377     |
-| __98__    | 398     |
-| __99__    | 241     |
+| item_id | value |
+| :------ | :---- |
+| **0**   | 377   |
+| **1**   | 213   |
+| **2**   | 329   |
+| **...** | ...   |
+| **97**  | 377   |
+| **98**  | 398   |
+| **99**  | 241   |
 
 As we can see above, instead of directly calling `.transform()` on our
 well-known and beloved DataFrame, we first group by the purchase ID column.
@@ -826,26 +813,24 @@ directly join that value back to the index used before the `.groupby()` call.
 
 We can now join that value back to our original DataFrame quite easily.
 
-
 ```python
 df.join(ts, rsuffix='_total')
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | date       | category   | value   | customer   | purchase   | value_total   |
-|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:--------------|
-| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 377           |
-| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 213           |
-| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 329           |
-| __...__   | ...        | ...        | ...     | ...        | ...        | ...           |
-| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 377           |
-| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 398           |
-| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 241           |
+| item_id | date       | category | value | customer | purchase | value_total |
+| :------ | :--------- | :------- | :---- | :------- | :------- | :---------- |
+| **0**   | 2017-01-05 | Magazine | 18    | 5        | 4        | 377         |
+| **1**   | 2017-01-16 | Beverage | 70    | 7        | 26       | 213         |
+| **2**   | 2017-01-07 | Food     | 72    | 1        | 29       | 329         |
+| **...** | ...        | ...      | ...   | ...      | ...      | ...         |
+| **97**  | 2017-01-30 | Beverage | 41    | 6        | 4        | 377         |
+| **98**  | 2017-01-18 | Magazine | 84    | 10       | 3        | 398         |
+| **99**  | 2017-01-08 | Food     | 12    | 4        | 13       | 241         |
 
 Even more exciting, we can perform the same calculation that we have performed
 before, and achieve what required an additional, unpleasant `.join()` before.
-
 
 ```python
 df.assign(
@@ -857,17 +842,17 @@ df.assign(
 ).round(2)
 ```
 
-__Output:__
+**Output:**
 
-| item_id   | date       | category   | value   | customer   | purchase   | value_pct   |
-|:----------|:-----------|:-----------|:--------|:-----------|:-----------|:------------|
-| __0__     | 2017-01-05 | Magazine   | 18      | 5          | 4          | 4.77        |
-| __1__     | 2017-01-16 | Beverage   | 70      | 7          | 26         | 32.86       |
-| __2__     | 2017-01-07 | Food       | 72      | 1          | 29         | 21.88       |
-| __...__   | ...        | ...        | ...     | ...        | ...        | ...         |
-| __97__    | 2017-01-30 | Beverage   | 41      | 6          | 4          | 10.88       |
-| __98__    | 2017-01-18 | Magazine   | 84      | 10         | 3          | 21.11       |
-| __99__    | 2017-01-08 | Food       | 12      | 4          | 13         | 4.98        |
+| item_id | date       | category | value | customer | purchase | value_pct |
+| :------ | :--------- | :------- | :---- | :------- | :------- | :-------- |
+| **0**   | 2017-01-05 | Magazine | 18    | 5        | 4        | 4.77      |
+| **1**   | 2017-01-16 | Beverage | 70    | 7        | 26       | 32.86     |
+| **2**   | 2017-01-07 | Food     | 72    | 1        | 29       | 21.88     |
+| **...** | ...        | ...      | ...   | ...      | ...      | ...       |
+| **97**  | 2017-01-30 | Beverage | 41    | 6        | 4        | 10.88     |
+| **98**  | 2017-01-18 | Magazine | 84    | 10       | 3        | 21.11     |
+| **99**  | 2017-01-08 | Food     | 12    | 4        | 13       | 4.98      |
 
 That wasn't so bad, was it? Let's see what we can take away from today's
 article
@@ -887,4 +872,3 @@ you with one or two things that neither of us knew about.
 
 So I would like to encourage you to stay tuned and go out, dig up some new
 Pandas DataFrame methods, and enjoy working with data.
-

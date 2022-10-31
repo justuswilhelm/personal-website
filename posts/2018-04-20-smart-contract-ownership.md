@@ -5,7 +5,7 @@ cta: Find out how we can help you find the right smart contract architecture
 ---
 
 When building your smart contract platform — whether on Ethereum or any other
-blockchain — at some you'll be faced with the question of ownership.  In this
+blockchain — at some you'll be faced with the question of ownership. In this
 article, I will explain three different types of smart contract ownership and
 discuss their advantages and disadvantages.
 
@@ -29,7 +29,7 @@ used for ICOs.
 
 ([This
 article](https://blog.wetrust.io/how-do-token-crowdsales-work-b3b6e9e53800)
-explains the mechanisms of token crowdsales.  OpenZeppelin's crowdsale
+explains the mechanisms of token crowdsales. OpenZeppelin's crowdsale
 contract, which can be deployed on the Ethereum blockchain, is described
 [here](https://openzeppelin.org/api/docs/crowdsale_Crowdsale.html).)
 
@@ -73,14 +73,15 @@ contract Crowdsale {
 ```
 
 The advantage is that this crowdsale contract can not be changed after
-deployment.  If an investor decides to buy its tokens, they are guaranteed to
+deployment. If an investor decides to buy its tokens, they are guaranteed to
 receive the tokens during payout exactly under the same conditions that they
 have purchased them under.
 
 There are two risks:
 
 — crowdsale parameters might be misconfigured, potentially leading to unfair
-  conditions for certain investors;
+conditions for certain investors;
+
 - programming errors in the contract code can not be fixed, everything is fixed
   after the crowdsale goes live. If funds are lost, they can not be recovered.
 
@@ -135,7 +136,7 @@ There are some risks to consider as well:
 
 - crowdsale owners can bait and switch investors by changing crowdsale
   parameters after the investment already took place;
-— ownership access keys can be lost or stolen, and a malicious actor could
+  — ownership access keys can be lost or stolen, and a malicious actor could
   manipulate the crowdsale.
 
 # 3. Governance
@@ -162,7 +163,7 @@ way. The following steps are required.
 1. A stakeholder proposes a change to the crowdsale and creates a ballot. The
    ballot contains code that the governance contract can execute, in this case,
    code that changes crowdsale parameters.
-3. Each stakeholder is assigned a number of votes proportionate to their shares
+2. Each stakeholder is assigned a number of votes proportionate to their shares
    or other predetermined factors.
 3. All stakeholders have an opportunity to vote.
 4. Once all eligible voters have voted or the ballot has closed, whichever

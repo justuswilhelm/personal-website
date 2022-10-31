@@ -19,13 +19,13 @@ I will cover how the two have been implemented.
 It all started with trying to turn this piece of coded embedded into my
 Markdown posts:
 
-~~~
+````
 ```
 digraph {
   "Hello" -> "World"
 }
 ```
-~~~
+````
 
 into this SVG image
 
@@ -100,8 +100,7 @@ folder.
 The cheap solution to this problem is exactly what 2-pass TeX would do. Run it
 once, and then run it once more. The thing is, I don't really want to mess
 around too much with _fragile_ build processes that run on CircleCI, as ideally
-I just want to have enough faith in my process, that I can just run `git
-commit` and `git push` and have a new post online on my blog in a few minutes.
+I just want to have enough faith in my process, that I can just run `git commit` and `git push` and have a new post online on my blog in a few minutes.
 
 In hindsight, the solution is quite obvious (as always). When before, the
 Pandoc filter that I was using, was creating SVG files on my hard drive, I

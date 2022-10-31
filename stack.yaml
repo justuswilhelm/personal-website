@@ -1,7 +1,7 @@
 resolver: lts-19.30
 packages:
-- .
+  - .
 extra-deps:
   - hakyll-4.15.1.1@sha256:890bff1eb4cf1faca6c9e5eec88a2b78e41b190d6f4781b984c7758fd2ceec75,9962
 extra-include-dirs:
-- /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/ffi
+  - /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk/usr/include/ffi

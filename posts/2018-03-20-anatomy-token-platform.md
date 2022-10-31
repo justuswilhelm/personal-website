@@ -15,14 +15,14 @@ This post builds on those questions and experiences to identify some of the
 things you should consider when tokenizing your application. There are roughly
 six topics.
 
-- __The Token__: What kind of token do you need?
-- __The Purchase__: How do users get access to your tokenized platform?
-- __The Wallet__: Where are your user tokens stored?
-- __The Smart Contract__: Which parts of your application can run on the
+- **The Token**: What kind of token do you need?
+- **The Purchase**: How do users get access to your tokenized platform?
+- **The Wallet**: Where are your user tokens stored?
+- **The Smart Contract**: Which parts of your application can run on the
   blockchain?
-- __The Backend__: How will your blockchain application integrate with the rest
+- **The Backend**: How will your blockchain application integrate with the rest
   of your platform?
-- __The Exchange__: How can users trade your tokens?
+- **The Exchange**: How can users trade your tokens?
 
 # 1. The Token
 
@@ -30,7 +30,7 @@ First things first. When you create your token, you should be very clear on
 what it represents. Is it a currency users can exchange for goods and services?
 Or does it represent unique assets users can purchase?
 
-For example, you can replace your in-game currency with a token.  A user's gold
+For example, you can replace your in-game currency with a token. A user's gold
 coins, formerly stored in a central SQL database, now become something they
 associate with a sense of ownership.
 
@@ -82,7 +82,7 @@ is important to fully evaluate your risk here.
 
 ## 2.2. Coupled Purchase
 
-While on your platform, a user purchases an item or a service.  Depending on
+While on your platform, a user purchases an item or a service. Depending on
 how much they spend, they receive a proportional amount of tokens. As an
 example, think about tokenizing a music streaming service: Users buy a monthly
 subscription for $10. In return, they receive 100 Streaming Tokens to use in
@@ -214,7 +214,7 @@ decentralized blockchain could include:
 - Data that doesn't require a transaction transaction history, such as caches.
 
 Finally, once you have a clear idea of what data needs to be stored where, you
-also need to have a clea concept of how the two can interact.  If data changes
+also need to have a clea concept of how the two can interact. If data changes
 on the blockchain are relevant to your bakckend operations, then the changes
 need to be properly propagated. Some of the questions you should ask yourself
 are:

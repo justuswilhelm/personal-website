@@ -75,9 +75,9 @@ called an allowance. Bob must then have a function in his smart contract called
 2. Calculate the correct amount of LJT to be paid out.
 3. Ensure that Bob's Lemon Juice Stand has enough tokens by checking
    `ljt.balanceOf(bob_address)`.
-3. Call `eve.transferFrom(alice_address, 20 ether)` and Assert that the
+4. Call `eve.transferFrom(alice_address, 20 ether)` and Assert that the
    call was successful.
-4. Call `ljt.transfer(alice_address, 20 ether)` and Assert that the call was
+5. Call `ljt.transfer(alice_address, 20 ether)` and Assert that the call was
    successful.
 
 If Bob's Lemon Juice Stand contract provides the `bob.giveToken()` function,
@@ -89,7 +89,7 @@ ET, the following two transactions are necessary:
 2. Alice calls `bob.giveToken()`. If the transaction is validated, Alice now
    has 20 more LJT and 20 fewer ET.
 
-So we can't solve this problem in less than two transactions.  With ERC20,
+So we can't solve this problem in less than two transactions. With ERC20,
 there is no way to transfer tokens and call smart contract functionality at the
 same time. When it comes to token transactions, simple and secure is better.
 Newer standards such as [ERC223](https://github.com/ethereum/EIPs/issues/777)

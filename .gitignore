@@ -4,3 +4,4 @@ _cache
 _site
 graphviz-images
 mscgen-images
+node_modules
